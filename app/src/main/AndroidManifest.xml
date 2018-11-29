@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="np.com.naxa.iset">
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
+
+    <application
+        android:name="np.com.naxa.iset.home.VSO"
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
+        <activity
+            android:name="np.com.naxa.iset.activity.SplashActivity"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name="np.com.naxa.iset.firebase.VSOFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name="np.com.naxa.iset.utils.maputils.MyLocationService"
+            android:process=":my_service" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name="np.com.naxa.iset.TestFlowChart"
+            android:exported="true" />
+        <activity
+            android:name="np.com.naxa.iset.activity.ReportActivity"
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.home.HomeActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.home.HomeActivity"
+            android:exported="true"
+            android:label="@string/title_activity_home_new_new"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="np.com.naxa.iset.emergencyContacts.ExpandableUseActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.home.HomeActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.activity.ContactActivity"
+            android:exported="true" />
+        <activity
+            android:name="np.com.naxa.iset.activity.OpenSpaceActivity"
+            android:exported="true" />
+        <activity
+            android:name="np.com.naxa.iset.gps.GeoPointActivity"
+            android:exported="true" />
+        <activity
+            android:name="np.com.naxa.iset.hospitalfilter.HospitalFilterActivity"
+            android:exported="true" />
+        <activity
+            android:name="np.com.naxa.iset.detailspage.MarkerDetailsDisplayActivity"
+            android:exported="true" />
+        <activity
+            android:name="np.com.naxa.iset.activity.MapActivity"
+            android:exported="true" />
+        <activity
+            android:name="np.com.naxa.iset.activity.MapBoxActivity"
+            android:exported="true" />
+
+        <!-- sudur manifest code -->
+        <activity android:name="np.com.naxa.iset.sudur.activities.SplashScreenActivity" />
+        <activity android:name="np.com.naxa.iset.sudur.SudurMainActivity" />
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.IntroductionActivity"
+            android:parentActivityName="np.com.naxa.iset.sudur.SudurMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.SudurMainActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.AboutFWDCActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.IntroductionUpdateActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.MapPointActivity"
+            android:parentActivityName="np.com.naxa.iset.sudur.SudurMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.SudurMainActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.HamroSudurPaschimActivity"
+            android:exported="true"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.SudurMainActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.AskForHelpActivity"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.SudurMainActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.YouTubeActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.SudurMainActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.ReligiousPlacesActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:value=".HamroSudurPaschimActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.HamroSudurPaschimActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.AddYourBusinessActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.SudurMainActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.RajnitikAwasthaActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.SudurMainActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.DevelopmentProjectListActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.HamroSudurPaschimActivity" />
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCT_UL0lI6qa0UYcWUyAg9eTgmA3wNY1B8" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.ProjectDetailsActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.AboutFWDCActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.NewsDetailsActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.SudurMainActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.FWDRCompletedProjectsActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.HamroSudurPaschimActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.FWDROngoingProjectActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.HamroSudurPaschimActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.FWDRFutureProjectsActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.HamroSudurPaschimActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.AttractionDetailsActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity" />
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.HistoricalPlacesActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.HamroSudurPaschimActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.CulturalPlacesActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.HamroSudurPaschimActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.NaturalPlacesActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.HamroSudurPaschimActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.SocioEconomicActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.SudurMainActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.PieChartDetailsActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.SocioEconomicActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.BarChartDetailsActivity"
+            android:screenOrientation="landscape"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.SocioEconomicActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.PrivacyPolicyActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.SudurMainActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.AboutUsActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.SudurMainActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.AboutFWDCpdfDetailsWebActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.AboutFWDCActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.NagarBudgetDistrict"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.BikashGatibitiActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.NagarBudgetActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.NagarBudgetDistrict" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.DistrictProgramActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.BikashGatibitiActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.BikashGatibitiActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.SudurMainActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.IntroductionUpdateActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.SudurMainActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.IntroductionRegionActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.IntroductionUpdateActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.IntroductionDevelopmentActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.IntroductionUpdateActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.NameListOfRepresentativeActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.RajnitikAwasthaActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.MajorDevelopmentProjectsActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.BikashGatibitiActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.DevelopmentINGOsOrganizationActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.BikashGatibitiActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.NGODetailsActivity"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.BikashGatibitiActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.GathanAadeshPdfActivity"
+            android:screenOrientation="portrait"
+            android:value=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.AboutFWDCActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.MajorProjectDetailsActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.MajorDevelopmentProjectsActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.ProposedDevelopmentProjectsActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.MajorDevelopmentProjectsActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.NgoIngoDetailsActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.activities.DevelopmentINGOsOrganizationActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.sudur.activities.BusinessPlacesMapActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.sudur.SudurMainActivity" />
+        </activity>
+        <!-- end of sudur manifest code -->
+
+        <activity android:name="np.com.naxa.iset.firebase.MessageActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.home.HomeActivity" />
+        </activity>
+        <activity
+            android:name="np.com.naxa.iset.youtubeplayer.YoutubePlayerActivity"
+            android:exported="true"
+            android:screenOrientation="landscape"/>
+        <activity android:name="np.com.naxa.iset.youtubeplayer.YoutubeVideoListActivity"
+            android:exported="true"></activity>
+    </application>
+
+</manifest>
