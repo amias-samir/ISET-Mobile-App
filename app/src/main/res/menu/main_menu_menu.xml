@@ -14,4 +14,9 @@
         android:title="@string/view_messages"
         app:showAsAction="never"/>
 
+    <item
+        android:id="@+id/action_emergency"
+        android:title="Emergency"
+        app:showAsAction="never" />
+
 </menu>

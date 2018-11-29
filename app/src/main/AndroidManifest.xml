@@ -8,7 +8,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
+    <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.location.gps" />
 
     <application
@@ -436,6 +438,8 @@
             android:screenOrientation="landscape"/>
         <activity android:name="np.com.naxa.iset.youtubeplayer.YoutubeVideoListActivity"
             android:exported="true"></activity>
+
+        <activity android:name=".activity.EmergencyActivity"></activity>
     </application>
 
 </manifest>

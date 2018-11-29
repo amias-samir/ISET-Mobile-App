@@ -114,6 +114,7 @@ import io.reactivex.subscribers.DisposableSubscriber;
 import np.com.naxa.iset.FloatingSuggestion;
 import np.com.naxa.iset.OverlayPopupHiddenStyler;
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.activity.EmergencyActivity;
 import np.com.naxa.iset.activity.ReportActivity;
 import np.com.naxa.iset.database.combinedentity.EducationAndCommon;
 import np.com.naxa.iset.database.combinedentity.HospitalAndCommon;
@@ -1316,6 +1317,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                                         Marker marker = new Marker(mapView);
                                         Marker.ENABLE_TEXT_LABELS_WHEN_NO_IMAGE = true;
+                                        Marker.ENABLE_TEXT_LABELS_WHEN_NO_IMAGE = true;
 
                                         marker.setTitle(wardNo);
                                         marker.setTextLabelFontSize((int) getResources().getDimension(R.dimen.material_text_body1));
@@ -1725,6 +1727,9 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     case R.id.action_view_message:
                         startActivity(new Intent(HomeActivity.this, MessageActivity.class));
 //                        finish();
+                        break;
+                    case R.id.action_emergency:
+                        EmergencyActivity.start(HomeActivity.this);
                         break;
                 }
                 return true;
