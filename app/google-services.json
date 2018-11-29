@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "807256870224",
+    "firebase_url": "https://iset-mobile-app.firebaseio.com",
+    "project_id": "iset-mobile-app",
+    "storage_bucket": "iset-mobile-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807256870224:android:0f38db019fe4e0a8",
+        "android_client_info": {
+          "package_name": "np.com.naxa.iset"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "807256870224-743pprhkargdsnto78f5mn3s47lb1194.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "np.com.naxa.iset",
+            "certificate_hash": "d1b74be07f754aaac4d9ce0666dfb3b6dafcc2ea"
+          }
+        },
+        {
+          "client_id": "807256870224-bm40afmekusiplsvf9e915bmgqpd0ij3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjtrMdYKB5gv42UujHlhuHT1qjPP7wvrg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "807256870224-bm40afmekusiplsvf9e915bmgqpd0ij3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
