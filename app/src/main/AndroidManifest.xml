@@ -15,11 +15,11 @@
 
     <application
         android:name="np.com.naxa.iset.home.VSO"
-        android:hardwareAccelerated="false"
-        android:largeHeap="true"
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -435,11 +435,17 @@
         <activity
             android:name="np.com.naxa.iset.youtubeplayer.YoutubePlayerActivity"
             android:exported="true"
-            android:screenOrientation="landscape"/>
-        <activity android:name="np.com.naxa.iset.youtubeplayer.YoutubeVideoListActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="np.com.naxa.iset.youtubeplayer.YoutubeVideoListActivity"
+            android:exported="true"></activity>
+
+        <activity
+            android:name=".newhomepage.SectionGridHomeActivity"
             android:exported="true"></activity>
 
         <activity android:name=".activity.EmergencyActivity"></activity>
     </application>
+
 
 </manifest>
