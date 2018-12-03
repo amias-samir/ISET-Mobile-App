@@ -142,7 +142,6 @@ import np.com.naxa.iset.home.model.MapDataCategory;
 import np.com.naxa.iset.home.model.MapMarkerItem;
 import np.com.naxa.iset.hospitalfilter.HospitalFilterActivity;
 import np.com.naxa.iset.hospitalfilter.SortedHospitalItem;
-import np.com.naxa.iset.sudur.activities.SplashScreenActivity;
 import np.com.naxa.iset.utils.NetworkUtils;
 import np.com.naxa.iset.utils.SharedPreferenceUtils;
 import np.com.naxa.iset.utils.ToastUtils;
@@ -1908,7 +1907,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     primaryLayerChange(myOverLayWardBoarder);
                     break;
                 case R.id.menu_sudur:
-                    startActivity(new Intent(HomeActivity.this, SplashScreenActivity.class));
+//                    startActivity(new Intent(HomeActivity.this, SplashScreenActivity.class));
                     break;
                 case R.id.menu_office:
                     break;

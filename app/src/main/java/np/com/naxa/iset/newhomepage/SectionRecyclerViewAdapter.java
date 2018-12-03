@@ -25,12 +25,13 @@ public class SectionRecyclerViewAdapter extends RecyclerView.Adapter<SectionRecy
 
     class SectionViewHolder extends RecyclerView.ViewHolder {
         private TextView sectionLabel, showAllButton;
-        private ImageView dottedView;
+        private ImageView dottedViewLine, dottedViewHead;
         private RecyclerView itemRecyclerView;
 
         public SectionViewHolder(View itemView) {
             super(itemView);
-            dottedView = (ImageView) itemView.findViewById(R.id.dottedView);
+            dottedViewLine = (ImageView) itemView.findViewById(R.id.dottedView);
+            dottedViewHead = (ImageView) itemView.findViewById(R.id.dottedLineHead);
             sectionLabel = (TextView) itemView.findViewById(R.id.section_label);
             showAllButton = (TextView) itemView.findViewById(R.id.section_show_all_button);
             itemRecyclerView = (RecyclerView) itemView.findViewById(R.id.item_recycler_view);
@@ -59,12 +60,9 @@ public class SectionRecyclerViewAdapter extends RecyclerView.Adapter<SectionRecy
 
 
         if(position==1){
-                holder.dottedView.setBackground(holder.dottedView.getContext().getResources().getDrawable(R.drawable.dotted_line_green));
+                holder.dottedViewLine.setBackground(holder.dottedViewLine.getContext().getResources().getDrawable(R.drawable.dotted_line_green));
                 holder.showAllButton.setVisibility(View.INVISIBLE);
-
-            Drawable img = holder.sectionLabel.getContext().getResources().getDrawable( R.drawable.dotted_line_green_head );
-            img.setBounds( 0, 0, 60, 60 );
-            holder.sectionLabel.setCompoundDrawables( img, null, null, null );
+            holder.dottedViewHead.setBackground(holder.dottedViewHead.getContext().getResources().getDrawable(R.drawable.dotted_line_green_head));
         }
 
         holder.sectionLabel.setText(sectionModel.getSectionLabel());
