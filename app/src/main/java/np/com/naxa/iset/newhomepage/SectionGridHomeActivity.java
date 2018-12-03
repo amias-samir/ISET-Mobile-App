@@ -15,6 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.utils.LinearLayoutManagerWithSmoothScroller;
 
 public class SectionGridHomeActivity extends AppCompatActivity {
 
@@ -46,7 +47,7 @@ public class SectionGridHomeActivity extends AppCompatActivity {
     private void setUpRecyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.sectioned_recycler_view);
         recyclerView.setHasFixedSize(true);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManagerWithSmoothScroller(this);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
 
@@ -85,10 +86,10 @@ public class SectionGridHomeActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_disaster_info:
-                recyclerView.scrollToPosition(1);
+                recyclerView.smoothScrollToPosition(1);
                 break;
             case R.id.btn_react_quickly:
-                recyclerView.scrollToPosition(0);
+                recyclerView.smoothScrollToPosition(0);
                 break;
             case R.id.btn_disaster_news:
                 break;
