@@ -61,7 +61,7 @@ public class SectionRecyclerViewAdapter extends RecyclerView.Adapter<SectionRecy
 
         if(position==1){
                 holder.dottedViewLine.setBackground(holder.dottedViewLine.getContext().getResources().getDrawable(R.drawable.dotted_line_green));
-                holder.showAllButton.setVisibility(View.INVISIBLE);
+                holder.showAllButton.setVisibility(View.GONE);
             holder.dottedViewHead.setBackground(holder.dottedViewHead.getContext().getResources().getDrawable(R.drawable.dotted_line_green_head));
         }
 
