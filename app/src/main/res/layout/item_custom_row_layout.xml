@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/dp_10"
-    card_view:cardBackgroundColor="@android:color/white"
+    card_view:cardBackgroundColor="#E9E0FE"
     card_view:cardCornerRadius="4dp"
-    card_view:cardElevation="10dp"
-    card_view:contentPadding="0dp">
-
+    card_view:cardElevation="5dp"
+    card_view:contentPaddingTop="@dimen/spacing_xxsmall"
+    card_view:contentPaddingLeft="@dimen/spacing_xxsmall"
+    card_view:contentPaddingRight="@dimen/spacing_xxsmall"
+    >
     <LinearLayout
-        android:background="#E9E0FE"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -19,7 +20,7 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="80dp"
             android:src="@mipmap/ic_launcher_round" />
 
         <TextView
