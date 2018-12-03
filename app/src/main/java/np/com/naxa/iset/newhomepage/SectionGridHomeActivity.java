@@ -54,13 +54,16 @@ public class SectionGridHomeActivity extends AppCompatActivity {
     //populate recycler view
     private void populateRecyclerView() {
         String[] sectionHeader = {"REACT QUICKLY", "DISASTER INFORMATION"};
+        String[] sectionChildTitle = {"FIND OPEN SPACE", "ASK FOR HELP", "Report", "NOTIFY OTHERS", "HAZARD INFO", "PLAY QUIZ", "MULTIMEDIA", "MAP"};
         ArrayList<SectionModel> sectionModelArrayList = new ArrayList<>();
         //for loop for sections
+        int sectionChildTitlePos = 0;
         for (int i = 1; i <= 2; i++) {
             ArrayList<String> itemArrayList = new ArrayList<>();
             //for loop for items
             for (int j = 1; j <= 4; j++) {
-                itemArrayList.add("Item " + j);
+                itemArrayList.add(sectionChildTitle[sectionChildTitlePos]);
+                sectionChildTitlePos++;
             }
 
             //add the section and items to array list
