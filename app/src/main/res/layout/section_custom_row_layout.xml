@@ -23,6 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginRight="@dimen/spacing_medium"
         android:layout_toRightOf="@id/dottedLineHead"
         android:layout_toEndOf="@id/dottedLineHead">
 
@@ -35,6 +36,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textSize="14sp"
+                android:textStyle="bold"
                 android:text="Section Head"
                 android:paddingLeft="@dimen/activity_horizontal_margin"/>
 
