@@ -191,6 +191,8 @@
     <string name="fb_login_protocol_scheme">fb392524947816591</string>
     <string name="searching_nearest_open_space">Searching Nearest Open Space</string>
     <string name="fetching_file">Getting %1$s.\n\Geojson data %2$s of %3$s file(s)</string>
+    <string name="toll_free_number">Toll Free Number</string>
+    <string name="feel_free_to_call_us">Feel free to call us\nWe are always there to help you</string>
     <!-- end of sudur resource -->
 
 
