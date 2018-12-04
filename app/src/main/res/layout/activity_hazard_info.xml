@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".disasterinfo.HazardInfoActivity">
+    tools:context=".disasterinfo.HazardInfoActivity"
+    android:background="@color/white">
 
     <include layout="@layout/toolbar_purple"
         android:id="@+id/toolbar">
@@ -29,6 +30,22 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintVertical_chainStyle="spread_inside" />
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/hazardListrecycler"
+        android:layout_width="match_parent"
+        android:layout_height="381dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/floating_search_hazards"
+        app:layout_constraintVertical_bias="1.0"></android.support.v7.widget.RecyclerView>
+
+
+
     <com.arlib.floatingsearchview.FloatingSearchView
         android:id="@+id/floating_search_hazards"
         android:layout_width="match_parent"
@@ -48,21 +65,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtHazardLBL"
         />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/hazardListrecycler"
-        android:layout_width="match_parent"
-        android:layout_height="381dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/floating_search_hazards"
-        app:layout_constraintVertical_bias="1.0"></android.support.v7.widget.RecyclerView>
 
 
 </android.support.constraint.ConstraintLayout>

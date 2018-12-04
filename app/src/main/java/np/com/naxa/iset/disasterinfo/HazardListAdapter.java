@@ -2,6 +2,7 @@ package np.com.naxa.iset.disasterinfo;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -23,7 +24,15 @@ public class HazardListAdapter extends BaseQuickAdapter<HazardListModel, BaseVie
     @Override
     protected void convert(BaseViewHolder helper, HazardListModel item) {
         LinearLayout relativeLayout = helper.getView(R.id.hazard_list_item_row_layout);
+
         helper.setText(R.id.tv_hazard_list_title,item.getTitle());
         helper.setText(R.id.tv_hazard_list_title,item.getTitle());
+
+
+
+        if((helper.getLayoutPosition() %2) == 1){
+            Log.d(TAG, "convert: "+helper.getLayoutPosition());
+            helper.setBackgroundColor(R.id.hazard_list_item_row_layout, relativeLayout.getContext().getResources().getColor(R.color.listItemSecondBG));
+        }
     }
 }
