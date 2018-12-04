@@ -23,7 +23,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar_sudur"/>
+        layout="@layout/toolbar_purple"/>
 
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"

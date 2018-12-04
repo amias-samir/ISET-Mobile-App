@@ -24,7 +24,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar_sudur" />
+        layout="@layout/toolbar_purple" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"

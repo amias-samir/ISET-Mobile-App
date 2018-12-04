@@ -91,7 +91,6 @@
         <activity
             android:name=".activity.MapBoxActivity"
             android:exported="true" />
-
         <activity android:name=".firebase.MessageActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -108,7 +107,7 @@
             android:name=".newhomepage.SectionGridHomeActivity"
             android:exported="true" />
         <activity android:name=".activity.EmergencyActivity" />
-        <activity android:name=".MotionViewTestActivity"
+        <activity android:name=".disasterinfo.HazardInfoActivity"
             android:exported="true"></activity>
     </application>
 

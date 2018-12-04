@@ -72,5 +72,11 @@
     <color name="btnPassive">#5D4C98</color>
     <color name="backgroundCenter">#5F5E9A</color>
     <color name="backgroundTopEnd">#292973</color>
+    <color name="textColorSearchHint">#aaafcf</color>
+    <color name="searchViewBackground">#825ec4</color>
+    <color name="listItemFirstBG">#F0E6FF</color>
+    <color name="listItemSecondBG">#F6F2FD</color>
+    <color name="isetToolbarColor">#673AB7</color>
+    <color name="isetArrowRightRectColor">#E2D5F8</color>
 
 </resources>

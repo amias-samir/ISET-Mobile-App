@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context="com.naxa.nepal.sudurpaschimanchal.activities.IntroductionUpdateActivity">
 
-    <include layout="@layout/toolbar_sudur"
+    <include layout="@layout/toolbar_purple"
         android:id="@+id/toolbar"></include>
 
     <ScrollView
