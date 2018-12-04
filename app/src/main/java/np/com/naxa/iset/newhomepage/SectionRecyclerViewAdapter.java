@@ -1,7 +1,6 @@
 package np.com.naxa.iset.newhomepage;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +16,7 @@ import java.util.ArrayList;
 import np.com.naxa.iset.R;
 
 /**
- * Created by sonu on 24/07/17.
+ * Created by samir on 01/12/18..
  */
 
 public class SectionRecyclerViewAdapter extends RecyclerView.Adapter<SectionRecyclerViewAdapter.SectionViewHolder> {
@@ -56,7 +55,8 @@ public class SectionRecyclerViewAdapter extends RecyclerView.Adapter<SectionRecy
 
     @Override
     public void onBindViewHolder(SectionViewHolder holder, int position) {
-        final SectionModel sectionModel = sectionModelArrayList.get(position);
+        final SectionModel sectionModel =
+                sectionModelArrayList.get(position);
 
 
         if(position==1){
@@ -88,6 +88,8 @@ public class SectionRecyclerViewAdapter extends RecyclerView.Adapter<SectionRecy
         }
         ItemRecyclerViewAdapter adapter = new ItemRecyclerViewAdapter(context, sectionModel.getItemArrayList());
         holder.itemRecyclerView.setAdapter(adapter);
+
+
 
         //show toast on click of show all button
         holder.showAllButton.setOnClickListener(new View.OnClickListener() {

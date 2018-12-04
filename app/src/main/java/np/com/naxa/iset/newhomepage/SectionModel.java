@@ -3,7 +3,7 @@ package np.com.naxa.iset.newhomepage;
 import java.util.ArrayList;
 
 /**
- * Created by sonu on 24/07/17.
+ * Created by samir on 01/12/18..
  */
 
 public class SectionModel {
