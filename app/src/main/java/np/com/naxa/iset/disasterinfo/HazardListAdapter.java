@@ -30,7 +30,7 @@ public class HazardListAdapter extends BaseQuickAdapter<HazardListModel, BaseVie
 
 
 
-        if((helper.getLayoutPosition() %2) == 1){
+        if(((helper.getLayoutPosition()+1) %2) == 0){
             Log.d(TAG, "convert: "+helper.getLayoutPosition());
             helper.setBackgroundColor(R.id.hazard_list_item_row_layout, relativeLayout.getContext().getResources().getColor(R.color.listItemSecondBG));
         }
