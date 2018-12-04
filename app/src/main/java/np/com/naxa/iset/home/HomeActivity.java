@@ -111,6 +111,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
+import np.com.naxa.iset.CustomDialog;
 import np.com.naxa.iset.FloatingSuggestion;
 import np.com.naxa.iset.OverlayPopupHiddenStyler;
 import np.com.naxa.iset.R;
@@ -1728,7 +1729,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //                        finish();
                         break;
                     case R.id.action_emergency:
-                        EmergencyActivity.start(HomeActivity.this);
+//                        EmergencyActivity.start(HomeActivity.this);
+                        new CustomDialog(HomeActivity.this).show();
                         break;
                 }
                 return true;
