@@ -1,7 +1,7 @@
 package np.com.naxa.iset.newhomepage;
 
 /**
- * Created by sonu on 24/07/17.
+ * Created by samir on 01/12/18..
  */
 
 public enum  RecyclerViewType {
