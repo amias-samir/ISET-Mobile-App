@@ -1729,8 +1729,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //                        finish();
                         break;
                     case R.id.action_emergency:
-//                        EmergencyActivity.start(HomeActivity.this);
-                        new CustomDialog(HomeActivity.this).show();
+                        EmergencyActivity.start(HomeActivity.this);
+//                        new CustomDialog(HomeActivity.this).show();
                         break;
                 }
                 return true;
