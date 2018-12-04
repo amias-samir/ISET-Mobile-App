@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar_sudur"></include>
+        layout="@layout/toolbar_purple"></include>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/NewsList"

@@ -63,7 +63,13 @@
     <!-- end of sudur color resource-->
 
     <!--ISET-->
+    <color name="textColorSearchHint">#aaafcf</color>
+    <color name="searchViewBackground">#825ec4</color>
+    <color name="listItemFirstBG">#F0E6FF</color>
+    <color name="listItemSecondBG">#F6F2FD</color>
+    <color name="isetToolbarColor">#673AB7</color>
     <color name="isetPurple">#7B1FA2</color>
     <color name="isetGreen">#388E3C</color>
+    <color name="isetArrowRightRectColor">#E2D5F8</color>
 
 </resources>
