@@ -1,7 +1,11 @@
 package np.com.naxa.iset.newhomepage;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ContentFrameLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -14,6 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.activity.SplashActivity;
 import np.com.naxa.iset.utils.recycleviewutils.LinearLayoutManagerWithSmoothScroller;
 import np.com.naxa.iset.utils.recycleviewutils.RecyclerViewType;
 
@@ -29,6 +34,11 @@ public class SectionGridHomeActivity extends AppCompatActivity {
 
     private RecyclerViewType recyclerViewType;
     private RecyclerView recyclerView;
+
+    public static void start(Context context) {
+        Intent intent = new Intent(context, SectionGridHomeActivity.class);
+        context.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
