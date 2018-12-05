@@ -3,90 +3,87 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_notify"
-    android:gravity="center"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_xxxlarge"
-        android:gravity="center_horizontal"
-        android:text="Click to ask for help "
-        android:textColor="@color/light_gray"
-        android:textSize="@dimen/material_text_headline"
-        android:textStyle="bold" />
+    <include layout="@layout/toolbar_purple" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="@dimen/spacing_xxlarge">
-
-
-        <ImageView
-            android:id="@+id/iv_alert"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/btn_circular_dynamic"
-            android:clickable="true"
-            android:hapticFeedbackEnabled="true" />
-
-        <View
-            android:layout_width="36dp"
-            android:layout_height="0dp" />
-
-        <ImageView
-            android:id="@+id/iv_strobe_light"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/btn_circular_dynamic"
-            android:clickable="true"
-            android:hapticFeedbackEnabled="true"
-            android:scaleType="fitXY" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/spacing_xxlarge"
-            android:layout_marginRight="@dimen/spacing_large"
-            android:text="Blink"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
-        <Switch
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/spacing_xxlarge" />
-
-        <SeekBar
-            android:id="@+id/sb_strobe_strength"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/spacing_large"
-            android:thumbTint="@color/mapboxRed"
-            android:visibility="visible" />
+            android:layout_margin="@dimen/spacing_xxxlarge"
+            android:gravity="center_horizontal"
+            android:text="Click to ask for help "
+            android:textColor="@color/light_gray"
+            android:textSize="@dimen/material_text_headline"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_xxlarge">
+
+
+            <ImageView
+                android:id="@+id/iv_torch_light"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/btn_circular_dynamic"
+                android:clickable="true"
+                android:hapticFeedbackEnabled="true" />
+
+            <View
+                android:layout_width="36dp"
+                android:layout_height="0dp" />
+
+            <ImageView
+                android:id="@+id/iv_alert"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/btn_circular_dynamic"
+                android:clickable="true"
+                android:hapticFeedbackEnabled="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_xxlarge"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:text="Blink"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/switch_strobe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/spacing_xxlarge" />
+
+            <SeekBar
+                android:id="@+id/sb_strobe_strength"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_large"
+                android:thumbTint="@color/mapboxBlue"
+                android:tickMarkTint="@color/lightPurple"
+                android:visibility="visible" />
+        </LinearLayout>
+
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/iv_torch_light"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/spacing_large"
-        android:clickable="true"
-        android:hapticFeedbackEnabled="true"
-        android:src="@drawable/ic_torch"
-        android:tint="@color/mapboxRed" />
-
-
 </LinearLayout>
