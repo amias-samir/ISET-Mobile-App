@@ -193,6 +193,7 @@
     <string name="fetching_file">Getting %1$s.\n\Geojson data %2$s of %3$s file(s)</string>
     <string name="toll_free_number">Toll Free Number</string>
     <string name="feel_free_to_call_us">Feel free to call us\nWe are always there to help you</string>
+    <string name="emergency_no">Emergency No</string>
     <!-- end of sudur resource -->
 
 

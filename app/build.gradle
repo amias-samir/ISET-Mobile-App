@@ -67,6 +67,7 @@ dependencies {
     implementation 'id.zelory:compressor:2.1.0'
     implementation 'com.github.franmontiel:LocaleChanger:0.9.2'
     implementation 'com.ogaclejapan.arclayout:library:1.1.0@aar'
+    implementation 'org.greenrobot:eventbus:3.1.1'
 
     //debug libs
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.3'

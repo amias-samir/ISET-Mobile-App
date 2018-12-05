@@ -3,7 +3,6 @@ package np.com.naxa.iset.newhomepage;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSmoothScroller;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,7 +14,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import np.com.naxa.iset.R;
-import np.com.naxa.iset.utils.LinearLayoutManagerWithSmoothScroller;
+import np.com.naxa.iset.utils.recycleviewutils.LinearLayoutManagerWithSmoothScroller;
+import np.com.naxa.iset.utils.recycleviewutils.RecyclerViewType;
 
 public class SectionGridHomeActivity extends AppCompatActivity {
 
@@ -26,6 +26,7 @@ public class SectionGridHomeActivity extends AppCompatActivity {
     Button btnReactQuickly;
     @BindView(R.id.btn_disaster_news)
     Button btnDisasterNews;
+
     private RecyclerViewType recyclerViewType;
     private RecyclerView recyclerView;
 
@@ -35,7 +36,6 @@ public class SectionGridHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_section_grid_home);
         ButterKnife.bind(this);
 
-        //get enum type passed from MainActivity
         recyclerViewType = RecyclerViewType.GRID;
 //        setUpToolbarTitle();
         setUpRecyclerView();

@@ -1,4 +1,4 @@
-package np.com.naxa.iset.newhomepage;
+package np.com.naxa.iset.utils.recycleviewutils;
 
 /**
  * Created by samir on 01/12/18..
