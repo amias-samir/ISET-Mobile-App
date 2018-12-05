@@ -1,14 +1,12 @@
 package np.com.naxa.iset.emergencynumbers;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -16,7 +14,6 @@ import java.util.ArrayList;
 
 import np.com.naxa.iset.R;
 import np.com.naxa.iset.event.EmergenctContactCallEvent;
-import np.com.naxa.iset.home.HomeActivity;
 
 /**
  * Created by samir on 01/12/18.
@@ -71,37 +68,5 @@ public class ItemRecyclerViewEmergencyNoAdapter extends RecyclerView.Adapter<Ite
     public int getItemCount() {
         return arrayList.size();
     }
-
-
-    private void startNewActivity(String gridItemTitle) {
-        switch (gridItemTitle) {
-            case "FIND OPEN SPACE":
-                break;
-
-            case "ASK FOR HELP":
-                break;
-
-            case "Report":
-                break;
-
-            case "NOTIFY OTHERS":
-                break;
-
-            case "HAZARD INFO":
-                break;
-
-            case "PLAY QUIZ":
-                break;
-
-            case "MULTIMEDIA":
-                break;
-
-            case "MAP":
-                context.startActivity(new Intent(context, HomeActivity.class));
-                break;
-        }
-
-    }
-
 
 }

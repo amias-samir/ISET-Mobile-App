@@ -31,12 +31,13 @@ public class SectionEmergencyNoModel {
         ArrayList<SectionEmergencyNoModel> sectionEmergencyNoModelArrayList = new ArrayList<SectionEmergencyNoModel>();
         for (int i = 0; i <= 4; i++) {
             ArrayList<String> itemArrayList1 = new ArrayList<String>();
-            sectionHead = "Emergency No. " + i;
             for (int j = 1; j < 10; j++) {
                 String contact_no = "98410102" + i + "" + j;
                 itemArrayList1.add(contact_no);
 
             }
+            sectionHead = "Emergency No."+i+" ( " + (itemArrayList1.size()+1)+")" ;
+
             sectionEmergencyNoModelArrayList.add(new SectionEmergencyNoModel(sectionHead, itemArrayList1));
         }
 

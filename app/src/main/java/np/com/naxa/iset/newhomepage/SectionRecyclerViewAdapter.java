@@ -1,6 +1,7 @@
 package np.com.naxa.iset.newhomepage;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.emergencynumbers.EmergencyNumbersActivity;
 import np.com.naxa.iset.utils.recycleviewutils.RecyclerViewType;
 
 /**
@@ -96,7 +98,7 @@ public class SectionRecyclerViewAdapter extends RecyclerView.Adapter<SectionRecy
         holder.showAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "You clicked on Show All of : " + sectionModel.getSectionLabel(), Toast.LENGTH_SHORT).show();
+                holder.showAllButton.getContext().startActivity(new Intent(context, EmergencyNumbersActivity.class));
             }
         });
 

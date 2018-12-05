@@ -14,7 +14,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.activity.EmergencyActivity;
+import np.com.naxa.iset.disasterinfo.HazardInfoActivity;
 import np.com.naxa.iset.home.HomeActivity;
+import np.com.naxa.iset.youtubeplayer.YoutubeVideoListActivity;
 
 /**
  * Created by samir on 01/12/18.
@@ -81,15 +84,18 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
                 break;
 
             case "NOTIFY OTHERS":
+                context.startActivity(new Intent(context, EmergencyActivity.class));
                 break;
 
             case "HAZARD INFO":
+                context.startActivity(new Intent(context, HazardInfoActivity.class));
                 break;
 
             case "PLAY QUIZ":
                 break;
 
             case "MULTIMEDIA":
+                context.startActivity(new Intent(context, YoutubeVideoListActivity.class));
                 break;
 
             case "MAP":
