@@ -28,13 +28,13 @@
                 android:text="Section Head"
                 />
 
-            <TextView
+            <ToggleButton
                 android:id="@+id/section_show_all_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_alignParentRight="true"
-                android:background="@color/transparent"
-                android:drawableRight="@drawable/ic_add_circle_outlline_purple_24dp"
+                android:gravity="center"
+                android:background="@drawable/ic_minus_circle_outer_purple_24dp"
                 android:paddingBottom="8dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
@@ -42,7 +42,8 @@
                 android:text=""
                 android:textAllCaps="true"
                 android:textColor="@android:color/white"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                />
         </RelativeLayout>
 
     </LinearLayout>

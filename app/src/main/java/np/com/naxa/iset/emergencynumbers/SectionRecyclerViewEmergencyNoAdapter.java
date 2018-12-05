@@ -1,6 +1,7 @@
 package np.com.naxa.iset.emergencynumbers;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.util.ArrayList;
 
@@ -25,14 +27,18 @@ public class SectionRecyclerViewEmergencyNoAdapter extends RecyclerView.Adapter<
 
 
     class SectionViewHolder extends RecyclerView.ViewHolder {
-        private TextView sectionLabel, showAllButton;
+        private TextView sectionLabel;
+        private ToggleButton showAllButton;
         private RecyclerView itemRecyclerView;
 
         public SectionViewHolder(View itemView) {
             super(itemView);
             sectionLabel = (TextView) itemView.findViewById(R.id.section_label);
-            showAllButton = (TextView) itemView.findViewById(R.id.section_show_all_button);
+            showAllButton = (ToggleButton) itemView.findViewById(R.id.section_show_all_button);
             itemRecyclerView = (RecyclerView) itemView.findViewById(R.id.item_recycler_view);
+            itemRecyclerView.setVisibility(View.GONE);
+            showAllButton.setBackgroundDrawable(showAllButton.getContext().getResources().getDrawable( R.drawable.ic_add_circle_outlline_purple_24dp ));
+            itemRecyclerView.setVisibility(View.GONE);
         }
     }
 
@@ -89,7 +95,19 @@ public class SectionRecyclerViewEmergencyNoAdapter extends RecyclerView.Adapter<
         holder.showAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "You clicked on Show All of : " + sectionEmergencyNoModel.getSectionLabel(), Toast.LENGTH_SHORT).show();
+                // Is the toggle on?
+                boolean on = ((ToggleButton) v).isChecked();
+
+                if (on) {
+                    // Enable
+                    holder.showAllButton.setBackgroundDrawable(holder.showAllButton.getContext().getResources().getDrawable( R.drawable.ic_minus_circle_outer_purple_24dp ));
+                    holder.itemRecyclerView.setVisibility(View.VISIBLE);
+                } else {
+                    // Disable
+                    holder.showAllButton.setBackgroundDrawable(holder.showAllButton.getContext().getResources().getDrawable( R.drawable.ic_add_circle_outlline_purple_24dp ));
+                    holder.itemRecyclerView.setVisibility(View.GONE);
+
+                }
             }
         });
 
