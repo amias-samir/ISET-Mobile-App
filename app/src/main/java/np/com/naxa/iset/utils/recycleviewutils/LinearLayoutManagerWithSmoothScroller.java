@@ -1,4 +1,4 @@
-package np.com.naxa.iset.utils;
+package np.com.naxa.iset.utils.recycleviewutils;
 
 import android.content.Context;
 import android.graphics.PointF;

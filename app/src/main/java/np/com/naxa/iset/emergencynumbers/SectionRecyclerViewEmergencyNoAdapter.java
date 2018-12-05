@@ -1,4 +1,4 @@
-package np.com.naxa.iset.newhomepage;
+package np.com.naxa.iset.emergencynumbers;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,24 +14,22 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.utils.recycleviewutils.LinearLayoutManagerWithSmoothScroller;
 import np.com.naxa.iset.utils.recycleviewutils.RecyclerViewType;
 
 /**
  * Created by samir on 01/12/18..
  */
 
-public class SectionRecyclerViewAdapter extends RecyclerView.Adapter<SectionRecyclerViewAdapter.SectionViewHolder> {
+public class SectionRecyclerViewEmergencyNoAdapter extends RecyclerView.Adapter<SectionRecyclerViewEmergencyNoAdapter.SectionViewHolder> {
 
 
     class SectionViewHolder extends RecyclerView.ViewHolder {
         private TextView sectionLabel, showAllButton;
-        private ImageView dottedViewLine, dottedViewHead;
         private RecyclerView itemRecyclerView;
 
         public SectionViewHolder(View itemView) {
             super(itemView);
-            dottedViewLine = (ImageView) itemView.findViewById(R.id.dottedView);
-            dottedViewHead = (ImageView) itemView.findViewById(R.id.dottedLineHead);
             sectionLabel = (TextView) itemView.findViewById(R.id.section_label);
             showAllButton = (TextView) itemView.findViewById(R.id.section_show_all_button);
             itemRecyclerView = (RecyclerView) itemView.findViewById(R.id.item_recycler_view);
@@ -40,33 +38,26 @@ public class SectionRecyclerViewAdapter extends RecyclerView.Adapter<SectionRecy
 
     private Context context;
     private RecyclerViewType recyclerViewType;
-    private ArrayList<SectionModel> sectionModelArrayList;
+    private ArrayList<SectionEmergencyNoModel> sectionEmergencyNoModelArrayList;
 
-    public SectionRecyclerViewAdapter(Context context, RecyclerViewType recyclerViewType, ArrayList<SectionModel> sectionModelArrayList) {
+    public SectionRecyclerViewEmergencyNoAdapter(Context context, RecyclerViewType recyclerViewType, ArrayList<SectionEmergencyNoModel> sectionEmergencyNoModelArrayList) {
         this.context = context;
         this.recyclerViewType = recyclerViewType;
-        this.sectionModelArrayList = sectionModelArrayList;
+        this.sectionEmergencyNoModelArrayList = sectionEmergencyNoModelArrayList;
     }
 
     @Override
     public SectionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.section_custom_row_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.section_custom_row_emergencyno_layout, parent, false);
         return new SectionViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(SectionViewHolder holder, int position) {
-        final SectionModel sectionModel =
-                sectionModelArrayList.get(position);
+        final SectionEmergencyNoModel sectionEmergencyNoModel =
+                sectionEmergencyNoModelArrayList.get(position);
 
-
-        if(position==1){
-                holder.dottedViewLine.setBackground(holder.dottedViewLine.getContext().getResources().getDrawable(R.drawable.dotted_line_green));
-                holder.showAllButton.setVisibility(View.GONE);
-            holder.dottedViewHead.setBackground(holder.dottedViewHead.getContext().getResources().getDrawable(R.drawable.dotted_line_green_head));
-        }
-
-        holder.sectionLabel.setText(sectionModel.getSectionLabel());
+        holder.sectionLabel.setText(sectionEmergencyNoModel.getSectionLabel());
 
         //recycler view for items
         holder.itemRecyclerView.setHasFixedSize(true);
@@ -75,8 +66,10 @@ public class SectionRecyclerViewAdapter extends RecyclerView.Adapter<SectionRecy
         /* set layout manager on basis of recyclerview enum type */
         switch (recyclerViewType) {
             case LINEAR_VERTICAL:
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManagerWithSmoothScroller(context, LinearLayoutManager.VERTICAL, false);
                 holder.itemRecyclerView.setLayoutManager(linearLayoutManager);
+//                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+//                holder.itemRecyclerView.setLayoutManager(linearLayoutManager);
                 break;
             case LINEAR_HORIZONTAL:
                 LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
@@ -87,7 +80,7 @@ public class SectionRecyclerViewAdapter extends RecyclerView.Adapter<SectionRecy
                 holder.itemRecyclerView.setLayoutManager(gridLayoutManager);
                 break;
         }
-        ItemRecyclerViewAdapter adapter = new ItemRecyclerViewAdapter(context, sectionModel.getItemArrayList());
+        ItemRecyclerViewEmergencyNoAdapter adapter = new ItemRecyclerViewEmergencyNoAdapter(context, sectionEmergencyNoModel.getItemArrayList());
         holder.itemRecyclerView.setAdapter(adapter);
 
 
@@ -96,7 +89,7 @@ public class SectionRecyclerViewAdapter extends RecyclerView.Adapter<SectionRecy
         holder.showAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "You clicked on Show All of : " + sectionModel.getSectionLabel(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "You clicked on Show All of : " + sectionEmergencyNoModel.getSectionLabel(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -104,7 +97,7 @@ public class SectionRecyclerViewAdapter extends RecyclerView.Adapter<SectionRecy
 
     @Override
     public int getItemCount() {
-        return sectionModelArrayList.size();
+        return sectionEmergencyNoModelArrayList.size();
     }
 
 
