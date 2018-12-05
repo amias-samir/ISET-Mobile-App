@@ -15,34 +15,46 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
+import android.widget.Switch;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 import np.com.naxa.iset.R;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
+import static np.com.naxa.iset.R.drawable.btn_circular_active;
+import static np.com.naxa.iset.R.drawable.btn_circular_passive;
+
 public class EmergencyActivity extends AppCompatActivity {
 
+
+    private final int RESULT_CAMERA = 150;
+    @BindView(R.id.toolbar_general)
+    Toolbar toolbarGeneral;
+    @BindView(R.id.appbar_general)
+    AppBarLayout appbarGeneral;
     @BindView(R.id.iv_alert)
     ImageView ivAlert;
-    @BindView(R.id.iv_strobe_light)
+    @BindView(R.id.iv_torch_light)
     ImageView ivStrobeLight;
     @BindView(R.id.sb_strobe_strength)
     SeekBar sbStrobeStrength;
-    @BindView(R.id.iv_torch_light)
-    ImageView ivTorchLight;
+    @BindView(R.id.switch_strobe)
+    Switch switchStrobe;
 
-    private final int RESULT_CAMERA = 150;
-    private MutableLiveData<Boolean> torchStatus;
-    private MutableLiveData <Boolean> strobeStatus;
+    private MutableLiveData<Boolean> torchButtonStatus;
+    private MutableLiveData<Boolean> strobeButtonStatus;
     private int strobeValue;
+    private boolean lightStatus;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, EmergencyActivity.class);
@@ -76,43 +88,35 @@ public class EmergencyActivity extends AppCompatActivity {
             }
         });
 
+        switchStrobe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                strobeButtonStatus.setValue(isChecked);
+            }
+        });
+
     }
 
     private void initValues() {
-        torchStatus = new MutableLiveData<>();
-        strobeStatus = new MutableLiveData<>();
-        torchStatus.setValue(false);
-        strobeStatus.setValue(false);
+        torchButtonStatus = new MutableLiveData<>();
+        strobeButtonStatus = new MutableLiveData<>();
+        torchButtonStatus.setValue(false);
+        strobeButtonStatus.setValue(false);
+        lightStatus = false;
         strobeValue = 0;
     }
 
-    @OnClick({R.id.iv_alert, R.id.iv_strobe_light, R.id.iv_torch_light})
+    @OnClick({R.id.iv_alert, R.id.iv_torch_light})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_alert:
                 setWhistleTest();
                 break;
-            case R.id.iv_strobe_light:
-                if (torchStatus.getValue()) {
-                    torchStatus.setValue(false);
-                }
-
-                if (strobeStatus.getValue()) {
-                    strobeStatus.setValue(false);
-
-                } else {
-                    strobeStatus.setValue(true);
-                }
-                break;
             case R.id.iv_torch_light:
-                if (strobeStatus.getValue()) {
-                    strobeStatus.setValue(false);
-                }
-
-                if (torchStatus.getValue()) {
-                    torchStatus.setValue(false);
+                if (torchButtonStatus.getValue()) {
+                    torchButtonStatus.setValue(false);
                 } else {
-                    torchStatus.setValue(true);
+                    torchButtonStatus.setValue(true);
                 }
                 break;
         }
@@ -128,25 +132,44 @@ public class EmergencyActivity extends AppCompatActivity {
     private void requestPermissionForTorch() {
         String camera = Manifest.permission.CAMERA;
         if (EasyPermissions.hasPermissions(this, camera)) {
-            torchStatus.observe(this, new Observer<Boolean>() {
+            torchButtonStatus.observe(this, new Observer<Boolean>() {
                 @Override
                 public void onChanged(@Nullable Boolean aBoolean) {
                     if (aBoolean) {
-                        setTorchLightState(true);
+                        ivStrobeLight.setBackground(getDrawable(btn_circular_active));
+                        ivStrobeLight.setBackground(getDrawable(btn_circular_active));
+                        if (strobeButtonStatus.getValue()) {
+                            setStrobeLight();
+                        } else {
+                            setTorchLightState(true);
+                        }
                     } else {
+                        ivStrobeLight.setBackground(getDrawable(btn_circular_passive));
                         setTorchLightState(false);
                     }
                 }
             });
 
-            strobeStatus.observe(this, new Observer<Boolean>() {
+            strobeButtonStatus.observe(this, new Observer<Boolean>() {
                 @Override
                 public void onChanged(@Nullable Boolean aBoolean) {
                     if (aBoolean) {
-                        sbStrobeStrength.setVisibility(View.VISIBLE);
-                        setStrobeLight();
+                        sbStrobeStrength.setEnabled(true);
+                        if (torchButtonStatus.getValue()) {
+                            setTorchLightState(false);
+                            setStrobeLight();
+                        }
                     } else {
-                        sbStrobeStrength.setVisibility(View.GONE);
+                        sbStrobeStrength.setEnabled(false);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (torchButtonStatus.getValue()) {
+                                    setTorchLightState(true);
+                                }
+                            }
+                        }, 100);
+
                     }
                 }
             });
@@ -156,6 +179,7 @@ public class EmergencyActivity extends AppCompatActivity {
                     RESULT_CAMERA, camera);
         }
     }
+
 
     @SuppressLint("NewApi")
     private void toggleFlashLightNew(boolean value) {
@@ -184,18 +208,19 @@ public class EmergencyActivity extends AppCompatActivity {
 
     private void setStrobeLight() {
 
-        if (!strobeStatus.getValue()) {
-            setTorchLightState(false);
-            return;
-        }
+        Boolean stopStrobe = !torchButtonStatus.getValue() || !strobeButtonStatus.getValue();
+
+        if (stopStrobe) return;
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (torchStatus.getValue()) {
-                    torchStatus.setValue(false);
+                if (lightStatus) {
+                    lightStatus = false;
+                    setTorchLightState(false);
                 } else {
-                    torchStatus.setValue(true);
+                    lightStatus = true;
+                    setTorchLightState(true);
                 }
                 setStrobeLight();
             }
@@ -222,5 +247,4 @@ public class EmergencyActivity extends AppCompatActivity {
         }
 
     }
-
 }

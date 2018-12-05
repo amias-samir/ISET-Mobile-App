@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar_purple" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_picture"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/spacing_xxlarge"
+                android:layout_marginRight="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_xlarge" />
+
+            <ImageButton
+                android:layout_width="36dp"
+                android:id="@+id/ib_setting"
+                android:layout_height="36dp"
+                android:layout_marginTop="@dimen/spacing_xxlarge"
+                android:layout_toRightOf="@id/iv_picture"
+                android:background="@drawable/ic_profile_setting" />
+
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_picture"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:gravity="center_horizontal"
+                android:text="Selena Shrestha"
+                android:textSize="@dimen/material_text_headline"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_name"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:gravity="center_horizontal"
+                android:text="New Baneshwor, Kathmandu" />
+
+            <TextView
+                android:id="@+id/tv_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_address"
+                android:gravity="center_horizontal"
+                android:text="9809876543" />
+
+            <TextView
+                android:id="@+id/tv_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_number"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_xlarge"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:layout_marginBottom="@dimen/spacing_xlarge"
+                android:text="This is just a text"
+                android:textSize="@dimen/material_text_subhead" />
+
+            <Button
+                android:id="@+id/btn_remove_watch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_detail"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/button_rounded_purple"
+                android:drawableRight="@drawable/ic_visibility_off"
+                android:drawablePadding="@dimen/spacing_large"
+                android:paddingLeft="@dimen/spacing_xlarge"
+                android:paddingRight="@dimen/spacing_xlarge"
+                android:text="Remove watch"
+                android:textAllCaps="false"
+                android:textColor="@color/light_gray" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

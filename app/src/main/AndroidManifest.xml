@@ -106,9 +106,13 @@
         <activity
             android:name=".newhomepage.SectionGridHomeActivity"
             android:exported="true" />
-        <activity android:name=".activity.EmergencyActivity" />
-        <activity android:name=".disasterinfo.HazardInfoActivity"
+        <activity android:name=".activity.EmergencyActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".disasterinfo.HazardInfoActivity"
             android:exported="true"></activity>
+        <activity android:name=".activity.ProfileActivity"
+            android:exported="true"/>
     </application>
 
 </manifest>
