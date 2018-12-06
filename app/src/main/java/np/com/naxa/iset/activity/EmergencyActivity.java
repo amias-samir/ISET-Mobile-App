@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Switch;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -59,6 +61,20 @@ public class EmergencyActivity extends AppCompatActivity {
     public static void start(Context context) {
         Intent intent = new Intent(context, EmergencyActivity.class);
         context.startActivity(intent);
+    }
+
+
+
+    static Camera camera = null;
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (camera != null) {
+            camera.release();
+            camera = null;
+        }
     }
 
     @Override
@@ -120,6 +136,7 @@ public class EmergencyActivity extends AppCompatActivity {
             case R.id.iv_alert:
                 setWhistleTest();
                 break;
+
             case R.id.iv_torch_light:
                 if (torchButtonStatus.getValue()) {
                     torchButtonStatus.setValue(false);
@@ -201,16 +218,26 @@ public class EmergencyActivity extends AppCompatActivity {
     }
 
     private void toggleFlashLightOld(boolean value) {
-        Camera camera = Camera.open();
+        if (camera != null) {
+            camera.release();
+            camera = null;
+        }
+        camera = Camera.open();
         Camera.Parameters parameters = camera.getParameters();
         if (value) {
-            parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            //Check Whether device supports AutoFlash, If you YES then set AutoFlash
+            List<String> flashModes = parameters.getSupportedFlashModes();
+            if (flashModes.contains(Camera.Parameters.FLASH_MODE_TORCH))
+            {
+                parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+            }
             camera.setParameters(parameters);
             camera.startPreview();
         } else {
             parameters.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
             camera.setParameters(parameters);
             camera.stopPreview();
+            camera.release();
         }
     }
 
