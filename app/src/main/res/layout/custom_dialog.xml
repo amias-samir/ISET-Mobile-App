@@ -10,9 +10,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_xlarge"
         android:gravity="center_horizontal"
-        android:text="Your request has been sent."
         android:textColor="@color/light_gray"
         android:textSize="@dimen/material_text_title"
+        android:id="@+id/tv_message"
         android:textStyle="bold" />
 
     <ImageView

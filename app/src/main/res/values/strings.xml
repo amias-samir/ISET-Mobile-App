@@ -197,4 +197,24 @@
     <!-- end of sudur resource -->
 
 
+    <!--Iset Resources-->
+
+    <string-array name="ward_no">
+        <item>Select Ward number</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
+    <string-array name="hazard_type">
+        <item>Hazard Type</item>
+        <item>Flood</item>
+        <item>Landslide</item>
+        <item>Fire</item>
+        <item>Gas</item>
+    </string-array>
+
+
 </resources>
