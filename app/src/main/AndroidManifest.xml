@@ -29,6 +29,7 @@
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -105,22 +106,19 @@
         <activity
             android:name=".newhomepage.SectionGridHomeActivity"
             android:exported="true" />
-
         <activity
             android:name=".activity.EmergencyActivity"
             android:exported="true" />
-
         <activity
             android:name=".disasterinfo.HazardInfoActivity"
             android:exported="true" />
-
         <activity
             android:name=".emergencynumbers.EmergencyNumbersActivity"
             android:exported="true" />
-
         <activity
             android:name=".activity.ProfileActivity"
             android:exported="true" />
+        <activity android:name=".quiz.QuizTestActivity"></activity>
     </application>
 
 </manifest>
