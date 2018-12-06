@@ -236,7 +236,7 @@ public class EmergencyActivity extends AppCompatActivity {
     }
 
     private void setTorchLightState(boolean value) {
-        boolean higherSdkVerison = Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP;
+        boolean higherSdkVerison = Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1;
         if (higherSdkVerison) {
             toggleFlashLightNew(value);
         } else {

@@ -29,6 +29,7 @@
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -141,6 +142,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="np.com.naxa.iset.newhomepage.SectionGridHomeActivity" />
         </activity>
+
+        <activity
+            android:name=".quiz.QuizTestActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.newhomepage.SectionGridHomeActivity" />
+        </activity>
+
     </application>
 
 </manifest>
