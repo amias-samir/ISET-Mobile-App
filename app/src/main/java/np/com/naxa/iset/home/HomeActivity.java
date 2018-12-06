@@ -111,12 +111,11 @@ import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
-import np.com.naxa.iset.CustomDialog;
 import np.com.naxa.iset.FloatingSuggestion;
 import np.com.naxa.iset.OverlayPopupHiddenStyler;
 import np.com.naxa.iset.R;
 import np.com.naxa.iset.activity.EmergencyActivity;
-import np.com.naxa.iset.activity.ReportActivity;
+import np.com.naxa.iset.activity.ReportActivityOld;
 import np.com.naxa.iset.database.combinedentity.EducationAndCommon;
 import np.com.naxa.iset.database.combinedentity.HospitalAndCommon;
 import np.com.naxa.iset.database.combinedentity.OpenAndCommon;
@@ -553,7 +552,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             switch (item.getItemId()) {
                 case R.id.menu_ask_for_help:
-                    ReportActivity.start(HomeActivity.this);
+                    ReportActivityOld.start(HomeActivity.this);
                     break;
                 case R.id.menu_emergency_contacts:
                     ExpandableUseActivity.start(HomeActivity.this);

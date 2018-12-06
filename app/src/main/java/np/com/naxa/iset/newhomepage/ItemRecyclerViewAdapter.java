@@ -15,8 +15,10 @@ import java.util.ArrayList;
 
 import np.com.naxa.iset.R;
 import np.com.naxa.iset.activity.EmergencyActivity;
+import np.com.naxa.iset.activity.ReportActivity;
 import np.com.naxa.iset.disasterinfo.HazardInfoActivity;
 import np.com.naxa.iset.home.HomeActivity;
+import np.com.naxa.iset.utils.DialogFactory;
 import np.com.naxa.iset.youtubeplayer.YoutubeVideoListActivity;
 
 /**
@@ -78,9 +80,12 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
                 break;
 
             case "ASK FOR HELP":
+                DialogFactory.createCustomDialog(context,
+                        "Your request has been sent.",
+                        () -> context.startActivity(new Intent(context, ReportActivity.class))).show();
                 break;
-
             case "Report":
+                context.startActivity(new Intent(context, ReportActivity.class));
                 break;
 
             case "NOTIFY OTHERS":

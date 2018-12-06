@@ -11,8 +11,13 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 
 import np.com.naxa.iset.R;
 
@@ -78,7 +83,6 @@ public final class DialogFactory {
 
     public static ProgressDialog createProgressBarDialog(Context context, String title, String message) {
 
-
         final ProgressDialog progress = new ProgressDialog(context, R.style.RiseUpDialog);
 
         DialogInterface.OnClickListener buttonListerns =
@@ -115,5 +119,31 @@ public final class DialogFactory {
                                                       @StringRes int messageResource) {
         return createProgressDialog(context, context.getString(messageResource));
     }
+
+    public static Dialog createCustomDialog(@NonNull Context context, @NonNull String message, @NonNull CustomDialogListener listener) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.custom_dialog);
+
+        TextView text = (TextView) dialog.findViewById(R.id.tv_message);
+        text.setText(message);
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.btn_ok);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                listener.onClick();
+            }
+        });
+        return dialog;
+    }
+
+    public interface CustomDialogListener {
+        void onClick();
+    }
+
+
 
 }

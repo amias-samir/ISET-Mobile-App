@@ -50,7 +50,7 @@
             android:name=".TestFlowChart"
             android:exported="true" />
         <activity
-            android:name=".activity.ReportActivity"
+            android:name=".activity.ReportActivityOld"
             android:exported="true"
             android:windowSoftInputMode="stateHidden">
             <meta-data
@@ -121,6 +121,8 @@
         <activity
             android:name=".activity.ProfileActivity"
             android:exported="true" />
+
+        <activity android:name=".activity.ReportActivity" />
     </application>
 
 </manifest>

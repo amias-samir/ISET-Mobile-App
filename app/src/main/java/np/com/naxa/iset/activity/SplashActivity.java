@@ -91,7 +91,7 @@ public class SplashActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             LocaleChanger.setLocale(new Locale("ne", "NP"));
 
-//            ActivityRecreationHelper.recreate(ReportActivity.this, true);
+//            ActivityRecreationHelper.recreate(ReportActivityOld.this, true);
         }
 
         handleStoragePermission();
