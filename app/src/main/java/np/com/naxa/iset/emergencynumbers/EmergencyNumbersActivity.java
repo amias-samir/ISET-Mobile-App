@@ -70,7 +70,6 @@ public class EmergencyNumbersActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Emergency Numbers");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
     }
 
     //setup recycler view

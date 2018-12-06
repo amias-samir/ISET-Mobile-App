@@ -68,6 +68,7 @@ public class EmergencyActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         initValues();
+        setupToolBar();
 
         requestPermissionForTorch();
 
@@ -95,6 +96,13 @@ public class EmergencyActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setupToolBar() {
+        setSupportActionBar(toolbarGeneral);
+        getSupportActionBar().setTitle("Notify Others");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     private void initValues() {

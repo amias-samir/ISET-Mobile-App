@@ -55,7 +55,15 @@ public class ReportActivity extends AppCompatActivity {
         setContentView(R.layout.activity_report);
         ButterKnife.bind(this);
 
+        setupToolBar();
         setUpSpinner();
+    }
+
+    private void setupToolBar() {
+        setSupportActionBar(toolbarGeneral);
+        getSupportActionBar().setTitle("Report");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     private void setUpSpinner() {

@@ -108,21 +108,39 @@
 
         <activity
             android:name=".activity.EmergencyActivity"
-            android:exported="true" />
+            android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.newhomepage.SectionGridHomeActivity" />
+        </activity>
 
         <activity
             android:name=".disasterinfo.HazardInfoActivity"
-            android:exported="true" />
+            android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.newhomepage.SectionGridHomeActivity" />
+        </activity>
 
         <activity
             android:name=".emergencynumbers.EmergencyNumbersActivity"
-            android:exported="true" />
+            android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.newhomepage.SectionGridHomeActivity" />
+        </activity>
 
         <activity
             android:name=".activity.ProfileActivity"
             android:exported="true" />
 
-        <activity android:name=".activity.ReportActivity" />
+        <activity
+            android:name=".activity.ReportActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.newhomepage.SectionGridHomeActivity" />
+        </activity>
     </application>
 
 </manifest>
