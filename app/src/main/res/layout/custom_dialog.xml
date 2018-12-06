@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="350dp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/isetPurple"
     android:orientation="vertical">
@@ -11,13 +11,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_xlarge"
         android:gravity="center_horizontal"
+        android:text="Your request has been sent"
         android:textColor="@color/light_gray"
         android:textSize="@dimen/material_text_title"
         android:textStyle="bold" />
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_xlarge"
         android:background="@color/isetPurple"
         android:src="@drawable/ic_custom_dialog" />

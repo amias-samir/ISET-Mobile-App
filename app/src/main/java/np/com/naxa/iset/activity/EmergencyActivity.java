@@ -20,7 +20,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.Switch;
 
@@ -43,9 +43,9 @@ public class EmergencyActivity extends AppCompatActivity {
     @BindView(R.id.appbar_general)
     AppBarLayout appbarGeneral;
     @BindView(R.id.iv_alert)
-    ImageView ivAlert;
+    ImageButton ivAlert;
     @BindView(R.id.iv_torch_light)
-    ImageView ivStrobeLight;
+    ImageButton ivStrobeLight;
     @BindView(R.id.sb_strobe_strength)
     SeekBar sbStrobeStrength;
     @BindView(R.id.switch_strobe)
@@ -144,15 +144,14 @@ public class EmergencyActivity extends AppCompatActivity {
                 @Override
                 public void onChanged(@Nullable Boolean aBoolean) {
                     if (aBoolean) {
-                        ivStrobeLight.setBackground(getDrawable(btn_circular_active));
-                        ivStrobeLight.setBackground(getDrawable(btn_circular_active));
+                        ivStrobeLight.setImageDrawable(getDrawable(btn_circular_active));
                         if (strobeButtonStatus.getValue()) {
                             setStrobeLight();
                         } else {
                             setTorchLightState(true);
                         }
                     } else {
-                        ivStrobeLight.setBackground(getDrawable(btn_circular_passive));
+                        ivStrobeLight.setImageDrawable(getDrawable(btn_circular_passive));
                         setTorchLightState(false);
                     }
                 }
