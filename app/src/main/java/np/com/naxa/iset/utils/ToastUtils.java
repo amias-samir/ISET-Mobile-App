@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 import com.andrognito.flashbar.Flashbar;
 
-import np.com.naxa.iset.home.VSO;
+import np.com.naxa.iset.home.ISET;
 
 import static android.widget.Toast.*;
 
@@ -23,6 +23,6 @@ public final class ToastUtils {
     }
 
     public static void showToast(@NonNull String msg) {
-        Toast.makeText(VSO.getInstance(), msg, LENGTH_SHORT).show();
+        Toast.makeText(ISET.getInstance(), msg, LENGTH_SHORT).show();
     }
 }

@@ -18,7 +18,7 @@
     <uses-feature android:name="android.hardware.location.gps" />
 
     <application
-        android:name=".home.VSO"
+        android:name=".home.ISET"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
@@ -149,6 +149,22 @@
 
         <activity
             android:name=".quiz.QuizTestActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.newhomepage.SectionGridHomeActivity" />
+        </activity>
+
+        <activity
+            android:name=".data_glossary.muth_busters.GlossaryListActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="np.com.naxa.iset.newhomepage.SectionGridHomeActivity" />
+        </activity>
+
+        <activity
+            android:name=".data_glossary.muth_busters.DataGlossaryWordDetailsActivity"
             android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

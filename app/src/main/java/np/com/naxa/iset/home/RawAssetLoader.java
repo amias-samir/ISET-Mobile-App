@@ -12,7 +12,7 @@ import io.reactivex.Observable;
 public class RawAssetLoader {
 
     private Pair<String, String> rawResourceToInputStream(String assetName) throws IOException {
-        InputStream jsonStream = VSO.getInstance().getAssets().open(assetName);
+        InputStream jsonStream = ISET.getInstance().getAssets().open(assetName);
         BufferedReader reader = new BufferedReader(new InputStreamReader(jsonStream));
         StringBuilder sb = new StringBuilder();
         String line = null;

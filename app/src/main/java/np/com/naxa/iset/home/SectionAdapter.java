@@ -34,7 +34,7 @@ public class SectionAdapter extends BaseSectionQuickAdapter<MySection, BaseViewH
 //                        Looper.prepare();
                         try {
                             theBitmap = Glide.
-                                    with(VSO.getInstance()).
+                                    with(ISET.getInstance()).
                                     load(mapDataCategory.image).
                                     asBitmap().
                                     into(-1,-1).
@@ -67,7 +67,7 @@ public class SectionAdapter extends BaseSectionQuickAdapter<MySection, BaseViewH
 //                        Looper.prepare();
                         try {
                             theBitmap = Glide.
-                                    with(VSO.getInstance()).
+                                    with(ISET.getInstance()).
                                     load(mapDataCategory.image).
                                     asBitmap().
                                     into(-1,-1).

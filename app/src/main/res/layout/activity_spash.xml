@@ -4,19 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.SplashActivity">
+    tools:context=".activity.SplashActivity"
+    android:background="@color/isetPurple">
 
 
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_above="@id/name"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:fitsSystemWindows="true"
         android:scaleType="fitXY"
-        android:src="@drawable/splash_screen" />
+        android:src="@mipmap/ic_launcher"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DIMS Mobile App"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="@dimen/material_text_headline"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+
+    <TextView
+        android:id="@+id/municipality"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:text="Kathmandu Metropolitan City"
+        android:textColor="@color/white"
+        android:textSize="@dimen/material_text_title"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/dims"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/municipality"
+        android:text="DIMS"
+        android:textColor="@color/white"
+        android:textSize="@dimen/material_text_title"
+        android:gravity="center"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/splash_bottom_img"
+        android:scaleType="fitXY"/>
 
     <View
         android:background="@color/colorPrimaryDark"
         android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        android:layout_height="40dp"
+        android:visibility="gone"/>
 </RelativeLayout>

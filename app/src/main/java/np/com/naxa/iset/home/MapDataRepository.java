@@ -12,7 +12,7 @@ public class MapDataRepository extends RawAssetLoader {
 
 
     public MapDataRepository() {
-        context = VSO.getInstance().getApplicationContext();
+        context = ISET.getInstance().getApplicationContext();
     }
 
 

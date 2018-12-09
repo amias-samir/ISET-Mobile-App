@@ -34,7 +34,7 @@ import io.reactivex.disposables.Disposable;
 
 import np.com.naxa.iset.OverlayPopupHiddenStyler;
 import np.com.naxa.iset.R;
-import np.com.naxa.iset.home.VSO;
+import np.com.naxa.iset.home.ISET;
 import np.com.naxa.iset.osm_convertor.multipolygon.Feature;
 import np.com.naxa.iset.osm_convertor.multipolygon.FeatureCollection;
 import np.com.naxa.iset.osm_convertor.multipolygon.Properties;
@@ -147,7 +147,7 @@ public class MapActivity extends AppCompatActivity {
 
     private KmlDocument generateOSMKML(String fileName) throws IOException {
         InputStream jsonStream = null;
-        jsonStream = VSO.getInstance().getAssets().open(fileName);
+        jsonStream = ISET.getInstance().getAssets().open(fileName);
 
         int size = jsonStream.available();
         byte[] buffer = new byte[size];
@@ -219,7 +219,7 @@ public class MapActivity extends AppCompatActivity {
 
     private String readStringFromAsset(String fileName) throws IOException {
 
-        InputStream jsonStream = VSO.getInstance().getAssets().open(fileName);
+        InputStream jsonStream = ISET.getInstance().getAssets().open(fileName);
         int size = jsonStream.available();
         byte[] buffer = new byte[size];
         jsonStream.read(buffer);

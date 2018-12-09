@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import np.com.naxa.iset.home.VSO;
+import np.com.naxa.iset.home.ISET;
 
 public class DatabaseDataSPClass {
     private static SharedPreferences sharedPreferences;
@@ -20,7 +20,7 @@ public class DatabaseDataSPClass {
     }
 
     public static void saveDataPresent(){
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(VSO.getInstance());
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ISET.getInstance());
         sharedPreferences.edit().putBoolean("database", true).commit();
     }
 }

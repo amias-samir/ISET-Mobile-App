@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import np.com.naxa.iset.R;
 import np.com.naxa.iset.database.VsoRoomDatabase;
 import np.com.naxa.iset.database.dao.MessageHelperDao;
-import np.com.naxa.iset.home.VSO;
+import np.com.naxa.iset.home.ISET;
 import np.com.naxa.iset.utils.SharedPreferenceUtils;
 import timber.log.Timber;
 
@@ -32,7 +32,7 @@ public class VSOFirebaseMessagingService extends FirebaseMessagingService {
 
     public static Boolean notification = false;
 
-    SharedPreferenceUtils sharedPreferenceUtils = new SharedPreferenceUtils(VSO.getInstance());
+    SharedPreferenceUtils sharedPreferenceUtils = new SharedPreferenceUtils(ISET.getInstance());
     String title, description;
     MessageHelperDao mMessageHelperDao;
 
@@ -64,7 +64,7 @@ public class VSOFirebaseMessagingService extends FirebaseMessagingService {
         String localTime = date1.format(currentLocalTime);
 
 
-        VsoRoomDatabase db = VsoRoomDatabase.getDatabase(VSO.getInstance());
+        VsoRoomDatabase db = VsoRoomDatabase.getDatabase(ISET.getInstance());
         mMessageHelperDao = db.messageHelperDao();
         insert(new MessageHelper(formattedDate, localTime, description, 1));
         sendNotificationTo_Home(new NotificationData(title, description));

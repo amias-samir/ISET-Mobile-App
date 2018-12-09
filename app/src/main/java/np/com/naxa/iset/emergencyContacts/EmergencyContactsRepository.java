@@ -5,14 +5,14 @@ import android.util.Pair;
 
 import io.reactivex.Observable;
 import np.com.naxa.iset.home.RawAssetLoader;
-import np.com.naxa.iset.home.VSO;
+import np.com.naxa.iset.home.ISET;
 
 public class EmergencyContactsRepository extends RawAssetLoader {
     private Context context;
 
 
     public EmergencyContactsRepository() {
-        context = VSO.getInstance().getApplicationContext();
+        context = ISET.getInstance().getApplicationContext();
     }
 
     public Observable<Pair> getContactJsonString(int pos) {

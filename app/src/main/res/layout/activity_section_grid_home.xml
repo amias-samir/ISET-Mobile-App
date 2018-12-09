@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:gravity="center"
-                android:text="Disaster News"
+                android:text="Disaster Map."
                 android:textColor="@color/black" />
         </RelativeLayout>
 

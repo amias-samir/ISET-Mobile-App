@@ -16,11 +16,11 @@ import org.osmdroid.views.overlay.Polyline;
 import java.util.ArrayList;
 
 import np.com.naxa.iset.R;
-import np.com.naxa.iset.home.VSO;
+import np.com.naxa.iset.home.ISET;
 
 public class OsmRouteGenerateUtils {
 
-    Context ctx = VSO.getInstance();
+    Context ctx = ISET.getInstance();
 
     //======================================================================================================
 /**
@@ -33,7 +33,7 @@ public class OsmRouteGenerateUtils {
     public void addRouteOverlay(MapView map, GeoPoint startPoint, GeoPoint endPoint)
     {
         //1 Routing via road manager
-        RoadManager roadManager = new MapQuestRoadManager(VSO.getInstance().getResources().getString(R.string.access_token));
+        RoadManager roadManager = new MapQuestRoadManager(ISET.getInstance().getResources().getString(R.string.access_token));
         roadManager.addRequestOption("routeType=fastest");
 
         //Then, retreive the road between your start and end point:

@@ -12,7 +12,7 @@ import java.util.Locale;
 
 import timber.log.Timber;
 
-public class VSO extends Application {
+public class ISET extends Application {
     private static Context context;
 
     public static final List<Locale> SUPPORTED_LOCALES =
