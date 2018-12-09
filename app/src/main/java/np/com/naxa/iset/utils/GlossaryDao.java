@@ -11,7 +11,7 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
-import np.com.naxa.iset.data_glossary.muth_busters.WordsWithDetailsModel;
+import np.com.naxa.iset.drr_dictionary.data_glossary.WordsWithDetailsModel;
 
 
 /**

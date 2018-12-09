@@ -1,4 +1,4 @@
-package np.com.naxa.iset.data_glossary;
+package np.com.naxa.iset.drr_dictionary;
 
 import android.content.Context;
 import android.os.AsyncTask;

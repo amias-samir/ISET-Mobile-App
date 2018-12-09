@@ -1,4 +1,4 @@
-package np.com.naxa.iset.data_glossary.muth_busters;
+package np.com.naxa.iset.drr_dictionary.data_glossary;
 
 import android.content.Context;
 import android.content.Intent;

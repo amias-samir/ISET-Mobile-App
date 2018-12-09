@@ -1,4 +1,4 @@
-package np.com.naxa.iset.data_glossary;
+package np.com.naxa.iset.drr_dictionary;
 
 /**
  * Created on 11/8/17

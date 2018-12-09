@@ -19,10 +19,10 @@ import java.util.Locale;
 
 import io.reactivex.observers.DisposableObserver;
 import np.com.naxa.iset.R;
-import np.com.naxa.iset.data_glossary.JSONAssetLoadListener;
-import np.com.naxa.iset.data_glossary.JSONAssetLoadTask;
-import np.com.naxa.iset.data_glossary.muth_busters.DataGlossaryWordDetailsActivity;
-import np.com.naxa.iset.data_glossary.muth_busters.WordsWithDetailsModel;
+import np.com.naxa.iset.drr_dictionary.JSONAssetLoadListener;
+import np.com.naxa.iset.drr_dictionary.JSONAssetLoadTask;
+import np.com.naxa.iset.drr_dictionary.data_glossary.DataGlossaryWordDetailsActivity;
+import np.com.naxa.iset.drr_dictionary.data_glossary.WordsWithDetailsModel;
 
 /**
  * Created by nishon on 3/3/18.

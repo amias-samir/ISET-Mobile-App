@@ -1,4 +1,4 @@
-package np.com.naxa.iset.data_glossary.muth_busters;
+package np.com.naxa.iset.drr_dictionary.data_glossary;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableSingleObserver;
 import np.com.naxa.iset.R;
-import np.com.naxa.iset.data_glossary.JSONLoadImpl;
+import np.com.naxa.iset.drr_dictionary.JSONLoadImpl;
 import np.com.naxa.iset.utils.TextViewUtils;
 
 public class DataGlossaryWordDetailsActivity extends AppCompatActivity {

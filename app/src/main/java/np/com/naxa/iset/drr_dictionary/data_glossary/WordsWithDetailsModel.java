@@ -1,4 +1,4 @@
-package np.com.naxa.iset.data_glossary.muth_busters;
+package np.com.naxa.iset.drr_dictionary.data_glossary;
 
 import android.os.Parcel;
 import android.os.Parcelable;

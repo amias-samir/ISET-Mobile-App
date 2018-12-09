@@ -3,9 +3,7 @@ package np.com.naxa.iset.newhomepage;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ContentFrameLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -18,7 +16,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import np.com.naxa.iset.R;
-import np.com.naxa.iset.activity.SplashActivity;
 import np.com.naxa.iset.utils.recycleviewutils.LinearLayoutManagerWithSmoothScroller;
 import np.com.naxa.iset.utils.recycleviewutils.RecyclerViewType;
 
@@ -29,7 +26,7 @@ public class SectionGridHomeActivity extends AppCompatActivity {
     Button btnDisasterInfo;
     @BindView(R.id.btn_react_quickly)
     Button btnReactQuickly;
-    @BindView(R.id.btn_disaster_news)
+    @BindView(R.id.btn_disaster_map)
     Button btnDisasterNews;
 
     private RecyclerViewType recyclerViewType;
@@ -63,8 +60,8 @@ public class SectionGridHomeActivity extends AppCompatActivity {
 
     //populate recycler view
     private void populateRecyclerView() {
-        String[] sectionHeader = {"REACT QUICKLY", "DISASTER INFORMATION"};
-        String[] sectionChildTitle = {"FIND OPEN SPACE", "ASK FOR HELP", "Report", "NOTIFY OTHERS", "HAZARD INFO", "PLAY QUIZ", "MULTIMEDIA", "MAP"};
+        String[] sectionHeader = {"REACT QUICKLY", "DRR DICTIONARY"};
+        String[] sectionChildTitle = {"FIND OPEN SPACE", "ASK FOR HELP", "Report", "NOTIFY OTHERS", "HAZARD INFO", "DRR QUIZ", "MULTIMEDIA", "MAP"};
         ArrayList<SectionModel> sectionModelArrayList = new ArrayList<>();
         //for loop for sections
         int sectionChildTitlePos = 0;
@@ -95,7 +92,7 @@ public class SectionGridHomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick({R.id.btn_disaster_info, R.id.btn_react_quickly, R.id.btn_disaster_news})
+    @OnClick({R.id.btn_disaster_info, R.id.btn_react_quickly, R.id.btn_disaster_map})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_disaster_info:
@@ -104,7 +101,7 @@ public class SectionGridHomeActivity extends AppCompatActivity {
             case R.id.btn_react_quickly:
                 recyclerView.smoothScrollToPosition(0);
                 break;
-            case R.id.btn_disaster_news:
+            case R.id.btn_disaster_map:
                 break;
         }
     }

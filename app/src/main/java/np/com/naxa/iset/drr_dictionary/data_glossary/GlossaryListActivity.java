@@ -1,4 +1,4 @@
-package np.com.naxa.iset.data_glossary.muth_busters;
+package np.com.naxa.iset.drr_dictionary.data_glossary;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -28,9 +28,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import np.com.naxa.iset.R;
-import np.com.naxa.iset.data_glossary.JSONAssetLoadListener;
-import np.com.naxa.iset.data_glossary.JSONAssetLoadTask;
-import np.com.naxa.iset.data_glossary.JSONLoadImpl;
+import np.com.naxa.iset.drr_dictionary.JSONAssetLoadListener;
+import np.com.naxa.iset.drr_dictionary.JSONAssetLoadTask;
+import np.com.naxa.iset.drr_dictionary.JSONLoadImpl;
 
 public class GlossaryListActivity extends AppCompatActivity implements JSONAssetLoadListener {
     final private String TAG = "WordsWithDetails";

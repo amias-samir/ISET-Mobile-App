@@ -82,7 +82,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
 
             case "ASK FOR HELP":
                 DialogFactory.createCustomDialog(context,
-                        "Your request has been sent.",
+                        "If you want to submit a detailed report, fill the following form.",
                         () -> context.startActivity(new Intent(context, ReportActivity.class))).show();
                 break;
             case "Report":
@@ -97,7 +97,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
                 context.startActivity(new Intent(context, HazardInfoActivity.class));
                 break;
 
-            case "PLAY QUIZ":
+            case "DRR QUIZ":
                 context.startActivity(new Intent(context, QuizTestActivity.class));
                 break;
 
@@ -106,7 +106,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
                 break;
 
             case "MAP":
-                context.startActivity(new Intent(context, HomeActivity.class));
+//                context.startActivity(new Intent(context, HomeActivity.class));
                 break;
         }
 

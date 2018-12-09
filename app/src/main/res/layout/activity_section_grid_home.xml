@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:gravity="center"
-                android:text="Disaster Information"
+                android:text="DRR\nDictionary"
                 android:textColor="@color/black" />
         </RelativeLayout>
 
@@ -90,7 +90,7 @@
             app:arc_angle="115">
 
             <Button
-                android:id="@+id/btn_disaster_news"
+                android:id="@+id/btn_disaster_map"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@drawable/dotted_line_orange_head"
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:gravity="center"
-                android:text="Disaster Map."
+                android:text="Disaster\nMap"
                 android:textColor="@color/black" />
         </RelativeLayout>
 

@@ -1,4 +1,4 @@
-package np.com.naxa.iset.data_glossary;
+package np.com.naxa.iset.drr_dictionary;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -15,7 +15,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.observers.DisposableObserver;
 import np.com.naxa.iset.R;
-import np.com.naxa.iset.data_glossary.muth_busters.WordsWithDetailsModel;
+import np.com.naxa.iset.drr_dictionary.data_glossary.WordsWithDetailsModel;
 import np.com.naxa.iset.utils.FileUtils;
 
 
