@@ -165,9 +165,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="np.com.naxa.iset.newhomepage.SectionGridHomeActivity" />
         </activity>
-        <activity android:name=".disasterinfo.HazardInfoDetailsActivity"
-            android:exported="true">
-        </activity>
+        <activity
+            android:name=".disasterinfo.HazardInfoDetailsActivity"
+            android:exported="true"></activity>
+        <activity android:name=".disasterinfo.HazardThingsToDoActivity"></activity>
     </application>
 
 </manifest>

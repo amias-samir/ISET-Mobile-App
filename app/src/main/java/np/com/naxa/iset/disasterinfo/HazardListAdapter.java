@@ -1,5 +1,7 @@
 package np.com.naxa.iset.disasterinfo;
 
+import android.content.Intent;
+import android.provider.SyncStateContract;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
@@ -27,8 +29,6 @@ public class HazardListAdapter extends BaseQuickAdapter<HazardListModel, BaseVie
         LinearLayout linearLayout = helper.getView(R.id.hazard_list_item_row_layout);
 
         helper.setText(R.id.tv_hazard_list_title,item.getTitle());
-        helper.setText(R.id.tv_hazard_list_title,item.getTitle());
-
 
 
         if(((helper.getLayoutPosition()+1) %2) == 0){
@@ -39,7 +39,9 @@ public class HazardListAdapter extends BaseQuickAdapter<HazardListModel, BaseVie
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(linearLayout.getContext(), HazardInfoDetailsActivity.class);
+                intent.putExtra("OBJ", item);
+                linearLayout.getContext().startActivity(intent);
             }
         });
 
