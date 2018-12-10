@@ -26,7 +26,7 @@ public class SectionGridHomeActivity extends AppCompatActivity {
     Button btnDisasterInfo;
     @BindView(R.id.btn_react_quickly)
     Button btnReactQuickly;
-    @BindView(R.id.btn_disaster_map)
+    @BindView(R.id.btn_info)
     Button btnDisasterNews;
 
     private RecyclerViewType recyclerViewType;
@@ -60,8 +60,8 @@ public class SectionGridHomeActivity extends AppCompatActivity {
 
     //populate recycler view
     private void populateRecyclerView() {
-        String[] sectionHeader = {"REACT QUICKLY", "DRR DICTIONARY"};
-        String[] sectionChildTitle = {"FIND OPEN SPACE", "ASK FOR HELP", "Report", "NOTIFY OTHERS", "HAZARD INFO", "DRR QUIZ", "MULTIMEDIA", "MAP"};
+        String[] sectionHeader = {"REACT QUICKLY", "DISASTER INFORMATION"};
+        String[] sectionChildTitle = {"FIND OPEN SPACE", "ASK FOR HELP", "Report", "NOTIFY OTHERS", "HAZARD INFO", "DRR QUIZ", "DRR Dictionary", "MAP"};
         ArrayList<SectionModel> sectionModelArrayList = new ArrayList<>();
         //for loop for sections
         int sectionChildTitlePos = 0;
@@ -92,7 +92,7 @@ public class SectionGridHomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick({R.id.btn_disaster_info, R.id.btn_react_quickly, R.id.btn_disaster_map})
+    @OnClick({R.id.btn_disaster_info, R.id.btn_react_quickly, R.id.btn_info})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_disaster_info:
@@ -101,7 +101,7 @@ public class SectionGridHomeActivity extends AppCompatActivity {
             case R.id.btn_react_quickly:
                 recyclerView.smoothScrollToPosition(0);
                 break;
-            case R.id.btn_disaster_map:
+            case R.id.btn_info:
                 break;
         }
     }

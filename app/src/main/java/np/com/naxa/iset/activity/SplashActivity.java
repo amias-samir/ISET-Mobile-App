@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -94,7 +95,14 @@ public class SplashActivity extends AppCompatActivity {
 //            ActivityRecreationHelper.recreate(ReportActivityOld.this, true);
         }
 
-        handleStoragePermission();
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //Do something after 100ms
+                handleStoragePermission();
+            }
+        }, 2000);
 
     }
 

@@ -45,9 +45,9 @@
                 android:id="@+id/btn_disaster_info"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/dotted_line_green_head"
+                android:background="@drawable/disaster_info_button_bg"
                 android:gravity="center"
-                android:text="c"
+                android:text=""
                 android:textColor="#FFFFFF" />
 
             <TextView
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:gravity="center"
-                android:text="DRR\nDictionary"
+                android:text="Disaster\nInformation"
                 android:textColor="@color/black" />
         </RelativeLayout>
 
@@ -69,9 +69,9 @@
                 android:id="@+id/btn_react_quickly"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:background="@drawable/dotted_line_red_head"
+                android:background="@drawable/react_quickly_button_bg"
                 android:gravity="center"
-                android:text="B"
+                android:text=""
                 android:textColor="#FFFFFF" />
 
             <TextView
@@ -90,12 +90,12 @@
             app:arc_angle="115">
 
             <Button
-                android:id="@+id/btn_disaster_map"
+                android:id="@+id/btn_info"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:background="@drawable/dotted_line_orange_head"
+                android:background="@drawable/info_button_bg"
                 android:gravity="center"
-                android:text="c"
+                android:text=""
                 android:textColor="#FFFFFF" />
 
             <TextView
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="60dp"
                 android:gravity="center"
-                android:text="Disaster\nMap"
+                android:text="INFO"
                 android:textColor="@color/black" />
         </RelativeLayout>
 

@@ -163,6 +163,8 @@
     <string name="main_works11">&#8226; स्वीकृत कार्यक्रम प्रभावकारी रुपमा कार्यान्वयन गर्न सम्बन्धित निकायलाई निर्देशन दिने ।</string>
 
 
+    <string name="earthquake_details_body">Shaking from the large earthquake that shuddered through Anchorage, Alaska last week was strong enough to turn smooth asphalt roads into broken, jagged depressions of rubble. But within just a few days, crews managed to repair the worst of the damage, unsnarling traffic in Alaska’s largest city.\nAnchorage has a population of nearly 300,000 people spread across more than 1,900 square miles — an area larger than the state of Rhode Island. That space is threaded by roads, asphalt lifelines of the population. When the magnitude 7.0 earthquake struck last week, some of the most visceral images showed roads that had broken apart. But within days, many of these same cracked highways had been smoothed back into ribbons of pavement by crews working around the clock. </string>
+
     <string-array name="business_type">
         <item>"होटल व्यवसाय"</item>
         <item>"खुद्रा व्यापार"</item>
@@ -194,6 +196,9 @@
     <string name="toll_free_number">Toll Free Number</string>
     <string name="feel_free_to_call_us">Feel free to call us\nWe are always there to help you</string>
     <string name="emergency_no">Emergency No</string>
+    <string name="title">Title</string>
+    <string name="play_quiz">play Quiz</string>
+    <string name="body">body</string>
     <!-- end of sudur resource -->
 
 

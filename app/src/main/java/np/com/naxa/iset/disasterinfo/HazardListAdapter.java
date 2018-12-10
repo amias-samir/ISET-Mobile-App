@@ -3,6 +3,7 @@ package np.com.naxa.iset.disasterinfo;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -23,7 +24,7 @@ public class HazardListAdapter extends BaseQuickAdapter<HazardListModel, BaseVie
 
     @Override
     protected void convert(BaseViewHolder helper, HazardListModel item) {
-        LinearLayout relativeLayout = helper.getView(R.id.hazard_list_item_row_layout);
+        LinearLayout linearLayout = helper.getView(R.id.hazard_list_item_row_layout);
 
         helper.setText(R.id.tv_hazard_list_title,item.getTitle());
         helper.setText(R.id.tv_hazard_list_title,item.getTitle());
@@ -32,7 +33,15 @@ public class HazardListAdapter extends BaseQuickAdapter<HazardListModel, BaseVie
 
         if(((helper.getLayoutPosition()+1) %2) == 0){
             Log.d(TAG, "convert: "+helper.getLayoutPosition());
-            helper.setBackgroundColor(R.id.hazard_list_item_row_layout, relativeLayout.getContext().getResources().getColor(R.color.listItemSecondBG));
+            helper.setBackgroundColor(R.id.hazard_list_item_row_layout, linearLayout.getContext().getResources().getColor(R.color.listItemSecondBG));
         }
+
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
 }
