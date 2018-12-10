@@ -44,6 +44,7 @@
 
     <color name="tabIconColor">#BDBDBD</color>
     <color name="black">#000000</color>
+    <color name="slate_black">#FF333333</color>
     <color name="jet">#222222</color>
     <color name="iron">#CCCCCC</color>
     <color name="white">#FFFFFF</color>

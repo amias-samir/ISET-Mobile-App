@@ -167,8 +167,11 @@
         </activity>
         <activity
             android:name=".disasterinfo.HazardInfoDetailsActivity"
+            android:exported="true" />
+        <activity android:name=".disasterinfo.HazardThingsToDoActivity" />
+
+        <activity android:name=".profile.municipalityprofile.MunicipalityProfileActivity"
             android:exported="true"></activity>
-        <activity android:name=".disasterinfo.HazardThingsToDoActivity"></activity>
     </application>
 
 </manifest>
