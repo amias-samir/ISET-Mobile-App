@@ -1,15 +1,15 @@
-package np.com.naxa.iset.profile.municipalityprofile;
+package np.com.naxa.iset.utils.sectionmultiitemUtils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class MunicipalityProfileModel implements Parcelable {
+public class MultiItemSectionModel implements Parcelable {
 
     String image;
     String data_key;
     String data_value;
 
-    public MunicipalityProfileModel(String image, String data_key, String data_value) {
+    public MultiItemSectionModel(String image, String data_key, String data_value) {
         this.image = image;
         this.data_key = data_key;
         this.data_value = data_value;
@@ -51,21 +51,21 @@ public class MunicipalityProfileModel implements Parcelable {
         dest.writeString(this.data_value);
     }
 
-    protected MunicipalityProfileModel(Parcel in) {
+    protected MultiItemSectionModel(Parcel in) {
         this.image = in.readString();
         this.data_key = in.readString();
         this.data_value = in.readString();
     }
 
-    public static final Parcelable.Creator<MunicipalityProfileModel> CREATOR = new Parcelable.Creator<MunicipalityProfileModel>() {
+    public static final Parcelable.Creator<MultiItemSectionModel> CREATOR = new Parcelable.Creator<MultiItemSectionModel>() {
         @Override
-        public MunicipalityProfileModel createFromParcel(Parcel source) {
-            return new MunicipalityProfileModel(source);
+        public MultiItemSectionModel createFromParcel(Parcel source) {
+            return new MultiItemSectionModel(source);
         }
 
         @Override
-        public MunicipalityProfileModel[] newArray(int size) {
-            return new MunicipalityProfileModel[size];
+        public MultiItemSectionModel[] newArray(int size) {
+            return new MultiItemSectionModel[size];
         }
     };
 }

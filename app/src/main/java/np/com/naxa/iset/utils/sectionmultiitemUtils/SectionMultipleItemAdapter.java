@@ -1,4 +1,4 @@
-package np.com.naxa.iset.profile.municipalityprofile;
+package np.com.naxa.iset.utils.sectionmultiitemUtils;
 
 import android.widget.ImageView;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 import np.com.naxa.iset.R;
 
-public class MunicipalitySectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter<MunicipalitySectionMultipleItem, BaseViewHolder> {
+public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter<SectionMultipleItem, BaseViewHolder> {
     /**
      * init SectionMultipleItemAdapter
      * 1. add your header resource layout
@@ -19,16 +19,16 @@ public class MunicipalitySectionMultipleItemAdapter extends BaseSectionMultiItem
      * @param sectionHeadResId The section head layout id for each item
      * @param data             A new list is created out of this one to avoid mutable list
      */
-    public MunicipalitySectionMultipleItemAdapter(int sectionHeadResId, List data) {
+    public SectionMultipleItemAdapter(int sectionHeadResId, List data) {
         super(sectionHeadResId, data);
 
-        addItemType(MunicipalitySectionMultipleItem.TEXT, R.layout.item_text_view);
-        addItemType(MunicipalitySectionMultipleItem.IMG, R.layout.item_image_view);
-        addItemType(MunicipalitySectionMultipleItem.IMG_TEXT, R.layout.item_img_text_view);
+        addItemType(SectionMultipleItem.TEXT, R.layout.item_text_view);
+        addItemType(SectionMultipleItem.IMG, R.layout.item_image_view);
+        addItemType(SectionMultipleItem.IMG_TEXT, R.layout.item_img_text_view);
     }
 
     @Override
-    protected void convertHead(BaseViewHolder helper, final MunicipalitySectionMultipleItem item) {
+    protected void convertHead(BaseViewHolder helper, final SectionMultipleItem item) {
         // deal with header viewHolder
         helper.setText(R.id.header, item.header);
         helper.setVisible(R.id.more, item.isMore());
@@ -36,20 +36,20 @@ public class MunicipalitySectionMultipleItemAdapter extends BaseSectionMultiItem
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, MunicipalitySectionMultipleItem item) {
+    protected void convert(BaseViewHolder helper, SectionMultipleItem item) {
         // deal with multiple type items viewHolder
         helper.addOnClickListener(R.id.card_view);
         switch (helper.getItemViewType()) {
-            case MunicipalitySectionMultipleItem.TEXT:
-                helper.setText(R.id.tv, item.getMunicipalityProfileModel().getData_key());
-                helper.setText(R.id.tv1, item.getMunicipalityProfileModel().getData_value());
+            case SectionMultipleItem.TEXT:
+                helper.setText(R.id.tv, item.getMultiItemSectionModel().getData_key());
+                helper.setText(R.id.tv1, item.getMultiItemSectionModel().getData_value());
                 break;
-            case MunicipalitySectionMultipleItem.IMG:
+            case SectionMultipleItem.IMG:
 
                 ImageView imageView = helper.getView(R.id.iv);
                 Glide
                         .with(imageView.getContext())
-                        .load(item.getMunicipalityProfileModel().getImage())
+                        .load(item.getMultiItemSectionModel().getImage())
                         .fitCenter()
                         .into(imageView);
 

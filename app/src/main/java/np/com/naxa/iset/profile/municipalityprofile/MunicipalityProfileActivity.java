@@ -19,7 +19,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import np.com.naxa.iset.R;
-import np.com.naxa.iset.activity.ReportActivity;
+import np.com.naxa.iset.utils.sectionmultiitemUtils.DataServer;
+import np.com.naxa.iset.utils.sectionmultiitemUtils.SectionMultipleItem;
+import np.com.naxa.iset.utils.sectionmultiitemUtils.SectionMultipleItemAdapter;
 
 public class MunicipalityProfileActivity extends AppCompatActivity {
 
@@ -34,7 +36,7 @@ public class MunicipalityProfileActivity extends AppCompatActivity {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    private List<MunicipalitySectionMultipleItem> mData;
+    private List<SectionMultipleItem> mData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,15 +75,15 @@ public class MunicipalityProfileActivity extends AppCompatActivity {
 
     private void setupRecyclerView(){
         // create adapter which extend BaseSectionMultiItemQuickAdapter provide your headerResId
-        MunicipalitySectionMultipleItemAdapter sectionAdapter = new MunicipalitySectionMultipleItemAdapter(R.layout.def_section_head, mData);
+        SectionMultipleItemAdapter sectionAdapter = new SectionMultipleItemAdapter(R.layout.def_section_head, mData);
         sectionAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-                MunicipalitySectionMultipleItem item = (MunicipalitySectionMultipleItem) adapter.getData().get(position);
+                SectionMultipleItem item = (SectionMultipleItem) adapter.getData().get(position);
                 switch (view.getId()) {
                     case R.id.card_view:
-                        if (item.getMunicipalityProfileModel() != null) {
-                            Toast.makeText(MunicipalityProfileActivity.this, item.getMunicipalityProfileModel().getData_key(), Toast.LENGTH_LONG).show();
+                        if (item.getMultiItemSectionModel() != null) {
+                            Toast.makeText(MunicipalityProfileActivity.this, item.getMultiItemSectionModel().getData_key(), Toast.LENGTH_LONG).show();
                         }
                         break;
                     default:
