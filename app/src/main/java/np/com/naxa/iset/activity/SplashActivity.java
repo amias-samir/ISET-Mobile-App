@@ -124,7 +124,7 @@ public class SplashActivity extends AppCompatActivity {
                 if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                         connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
                     //we are connected to a network
-//                    fetchGeoJsonCategoryList();
+                    fetchGeoJsonCategoryList();
                     SectionGridHomeActivity.start(SplashActivity.this);
 
                 } else {

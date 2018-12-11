@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.profile.municipalityprofile.MunicipalityProfileActivity;
 import np.com.naxa.iset.utils.recycleviewutils.LinearLayoutManagerWithSmoothScroller;
 import np.com.naxa.iset.utils.recycleviewutils.RecyclerViewType;
 
@@ -102,6 +103,7 @@ public class SectionGridHomeActivity extends AppCompatActivity {
                 recyclerView.smoothScrollToPosition(0);
                 break;
             case R.id.btn_info:
+                startActivity(new Intent(SectionGridHomeActivity.this, MunicipalityProfileActivity.class));
                 break;
         }
     }
