@@ -22,7 +22,7 @@ import java.util.TimeZone;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import np.com.naxa.iset.R;
-import np.com.naxa.iset.database.VsoRoomDatabase;
+import np.com.naxa.iset.database.ISETRoomDatabase;
 import np.com.naxa.iset.database.dao.MessageHelperDao;
 import np.com.naxa.iset.home.ISET;
 import np.com.naxa.iset.utils.SharedPreferenceUtils;
@@ -64,7 +64,7 @@ public class VSOFirebaseMessagingService extends FirebaseMessagingService {
         String localTime = date1.format(currentLocalTime);
 
 
-        VsoRoomDatabase db = VsoRoomDatabase.getDatabase(ISET.getInstance());
+        ISETRoomDatabase db = ISETRoomDatabase.getDatabase(ISET.getInstance());
         mMessageHelperDao = db.messageHelperDao();
         insert(new MessageHelper(formattedDate, localTime, description, 1));
         sendNotificationTo_Home(new NotificationData(title, description));

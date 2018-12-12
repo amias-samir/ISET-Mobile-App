@@ -47,19 +47,40 @@ public class GeoJsonCategoryEntity {
     @Expose
     private String summaryName;
 
+    @SerializedName("last_updated")
+    @ColumnInfo(name = "last_updated")
+    @Expose
+    private String lastUpdated;
+
+    @SerializedName("public_view")
+    @ColumnInfo(name = "public_view")
+    @Expose
+    private String publicView;
+
 
 //    public GeoJsonCategoryEntity(String categoryName, String categoryTable) {
 //        this.categoryName = categoryName;
 //        this.categoryTable = categoryTable;
 //    }
 
-    public GeoJsonCategoryEntity(String categoryName, String categoryTable, String categoryType, String categoryPhoto, String summaryList, String summaryName) {
+//    public GeoJsonCategoryEntity(String categoryName, String categoryTable, String categoryType, String categoryPhoto, String summaryList, String summaryName) {
+//        this.categoryName = categoryName;
+//        this.categoryTable = categoryTable;
+//        this.categoryType = categoryType;
+//        this.categoryPhoto = categoryPhoto;
+//        this.summaryList = summaryList;
+//        this.summaryName = summaryName;
+//    }
+
+    public GeoJsonCategoryEntity(String categoryName, String categoryTable, String categoryType, String categoryPhoto, String summaryList, String summaryName, String lastUpdated, String publicView) {
         this.categoryName = categoryName;
         this.categoryTable = categoryTable;
         this.categoryType = categoryType;
         this.categoryPhoto = categoryPhoto;
         this.summaryList = summaryList;
         this.summaryName = summaryName;
+        this.lastUpdated = lastUpdated;
+        this.publicView = publicView;
     }
 
     public String getCategoryName() {
@@ -117,5 +138,21 @@ public class GeoJsonCategoryEntity {
 
     public void setSummaryName(String summaryName) {
         this.summaryName = summaryName;
+    }
+
+    public String getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(String lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    public String getPublicView() {
+        return publicView;
+    }
+
+    public void setPublicView(String publicView) {
+        this.publicView = publicView;
     }
 }

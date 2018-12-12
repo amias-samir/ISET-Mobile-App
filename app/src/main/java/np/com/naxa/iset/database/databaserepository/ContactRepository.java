@@ -7,7 +7,7 @@ import android.util.Log;
 
 import java.util.List;
 
-import np.com.naxa.iset.database.VsoRoomDatabase;
+import np.com.naxa.iset.database.ISETRoomDatabase;
 import np.com.naxa.iset.database.dao.ContactDao;
 import np.com.naxa.iset.database.entity.Contact;
 
@@ -25,7 +25,7 @@ public class ContactRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public ContactRepository(Application application) {
-        VsoRoomDatabase db = VsoRoomDatabase.getDatabase(application);
+        ISETRoomDatabase db = ISETRoomDatabase.getDatabase(application);
         mContactDao = db.contactDao();
         mAllContacts = mContactDao.getAlphabetizedWords();
     }

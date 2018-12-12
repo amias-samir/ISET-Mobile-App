@@ -31,9 +31,9 @@ import np.com.naxa.iset.firebase.MessageHelper;
 
 @Database(entities = {Contact.class, OpenSpace.class, CommonPlacesAttrb.class, HospitalFacilities.class, EducationalInstitutes.class,
         GeoJsonCategoryEntity.class, GeoJsonListEntity.class, MessageHelper.class,
-}, version = 16, exportSchema = false)
+}, version = 17, exportSchema = false)
 
-public abstract class VsoRoomDatabase extends RoomDatabase {
+public abstract class ISETRoomDatabase extends RoomDatabase {
 
     public abstract ContactDao contactDao();
     public abstract MessageHelperDao messageHelperDao();
@@ -44,14 +44,14 @@ public abstract class VsoRoomDatabase extends RoomDatabase {
     public abstract GeoJsonCategoryDao geoJsonCategoryDao();
     public abstract GeoJsonListDao geoJsonListDao();
 
-    private static VsoRoomDatabase INSTANCE;
+    private static ISETRoomDatabase INSTANCE;
 
-    public static VsoRoomDatabase getDatabase(final Context context) {
+    public static ISETRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (VsoRoomDatabase.class) {
+            synchronized (ISETRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            VsoRoomDatabase.class, "vso_database")
+                            ISETRoomDatabase.class, "iset_database")
                             // Wipes and rebuilds instead of migrating if no Migration object.
                             // Migration is not part of this codelab.
                             .fallbackToDestructiveMigration()
@@ -92,7 +92,7 @@ public abstract class VsoRoomDatabase extends RoomDatabase {
         private final GeoJsonCategoryDao mGeoJsonCategoryDao;
         private final GeoJsonListDao mGeoJsonListDao;
 
-        PopulateDbAsync(VsoRoomDatabase db) {
+        PopulateDbAsync(ISETRoomDatabase db) {
             mContactDao = db.contactDao();
             mMessageHelperDao = db.messageHelperDao();
             mOpenSpaceDao = db.openSpaceDao();

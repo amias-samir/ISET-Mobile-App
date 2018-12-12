@@ -10,7 +10,7 @@ import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-import np.com.naxa.iset.database.VsoRoomDatabase;
+import np.com.naxa.iset.database.ISETRoomDatabase;
 import np.com.naxa.iset.database.dao.GeoJsonCategoryDao;
 import np.com.naxa.iset.database.entity.GeoJsonCategoryEntity;
 
@@ -25,7 +25,7 @@ public class GeoJsonCategoryRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public GeoJsonCategoryRepository(Application application) {
-        VsoRoomDatabase db = VsoRoomDatabase.getDatabase(application);
+        ISETRoomDatabase db = ISETRoomDatabase.getDatabase(application);
         mGeoJsonCategoryDao = db.geoJsonCategoryDao();
         mAllGeoJsonCategoryEntity = mGeoJsonCategoryDao.getGeoJsonCategoryList();
     }

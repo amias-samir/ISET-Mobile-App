@@ -1,4 +1,4 @@
-package np.com.naxa.iset.profile.municipalityprofile;
+package np.com.naxa.iset.utils.sectionmultiitemUtils;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 

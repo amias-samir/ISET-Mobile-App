@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -114,8 +115,10 @@ public class SplashActivity extends AppCompatActivity {
             SharedPreferenceUtils sharedPreference = new SharedPreferenceUtils(this);
 
             Date date = Calendar.getInstance(new Locale("en", "US")).getTime();
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            String formattedDate = df.format(date);
+//            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+//            String formattedDate = df.format(date);
+            String formattedDate = date.toString();
+
 
             if (formattedDate.equals(sharedPreference.getStringValue("time", ""))) {
                 SectionGridHomeActivity.start(SplashActivity.this);
@@ -124,12 +127,13 @@ public class SplashActivity extends AppCompatActivity {
                 if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
                         connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
                     //we are connected to a network
-                    fetchGeoJsonCategoryList();
+//                    fetchGeoJsonCategoryList();
                     SectionGridHomeActivity.start(SplashActivity.this);
 
                 } else {
                     // redirect to homepage27.1.1
-                    SectionGridHomeActivity.start(SplashActivity.this);
+//                    SectionGridHomeActivity.start(SplashActivity.this);
+                    startActivity(new Intent(SplashActivity.this, SectionGridHomeActivity.class));
                 }
             }
 

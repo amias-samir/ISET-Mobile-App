@@ -9,7 +9,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
-import np.com.naxa.iset.database.VsoRoomDatabase;
+import np.com.naxa.iset.database.ISETRoomDatabase;
 import np.com.naxa.iset.database.dao.GeoJsonListDao;
 import np.com.naxa.iset.database.entity.GeoJsonListEntity;
 
@@ -24,7 +24,7 @@ public class GeoJsonListEntityRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public GeoJsonListEntityRepository(Application application) {
-        VsoRoomDatabase db = VsoRoomDatabase.getDatabase(application);
+        ISETRoomDatabase db = ISETRoomDatabase.getDatabase(application);
         mGeoJsonListDao = db.geoJsonListDao();
         mAllGeoJsonListEntity = mGeoJsonListDao.getGeoJsonListEntity();
     }

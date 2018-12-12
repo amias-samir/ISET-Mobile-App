@@ -1,5 +1,6 @@
 package np.com.naxa.iset.profile.municipalityprofile;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
@@ -7,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.profile.wardprofile.WardProfileActivity;
 import np.com.naxa.iset.utils.sectionmultiitemUtils.DataServer;
 import np.com.naxa.iset.utils.sectionmultiitemUtils.SectionMultipleItem;
 import np.com.naxa.iset.utils.sectionmultiitemUtils.SectionMultipleItemAdapter;
@@ -70,6 +73,23 @@ public class MunicipalityProfileActivity extends AppCompatActivity {
                 R.layout.item_spinner_text_black, getResources().getStringArray(R.array.ward_no));
         wardAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnWardNo.setAdapter(wardAdapter);
+
+
+        spnWardNo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position>0) {
+                    Intent intent = new Intent(MunicipalityProfileActivity.this, WardProfileActivity.class);
+                    intent.putExtra("ward", spnWardNo.getSelectedItem().toString());
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
     }
 

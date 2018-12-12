@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Flowable;
-import np.com.naxa.iset.database.VsoRoomDatabase;
+import np.com.naxa.iset.database.ISETRoomDatabase;
 import np.com.naxa.iset.database.dao.CommonPlacesAttrbDao;
 import np.com.naxa.iset.database.entity.CommonPlacesAttrb;
 
@@ -33,7 +33,7 @@ public class CommonPlacesAttrbRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public CommonPlacesAttrbRepository(Application application) {
-        VsoRoomDatabase db = VsoRoomDatabase.getDatabase(application);
+        ISETRoomDatabase db = ISETRoomDatabase.getDatabase(application);
         mCommonPlacesAttrbDao = db.commonPlacesAttrbDao();
         mAllCommonPlacesAttrb = mCommonPlacesAttrbDao.getFirstInsertedCommonPlaces();
     }

@@ -8,7 +8,7 @@ import android.util.Log;
 import java.util.List;
 
 import io.reactivex.Flowable;
-import np.com.naxa.iset.database.VsoRoomDatabase;
+import np.com.naxa.iset.database.ISETRoomDatabase;
 import np.com.naxa.iset.database.combinedentity.EducationAndCommon;
 import np.com.naxa.iset.database.dao.EducationalInstitutesDao;
 import np.com.naxa.iset.database.entity.EducationalInstitutes;
@@ -27,7 +27,7 @@ public class EducationalInstitutesRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public EducationalInstitutesRepository(Application application) {
-        VsoRoomDatabase db = VsoRoomDatabase.getDatabase(application);
+        ISETRoomDatabase db = ISETRoomDatabase.getDatabase(application);
         mEducationalInstitutesDao = db.educationalInstitutesDao();
         mAllEducationalInstitutes = mEducationalInstitutesDao.getFirstInsertedEducationalInstitutes();
     }

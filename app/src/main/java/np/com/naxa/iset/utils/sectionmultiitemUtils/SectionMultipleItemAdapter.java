@@ -1,6 +1,9 @@
 package np.com.naxa.iset.utils.sectionmultiitemUtils;
 
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseSectionMultiItemQuickAdapter;
@@ -19,6 +22,9 @@ public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter
      * @param sectionHeadResId The section head layout id for each item
      * @param data             A new list is created out of this one to avoid mutable list
      */
+
+    int sectionItemCount = 0;
+
     public SectionMultipleItemAdapter(int sectionHeadResId, List data) {
         super(sectionHeadResId, data);
 
@@ -30,6 +36,9 @@ public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter
     @Override
     protected void convertHead(BaseViewHolder helper, final SectionMultipleItem item) {
         // deal with header viewHolder
+        TextView view = helper.getView(R.id.header_no);
+        view.setVisibility(item.isHeadListNo() ? View.VISIBLE : View.GONE);
+
         helper.setText(R.id.header, item.header);
         helper.setVisible(R.id.more, item.isMore());
         helper.addOnClickListener(R.id.more);
@@ -37,6 +46,16 @@ public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter
 
     @Override
     protected void convert(BaseViewHolder helper, SectionMultipleItem item) {
+
+        Log.d(TAG, "convertHead: setupRecyclerView "+item.getMultiItemSectionModel().getData_key());
+        if(item.isHeadListNo()){
+            sectionItemCount++;
+            Log.d(TAG, "convertHead: setupRecyclerView "+item.getMultiItemSectionModel().getData_key());
+            Log.d(TAG, "convertHead: setupRecyclerView "+item.getMultiItemSectionModel().getData_value());
+            Log.d(TAG, "convertHead: setupRecyclerView "+item.getMultiItemSectionModel().getImage());
+            helper.setText(R.id.header_no, sectionItemCount );
+        }
+
         // deal with multiple type items viewHolder
         helper.addOnClickListener(R.id.card_view);
         switch (helper.getItemViewType()) {
@@ -44,6 +63,7 @@ public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter
                 helper.setText(R.id.tv, item.getMultiItemSectionModel().getData_key());
                 helper.setText(R.id.tv1, item.getMultiItemSectionModel().getData_value());
                 break;
+
             case SectionMultipleItem.IMG:
 
                 ImageView imageView = helper.getView(R.id.iv);
@@ -52,6 +72,18 @@ public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter
                         .load(item.getMultiItemSectionModel().getImage())
                         .fitCenter()
                         .into(imageView);
+
+                break;
+
+            case SectionMultipleItem.IMG_TEXT:
+                helper.setText(R.id.tv, item.getMultiItemSectionModel().getData_key());
+
+                ImageView imageView1 = helper.getView(R.id.iv);
+                Glide
+                        .with(imageView1.getContext())
+                        .load(item.getMultiItemSectionModel().getImage())
+                        .fitCenter()
+                        .into(imageView1);
 
                 break;
         }

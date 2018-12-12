@@ -8,7 +8,7 @@ import android.util.Log;
 import java.util.List;
 
 import io.reactivex.Flowable;
-import np.com.naxa.iset.database.VsoRoomDatabase;
+import np.com.naxa.iset.database.ISETRoomDatabase;
 import np.com.naxa.iset.database.combinedentity.OpenAndCommon;
 import np.com.naxa.iset.database.dao.OpenSpaceDao;
 import np.com.naxa.iset.database.entity.OpenSpace;
@@ -27,7 +27,7 @@ public class OpenSpaceRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public OpenSpaceRepository(Application application) {
-        VsoRoomDatabase db = VsoRoomDatabase.getDatabase(application);
+        ISETRoomDatabase db = ISETRoomDatabase.getDatabase(application);
         mOpenSpaceDao = db.openSpaceDao();
         mAllOpenSpaces = mOpenSpaceDao.getAlphabetizedWords();
     }

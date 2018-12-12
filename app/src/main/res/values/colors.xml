@@ -79,5 +79,6 @@
     <color name="listItemSecondBG">#F6F2FD</color>
     <color name="isetToolbarColor">#673AB7</color>
     <color name="isetArrowRightRectColor">#E2D5F8</color>
+    <color name="thingsToDoListnumberBG">#D7CCEC</color>
 
 </resources>

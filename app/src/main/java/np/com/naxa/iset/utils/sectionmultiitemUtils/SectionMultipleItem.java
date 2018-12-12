@@ -11,11 +11,13 @@ public class SectionMultipleItem extends SectionMultiEntity<MultiItemSectionMode
     public static final int IMG_TEXT = 3;
     private int itemType;
     private boolean isMore;
+    private boolean isHeadListNo;
     private MultiItemSectionModel multiItemSectionModel;
 
-    public SectionMultipleItem(boolean isHeader, String header, boolean isMore) {
+    public SectionMultipleItem(boolean isHeader, String header, boolean isMore, boolean isHeadListNo) {
         super(isHeader, header);
         this.isMore = isMore;
+        this.isHeadListNo = isHeadListNo;
     }
 
     public SectionMultipleItem(int itemType, MultiItemSectionModel multiItemSectionModel) {
@@ -46,4 +48,11 @@ public class SectionMultipleItem extends SectionMultiEntity<MultiItemSectionMode
     }
 
 
+    public boolean isHeadListNo() {
+        return isHeadListNo;
+    }
+
+    public void setHeadListNo(boolean headListNo) {
+        isHeadListNo = headListNo;
+    }
 }

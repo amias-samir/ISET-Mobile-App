@@ -7,7 +7,7 @@ import android.util.Log;
 import java.util.List;
 
 import io.reactivex.Flowable;
-import np.com.naxa.iset.database.VsoRoomDatabase;
+import np.com.naxa.iset.database.ISETRoomDatabase;
 import np.com.naxa.iset.database.dao.MessageHelperDao;
 import np.com.naxa.iset.firebase.MessageHelper;
 
@@ -20,7 +20,7 @@ public class MessageHelperRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public MessageHelperRepository(Application application) {
-        VsoRoomDatabase db = VsoRoomDatabase.getDatabase(application);
+        ISETRoomDatabase db = ISETRoomDatabase.getDatabase(application);
         mMessageHelperDao = db.messageHelperDao();
         mAllMessageList = mMessageHelperDao.getAllMessageList();
     }

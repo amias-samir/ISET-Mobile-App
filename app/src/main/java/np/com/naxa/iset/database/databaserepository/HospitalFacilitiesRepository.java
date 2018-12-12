@@ -7,7 +7,7 @@ import android.util.Log;
 import java.util.List;
 
 import io.reactivex.Flowable;
-import np.com.naxa.iset.database.VsoRoomDatabase;
+import np.com.naxa.iset.database.ISETRoomDatabase;
 import np.com.naxa.iset.database.combinedentity.HospitalAndCommon;
 import np.com.naxa.iset.database.dao.HospitalFacilitiesDao;
 import np.com.naxa.iset.database.entity.HospitalFacilities;
@@ -34,7 +34,7 @@ public class HospitalFacilitiesRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
     public HospitalFacilitiesRepository(Application application) {
-        VsoRoomDatabase db = VsoRoomDatabase.getDatabase(application);
+        ISETRoomDatabase db = ISETRoomDatabase.getDatabase(application);
         mHospitalFacilitiesDao = db.hospitalFacilitiesDao();
         mAllHospitalFacilities = mHospitalFacilitiesDao.getFirstInsertedHospital();
         mAllDistinctTypeList = mHospitalFacilitiesDao.getDistinctTypeList();
