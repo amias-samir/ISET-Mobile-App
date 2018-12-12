@@ -173,7 +173,8 @@
             android:name=".profile.municipalityprofile.MunicipalityProfileActivity"
             android:exported="true" />
         <activity android:name=".profile.wardprofile.WardProfileActivity" />
-        <activity android:name=".quiz.QuizHomeActivity"></activity>
+        <activity android:name=".quiz.QuizHomeActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>
