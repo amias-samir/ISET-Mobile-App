@@ -16,6 +16,7 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -146,10 +147,16 @@ public final class DialogFactory {
 
 
     public static Dialog createBaseLayerDialog(@NonNull Context context){
+
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.select_base_layer_custom_dialog_layout);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
 
 
         Button dialogButton = (Button) dialog.findViewById(R.id.btn_closeDialog);
@@ -160,8 +167,8 @@ public final class DialogFactory {
                 dialog.dismiss();
             }
         });
-
-
+        
+        dialog.getWindow().setAttributes(lp);
         return dialog;
     }
 
