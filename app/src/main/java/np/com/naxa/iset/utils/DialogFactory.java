@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import np.com.naxa.iset.R;
@@ -146,7 +148,7 @@ public final class DialogFactory {
     }
 
 
-    public static Dialog createBaseLayerDialog(@NonNull Context context){
+    public static Dialog createBaseLayerDialog(@NonNull Context context, @NonNull CustomBaseLayerDialogListner listner){
 
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -161,17 +163,91 @@ public final class DialogFactory {
 
         Button dialogButton = (Button) dialog.findViewById(R.id.btn_closeDialog);
 
+        Switch street = (Switch) dialog.findViewById(R.id.switchStreetView);
+        Switch satellite = (Switch) dialog.findViewById(R.id.switchSatelliteView);
+        Switch openStreet = (Switch) dialog.findViewById(R.id.switchOpenStreetView);
+        Switch municipality = (Switch) dialog.findViewById(R.id.switchMetropolitianBoundary);
+        Switch ward = (Switch) dialog.findViewById(R.id.switchWardBoundary);
+
+
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
             }
         });
-        
+
+        street.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                if(isChecked == true){
+                    satellite.setChecked(false);
+                    openStreet.setChecked(false);
+                    listner.onStreetClick();
+                }
+            }
+        });
+
+        satellite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                if(isChecked == true){
+                    street.setChecked(false);
+                    openStreet.setChecked(false);
+                    listner.onSatelliteClick();
+
+                }
+            }
+        });
+
+        openStreet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                if(isChecked == true){
+                    street.setChecked(false);
+                    satellite.setChecked(false);
+                    listner.onOpenStreetClick();
+
+                }
+            }
+        });
+
+        municipality.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                if(isChecked == true){
+                    ward.setChecked(false);
+                    listner.onMetropolitianClick();
+
+                }
+            }
+        });
+
+        ward.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                if(isChecked == true){
+                    municipality.setChecked(false);
+                    listner.onOpenStreetClick();
+                }
+            }
+        });
+
+
+
+
         dialog.getWindow().setAttributes(lp);
         return dialog;
     }
 
+
+    public interface CustomBaseLayerDialogListner {
+        void onStreetClick();
+        void onSatelliteClick();
+        void onOpenStreetClick();
+        void onMetropolitianClick();
+        void onWardClick();
+    }
 
 
 

@@ -30,10 +30,10 @@
             >
 
             <Switch
-                android:id="@+id/stitchStreetView"
+                android:id="@+id/switchStreetView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="false"
+                android:checked="true"
                 android:text="Street view"
                 android:textAlignment="viewStart"
                 android:layout_centerHorizontal="true"
@@ -43,10 +43,11 @@
                 android:gravity="center"
                 android:textSize="@dimen/material_text_title"
                 tools:ignore="RtlCompat"
-                android:layout_marginTop="@dimen/spacing_large"/>
+                android:layout_marginTop="@dimen/spacing_large"
+                />
 
             <Switch
-                android:id="@+id/stitchSatelliteView"
+                android:id="@+id/switchSatelliteView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="false"
@@ -62,7 +63,7 @@
                 tools:ignore="RtlCompat" />
 
             <Switch
-                android:id="@+id/stitchOpenStreetView"
+                android:id="@+id/switchOpenStreetView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="false"
@@ -108,10 +109,10 @@
             >
 
             <Switch
-                android:id="@+id/stitchMetropolitianBoundary"
+                android:id="@+id/switchMetropolitianBoundary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="false"
+                android:checked="true"
                 android:text="Metropolitian Boundary"
                 android:textAlignment="viewStart"
                 android:layout_centerHorizontal="true"
@@ -124,7 +125,7 @@
                 android:layout_marginTop="@dimen/spacing_mlarge"/>
 
             <Switch
-                android:id="@+id/stitchWardBoundary"
+                android:id="@+id/switchWardBoundary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/isetPurple"

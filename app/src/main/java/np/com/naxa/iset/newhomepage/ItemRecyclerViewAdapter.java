@@ -84,7 +84,12 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
             case "ASK FOR HELP":
                 DialogFactory.createCustomDialog(context,
                         "If you want to submit a detailed report, fill the following form.",
-                        () -> context.startActivity(new Intent(context, ReportActivity.class))).show();
+                        new DialogFactory.CustomDialogListener() {
+                            @Override
+                            public void onClick() {
+                                context.startActivity(new Intent(context, ReportActivity.class));
+                            }
+                        }).show();
                 break;
             case "Report":
                 context.startActivity(new Intent(context, ReportActivity.class));
@@ -107,7 +112,32 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
                 break;
 
             case "MAP":
-                DialogFactory.createBaseLayerDialog(context).show();
+                DialogFactory.createBaseLayerDialog(context, new DialogFactory.CustomBaseLayerDialogListner() {
+                    @Override
+                    public void onStreetClick() {
+
+                    }
+
+                    @Override
+                    public void onSatelliteClick() {
+
+                    }
+
+                    @Override
+                    public void onOpenStreetClick() {
+
+                    }
+
+                    @Override
+                    public void onMetropolitianClick() {
+
+                    }
+
+                    @Override
+                    public void onWardClick() {
+
+                    }
+                }).show();
 //                context.startActivity(new Intent(context, HomeActivity.class));
                 break;
         }
