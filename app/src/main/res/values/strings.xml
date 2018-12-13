@@ -229,6 +229,12 @@
 
 
     <!-- Navigation Drawer menu labels -->
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="openDrawer">open_drawer</string>
+    <string name="closeDrawer">close_drawer</string>
+
     <string name="nav_home">Home</string>
     <string name="nav_profile">Profile</string>
     <string name="nav_ask_for_help">Ask for Help</string>
