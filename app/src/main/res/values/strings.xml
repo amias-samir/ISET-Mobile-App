@@ -228,4 +228,16 @@
     <string name="quiz_category">Quiz category</string>
 
 
+    <!-- Navigation Drawer menu labels -->
+    <string name="nav_home">Home</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_ask_for_help">Ask for Help</string>
+    <string name="nav_report">Report</string>
+    <string name="nav_Notify_others">Notify Others</string>
+    <string name="nav_hazard_info">Hazard Info</string>
+    <string name="nav_play_quiz">Play Quiz</string>
+    <string name="nav_settings">settings</string>
+    <string name="nav_map">Map</string>
+
+
 </resources>
