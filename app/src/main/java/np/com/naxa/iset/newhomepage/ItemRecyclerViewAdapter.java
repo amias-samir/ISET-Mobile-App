@@ -107,6 +107,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
                 break;
 
             case "MAP":
+                DialogFactory.createBaseLayerDialog(context).show();
 //                context.startActivity(new Intent(context, HomeActivity.class));
                 break;
         }

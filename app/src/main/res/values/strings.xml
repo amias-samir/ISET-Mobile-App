@@ -244,6 +244,8 @@
     <string name="nav_play_quiz">Play Quiz</string>
     <string name="nav_settings">settings</string>
     <string name="nav_map">Map</string>
+    <string name="select_base_layer">Select Base Layer</string>
+    <string name="select_overlay_layer">Select Overlay Layer</string>
 
 
 </resources>

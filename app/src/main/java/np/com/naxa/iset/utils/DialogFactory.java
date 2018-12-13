@@ -145,5 +145,27 @@ public final class DialogFactory {
     }
 
 
+    public static Dialog createBaseLayerDialog(@NonNull Context context){
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.select_base_layer_custom_dialog_layout);
+
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.btn_closeDialog);
+
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
+        return dialog;
+    }
+
+
+
 
 }
