@@ -40,7 +40,7 @@ public class QuizHomeActivity extends AppCompatActivity {
 
     private void setupToolBar() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Emergency Numbers");
+        getSupportActionBar().setTitle("DRR Quiz");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }

@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -34,6 +35,8 @@ public class DataGlossaryWordDetailsActivity extends AppCompatActivity {
     RelativeLayout btnWatchVideo;
     @BindView(R.id.toolbar_general)
     Toolbar toolbar;
+    @BindView(R.id.imageViewGlossaryDetails)
+    ImageView imageViewGlossaryDetails;
     private WordsWithDetailsModel wordsWithDetailsModel;
 
 
@@ -104,7 +107,7 @@ public class DataGlossaryWordDetailsActivity extends AppCompatActivity {
     private void initToolbar() {
 //        final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        toolbar.setTitle(wordsWithDetailsModel != null ? wordsWithDetailsModel.getTitle() : "Failed to load");
-        toolbar.setTitle("");
+        toolbar.setTitle("DRR Dictionary");
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {

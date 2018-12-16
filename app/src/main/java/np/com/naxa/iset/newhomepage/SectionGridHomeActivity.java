@@ -109,17 +109,27 @@ public class SectionGridHomeActivity extends AppCompatActivity {
     //populate recycler view
     private void populateRecyclerView() {
         String[] sectionHeader = {"REACT QUICKLY", "DISASTER INFORMATION"};
-        String[] sectionChildTitle = {"FIND OPEN SPACE", "ASK FOR HELP", "Report", "NOTIFY OTHERS", "HAZARD INFO", "DRR QUIZ", "DRR Dictionary", "MAP"};
+//        String[] sectionChildTitle = {"FIND OPEN SPACE", "ASK FOR HELP", "Report", "NOTIFY OTHERS", "HAZARD INFO", "DRR QUIZ", "DRR Dictionary", "MAP"};
+        String[] sectionChildTitle = {"FIND OPEN SPACE", "ASK FOR HELP", "Blood Request", "NOTIFY OTHERS","My Circle", "Report", "HAZARD INFO", "DRR QUIZ", "DRR Dictionary", "DRR relevant files", "Multimedia", "Who Does What"};
         ArrayList<SectionModel> sectionModelArrayList = new ArrayList<>();
         //for loop for sections
         int sectionChildTitlePos = 0;
         for (int i = 1; i <= 2; i++) {
             ArrayList<String> itemArrayList = new ArrayList<>();
             //for loop for items
-            for (int j = 1; j <= 4; j++) {
-                itemArrayList.add(sectionChildTitle[sectionChildTitlePos]);
-                sectionChildTitlePos++;
-            }
+//            if(i ==1){
+//                for (int j = 1; j <= 5; j++) {
+//                    itemArrayList.add(sectionChildTitle[sectionChildTitlePos]);
+//                    sectionChildTitlePos++;
+//                }
+//            }
+//             if(i==2){
+                 for (int j = 1; j <= 6; j++) {
+                     itemArrayList.add(sectionChildTitle[sectionChildTitlePos]);
+                     sectionChildTitlePos++;
+                 }
+//             }
+
 
             //add the section and items to array list
             sectionModelArrayList.add(new SectionModel(sectionHeader[i - 1], itemArrayList));

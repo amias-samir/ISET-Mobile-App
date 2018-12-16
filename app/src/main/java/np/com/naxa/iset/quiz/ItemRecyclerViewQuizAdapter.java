@@ -1,6 +1,7 @@
 package np.com.naxa.iset.quiz;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -89,12 +90,14 @@ public class ItemRecyclerViewQuizAdapter extends RecyclerView.Adapter<ItemRecycl
        holder.quiz_percentage.setBackground(mDrawable1);
 
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.item_bg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                Toast.makeText(context, arrayList.get(position) + " Clicked", Toast.LENGTH_SHORT).show();
 //                startNewActivity(arrayList.get(position));
 //                EventBus.getDefault().post(new EmergenctContactCallEvent.ContactItemClick(arrayList.get(position)));
+
+                holder.item_bg.getContext().startActivity(new Intent(holder.item_bg.getContext(), QuizTestActivity.class));
 
             }
         });

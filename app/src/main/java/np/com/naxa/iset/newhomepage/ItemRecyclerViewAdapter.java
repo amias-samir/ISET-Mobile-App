@@ -19,6 +19,7 @@ import np.com.naxa.iset.activity.ReportActivity;
 import np.com.naxa.iset.disasterinfo.HazardInfoActivity;
 import np.com.naxa.iset.drr_dictionary.data_glossary.GlossaryListActivity;
 import np.com.naxa.iset.home.HomeActivity;
+import np.com.naxa.iset.quiz.QuizHomeActivity;
 import np.com.naxa.iset.quiz.QuizTestActivity;
 import np.com.naxa.iset.utils.DialogFactory;
 import np.com.naxa.iset.youtubeplayer.YoutubeVideoListActivity;
@@ -104,7 +105,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
                 break;
 
             case "DRR QUIZ":
-                context.startActivity(new Intent(context, QuizTestActivity.class));
+                context.startActivity(new Intent(context, QuizHomeActivity.class));
                 break;
 
             case "DRR Dictionary":
