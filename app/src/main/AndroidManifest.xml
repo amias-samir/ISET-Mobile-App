@@ -139,8 +139,8 @@
             android:exported="true" />
         <activity
             android:name=".activity.ReportActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="np.com.naxa.iset.newhomepage.SectionGridHomeActivity" />
@@ -174,8 +174,10 @@
             android:name=".profile.municipalityprofile.MunicipalityProfileActivity"
             android:exported="true" />
         <activity android:name=".profile.wardprofile.WardProfileActivity" />
-        <activity android:name=".quiz.QuizHomeActivity"
-            android:exported="true"></activity>
+        <activity
+            android:name=".quiz.QuizHomeActivity"
+            android:exported="true" />
+        <activity android:name=".settings.SettingsActivity"></activity>
     </application>
 
 </manifest>
