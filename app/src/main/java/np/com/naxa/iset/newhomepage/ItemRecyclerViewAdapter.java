@@ -135,7 +135,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
                     }
 
                     @Override
-                    public void onMetropolitianClick() {
+                    public void onMetropolitanClick() {
 
                     }
 

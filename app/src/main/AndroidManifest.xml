@@ -177,7 +177,9 @@
         <activity
             android:name=".quiz.QuizHomeActivity"
             android:exported="true" />
-        <activity android:name=".settings.SettingsActivity"></activity>
+
+        <activity android:name=".settings.SettingsActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>

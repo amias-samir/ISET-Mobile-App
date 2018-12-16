@@ -248,6 +248,12 @@
     <string name="select_overlay_layer">Select Overlay Layer</string>
     <string name="your_circle_is_empty_LBL">Your circle is Empty. Please add your nearest people to your circle and know their status in case of danger!!!</string>
     <string name="add_people">Add people</string>
+    <string name="alert_settings">Alert Setting</string>
+
+    <string-array name="choose_language">
+        <item>English</item>
+        <item>नेपाली</item>
+    </string-array>
 
 
 </resources>

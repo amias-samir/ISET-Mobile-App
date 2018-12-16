@@ -217,7 +217,7 @@ public final class DialogFactory {
                 // do something, the isChecked will be
                 if(isChecked == true){
                     ward.setChecked(false);
-                    listner.onMetropolitianClick();
+                    listner.onMetropolitanClick();
 
                 }
             }
@@ -228,7 +228,7 @@ public final class DialogFactory {
                 // do something, the isChecked will be
                 if(isChecked == true){
                     municipality.setChecked(false);
-                    listner.onOpenStreetClick();
+                    listner.onWardClick();
                 }
             }
         });
@@ -245,7 +245,7 @@ public final class DialogFactory {
         void onStreetClick();
         void onSatelliteClick();
         void onOpenStreetClick();
-        void onMetropolitianClick();
+        void onMetropolitanClick();
         void onWardClick();
     }
 
