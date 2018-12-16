@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import np.com.naxa.iset.R;
 
-public class ProfileActivity extends AppCompatActivity {
+public class MyCircleProfileActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar_general)
     Toolbar toolbarGeneral;
@@ -38,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView tvNumber;
     @BindView(R.id.tv_detail)
     TextView tvDetail;
-    @BindView(R.id.btn_remove_watch)
+    @BindView(R.id.btn_add_people)
     Button btnRemoveWatch;
     @BindView(R.id.ib_setting)
     ImageButton ibSetting;
@@ -49,12 +49,20 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         ButterKnife.bind(this);
 
+        setupToolBar();
         initUI();
     }
 
+    private void setupToolBar() {
+        setSupportActionBar(toolbarGeneral);
+        getSupportActionBar().setTitle("Profile");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+    }
     private void initUI() {
         Glide.with(this)
-                .load(R.drawable.bikash_aayog_barema)
+                .load("https://thumbs.dreamstime.com/b/profile-icon-male-avatar-portrait-casual-person-silhouette-face-flat-design-vector-46846328.jpg")
                 .asBitmap()
                 .centerCrop()
                 .into(new BitmapImageViewTarget(ivPicture) {
@@ -68,12 +76,12 @@ public class ProfileActivity extends AppCompatActivity {
                 });
     }
 
-    @OnClick({R.id.ib_setting, R.id.btn_remove_watch})
+    @OnClick({R.id.ib_setting, R.id.btn_add_people})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ib_setting:
                 break;
-            case R.id.btn_remove_watch:
+            case R.id.btn_add_people:
                 break;
         }
     }

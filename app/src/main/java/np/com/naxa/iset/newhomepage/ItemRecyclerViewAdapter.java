@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import np.com.naxa.iset.R;
 import np.com.naxa.iset.activity.EmergencyActivity;
+import np.com.naxa.iset.activity.MyCircleProfileActivity;
 import np.com.naxa.iset.activity.ReportActivity;
 import np.com.naxa.iset.disasterinfo.HazardInfoActivity;
 import np.com.naxa.iset.drr_dictionary.data_glossary.GlossaryListActivity;
@@ -98,6 +99,10 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
 
             case "NOTIFY OTHERS":
                 context.startActivity(new Intent(context, EmergencyActivity.class));
+                break;
+
+            case "My Circle":
+                context.startActivity(new Intent(context, MyCircleProfileActivity.class));
                 break;
 
             case "HAZARD INFO":

@@ -135,7 +135,7 @@
                 android:value="np.com.naxa.iset.newhomepage.SectionGridHomeActivity" />
         </activity>
         <activity
-            android:name=".activity.ProfileActivity"
+            android:name=".activity.MyCircleProfileActivity"
             android:exported="true" />
         <activity
             android:name=".activity.ReportActivity"

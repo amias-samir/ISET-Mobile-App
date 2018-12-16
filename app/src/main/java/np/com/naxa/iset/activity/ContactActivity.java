@@ -68,7 +68,7 @@ public class ContactActivity extends AppCompatActivity {
         mContactViewModel.insert(contact);
 
 //        for (int i = 0; i < 10; i++) {
-            Log.d(TAG, "saveOpenSpaceDataViaRoom: insert inserting ");
+            Log.d(TAG, "saveConactDataViaRoom: insert inserting ");
 //            contact.setFirstName( "Name_" + i);
 //            contact.setLastName("Lastname_" + i);
 //            contact.setAge(41 + i);
