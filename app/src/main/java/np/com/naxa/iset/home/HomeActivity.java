@@ -114,7 +114,7 @@ import io.reactivex.subscribers.DisposableSubscriber;
 import np.com.naxa.iset.FloatingSuggestion;
 import np.com.naxa.iset.OverlayPopupHiddenStyler;
 import np.com.naxa.iset.R;
-import np.com.naxa.iset.activity.EmergencyActivity;
+import np.com.naxa.iset.activity.NotifyOthersActivity;
 import np.com.naxa.iset.activity.ReportActivityOld;
 import np.com.naxa.iset.database.combinedentity.EducationAndCommon;
 import np.com.naxa.iset.database.combinedentity.HospitalAndCommon;
@@ -1046,7 +1046,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
                 final int[] step = {1};
                 Drawable nodeIcon = getResources().getDrawable(R.drawable.ic_circle_marker);
-                Drawable icon = getResources().getDrawable(R.drawable.ic_call_black_24dp);
+                Drawable icon = getResources().getDrawable(R.drawable.ic_call_purple_24dp);
                 Observable.just(road.mNodes)
                         .flatMapIterable(new Function<ArrayList<RoadNode>, Iterable<RoadNode>>() {
                             @Override
@@ -1728,7 +1728,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 //                        finish();
                         break;
                     case R.id.action_emergency:
-                        EmergencyActivity.start(HomeActivity.this);
+                        NotifyOthersActivity.start(HomeActivity.this);
 //                        new CustomDialog(HomeActivity.this).show();
                         break;
                 }

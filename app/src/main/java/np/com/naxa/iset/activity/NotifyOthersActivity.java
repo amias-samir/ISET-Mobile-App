@@ -36,7 +36,7 @@ import pub.devrel.easypermissions.EasyPermissions;
 import static np.com.naxa.iset.R.drawable.btn_circular_active;
 import static np.com.naxa.iset.R.drawable.btn_circular_passive;
 
-public class EmergencyActivity extends AppCompatActivity {
+public class NotifyOthersActivity extends AppCompatActivity {
 
 
     private final int RESULT_CAMERA = 150;
@@ -59,7 +59,7 @@ public class EmergencyActivity extends AppCompatActivity {
     private boolean lightStatus;
 
     public static void start(Context context) {
-        Intent intent = new Intent(context, EmergencyActivity.class);
+        Intent intent = new Intent(context, NotifyOthersActivity.class);
         context.startActivity(intent);
     }
 

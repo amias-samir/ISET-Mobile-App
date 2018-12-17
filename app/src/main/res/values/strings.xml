@@ -249,6 +249,9 @@
     <string name="your_circle_is_empty_LBL">Your circle is Empty. Please add your nearest people to your circle and know their status in case of danger!!!</string>
     <string name="add_people">Add people</string>
     <string name="alert_settings">Alert Setting</string>
+    <string name="people_in_your_circle">People in your \'Circle\'</string>
+    <string name="enter_name_or_phone_no">Enter name or Phone no</string>
+    <string name="close">Close</string>
 
     <string-array name="choose_language">
         <item>English</item>

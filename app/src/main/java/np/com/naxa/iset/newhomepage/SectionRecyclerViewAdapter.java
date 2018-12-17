@@ -60,11 +60,11 @@ public class SectionRecyclerViewAdapter extends RecyclerView.Adapter<SectionRecy
     public void onBindViewHolder(SectionViewHolder holder, int position) {
         final SectionModel sectionModel =
                 sectionModelArrayList.get(position);
+        holder.showAllButton.setVisibility(View.GONE);
 
 
         if(position==1){
                 holder.dottedViewLine.setBackground(holder.dottedViewLine.getContext().getResources().getDrawable(R.drawable.dotted_line_green));
-                holder.showAllButton.setVisibility(View.GONE);
             holder.dottedViewHead.setBackground(holder.dottedViewHead.getContext().getResources().getDrawable(R.drawable.dotted_line_green_head));
         }
 
@@ -89,7 +89,8 @@ public class SectionRecyclerViewAdapter extends RecyclerView.Adapter<SectionRecy
                 holder.itemRecyclerView.setLayoutManager(gridLayoutManager);
                 break;
         }
-        ItemRecyclerViewAdapter adapter = new ItemRecyclerViewAdapter(context, sectionModel.getItemArrayList());
+        ItemRecyclerViewAdapter adapter = new ItemRecyclerViewAdapter(context, sectionModel.getItemArrayList(), sectionModel.getItemDrawableArrayList());
+
         holder.itemRecyclerView.setAdapter(adapter);
 
 

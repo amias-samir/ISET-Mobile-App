@@ -1,5 +1,6 @@
 package np.com.naxa.iset.activity;
 
+import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,13 +8,19 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.arlib.floatingsearchview.FloatingSearchView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 
@@ -42,6 +49,12 @@ public class MyCircleProfileActivity extends AppCompatActivity {
     Button btnRemoveWatch;
     @BindView(R.id.ib_setting)
     ImageButton ibSetting;
+    @BindView(R.id.relativeLayoutBeforeCircleAdd)
+    RelativeLayout relativeLayoutBeforeCircleAdd;
+    @BindView(R.id.recyclerViewMyCircle)
+    RecyclerView recyclerViewMyCircle;
+    @BindView(R.id.relativeLayoutAfterCircleAdded)
+    RelativeLayout relativeLayoutAfterCircleAdded;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,6 +73,7 @@ public class MyCircleProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     }
+
     private void initUI() {
         Glide.with(this)
                 .load("https://thumbs.dreamstime.com/b/profile-icon-male-avatar-portrait-casual-person-silhouette-face-flat-design-vector-46846328.jpg")
@@ -85,4 +99,8 @@ public class MyCircleProfileActivity extends AppCompatActivity {
                 break;
         }
     }
+
+
+
+
 }

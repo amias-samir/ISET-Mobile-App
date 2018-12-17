@@ -2,6 +2,7 @@ package np.com.naxa.iset.newhomepage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -26,8 +28,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Optional;
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.activity.NotifyOthersActivity;
 import np.com.naxa.iset.profile.municipalityprofile.MunicipalityProfileActivity;
 import np.com.naxa.iset.utils.imageutils.CircleTransform;
 import np.com.naxa.iset.utils.recycleviewutils.LinearLayoutManagerWithSmoothScroller;
@@ -53,6 +55,10 @@ public class SectionGridHomeActivity extends AppCompatActivity {
     NavigationView navigationView;
     @BindView(R.id.drawer_layout)
     DrawerLayout drawer;
+    @BindView(R.id.btnAskForBlood)
+    Button btnAskForBlood;
+    @BindView(R.id.btnNotifyOthers)
+    Button btnNotifyOthers;
 
     private RecyclerViewType recyclerViewType;
     private RecyclerView recyclerView;
@@ -110,29 +116,47 @@ public class SectionGridHomeActivity extends AppCompatActivity {
     private void populateRecyclerView() {
         String[] sectionHeader = {"REACT QUICKLY", "DISASTER INFORMATION"};
 //        String[] sectionChildTitle = {"FIND OPEN SPACE", "ASK FOR HELP", "Report", "NOTIFY OTHERS", "HAZARD INFO", "DRR QUIZ", "DRR Dictionary", "MAP"};
-        String[] sectionChildTitle = {"FIND OPEN SPACE", "ASK FOR HELP", "Blood Request", "NOTIFY OTHERS","My Circle", "Report", "HAZARD INFO", "DRR QUIZ", "DRR Dictionary", "DRR relevant files", "Multimedia", "Who Does What"};
+        String[] sectionChildTitle = {"FIND OPEN SPACE", "ASK FOR HELP", "YOUR CIRCLE", "EMERGENCY NUMBERS", "HAZARD INFO", "DRR Dictionary", "DRR QUIZ", "Multimedia",  "DRR Knowledge", "Who Does What"};
+
+        ArrayList<Drawable> gridIcon = new ArrayList<Drawable>();
+        gridIcon.add(getResources().getDrawable(R.drawable.ic_open_space_grid));
+        gridIcon.add(getResources().getDrawable(R.drawable.ic_ask_for_help_grid));
+        gridIcon.add(getResources().getDrawable(R.drawable.ic_your_circle_grid));
+        gridIcon.add(getResources().getDrawable(R.drawable.ic_call_purple_24dp));
+        gridIcon.add(getResources().getDrawable(R.drawable.ic_hazard_info_grid));
+        gridIcon.add(getResources().getDrawable(R.drawable.ic_drr_dictionary_grid));
+        gridIcon.add(getResources().getDrawable(R.drawable.ic_quiz_grid));
+        gridIcon.add(null);
+        gridIcon.add(null);
+        gridIcon.add(null);
+
+
+
         ArrayList<SectionModel> sectionModelArrayList = new ArrayList<>();
         //for loop for sections
         int sectionChildTitlePos = 0;
         for (int i = 1; i <= 2; i++) {
             ArrayList<String> itemArrayList = new ArrayList<>();
+            ArrayList<Drawable> itemIconArrayList = new ArrayList<>();
             //for loop for items
-//            if(i ==1){
-//                for (int j = 1; j <= 5; j++) {
-//                    itemArrayList.add(sectionChildTitle[sectionChildTitlePos]);
-//                    sectionChildTitlePos++;
-//                }
-//            }
-//             if(i==2){
-                 for (int j = 1; j <= 6; j++) {
-                     itemArrayList.add(sectionChildTitle[sectionChildTitlePos]);
-                     sectionChildTitlePos++;
-                 }
-//             }
+            if(i ==1){
+                for (int j = 1; j <= 4; j++) {
+                    itemArrayList.add(sectionChildTitle[sectionChildTitlePos]);
+                    itemIconArrayList.add(gridIcon.get(sectionChildTitlePos));
+                    sectionChildTitlePos++;
+                }
+            }
+             if(i==2){
+            for (int j = 1; j <= 6; j++) {
+                itemArrayList.add(sectionChildTitle[sectionChildTitlePos]);
+                itemIconArrayList.add(gridIcon.get(sectionChildTitlePos));
+                sectionChildTitlePos++;
+            }
+             }
 
 
             //add the section and items to array list
-            sectionModelArrayList.add(new SectionModel(sectionHeader[i - 1], itemArrayList));
+            sectionModelArrayList.add(new SectionModel(sectionHeader[i - 1], itemArrayList, itemIconArrayList));
 
         }
 
@@ -150,7 +174,7 @@ public class SectionGridHomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick({R.id.btn_disaster_info, R.id.btn_react_quickly, R.id.btn_info})
+    @OnClick({R.id.btn_disaster_info, R.id.btn_react_quickly, R.id.btn_info, R.id.btnAskForBlood, R.id.btnNotifyOthers})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_disaster_info:
@@ -161,6 +185,14 @@ public class SectionGridHomeActivity extends AppCompatActivity {
                 break;
             case R.id.btn_info:
                 startActivity(new Intent(SectionGridHomeActivity.this, MunicipalityProfileActivity.class));
+                break;
+
+            case R.id.btnAskForBlood:
+                Toast.makeText(this, "Ask for blood", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.btnNotifyOthers:
+                startActivity(new Intent(SectionGridHomeActivity.this, NotifyOthersActivity.class));
                 break;
         }
     }
@@ -275,6 +307,5 @@ public class SectionGridHomeActivity extends AppCompatActivity {
         //calling sync state is necessary or else your hamburger icon wont show up
         actionBarDrawerToggle.syncState();
     }
-
 
 }

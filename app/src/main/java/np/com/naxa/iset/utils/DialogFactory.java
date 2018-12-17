@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,7 +23,13 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.arlib.floatingsearchview.FloatingSearchView;
+
+import java.util.ArrayList;
+
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.activity.MyCircleProfileActivity;
+import np.com.naxa.iset.mycircle.ContactModel;
 
 
 public final class DialogFactory {
@@ -249,6 +256,34 @@ public final class DialogFactory {
         void onWardClick();
     }
 
+
+
+    private void showContactListDialog(@NonNull Context context, ArrayList<ContactModel> contactModelArrayList){
+
+
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialog_my_circle_contact_list_layout);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(dialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+
+        FloatingSearchView floatingSearchView = (FloatingSearchView) dialog.findViewById(R.id.floating_search_contacts_dialog);
+        RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.recyclerViewContactsDialog);
+        Button dialogButton = (Button) dialog.findViewById(R.id.btnClose);
+
+
+
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
 
 
 }

@@ -2,6 +2,7 @@ package np.com.naxa.iset.newhomepage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,16 +15,13 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import np.com.naxa.iset.R;
-import np.com.naxa.iset.activity.EmergencyActivity;
+import np.com.naxa.iset.activity.NotifyOthersActivity;
 import np.com.naxa.iset.activity.MyCircleProfileActivity;
 import np.com.naxa.iset.activity.ReportActivity;
 import np.com.naxa.iset.disasterinfo.HazardInfoActivity;
 import np.com.naxa.iset.drr_dictionary.data_glossary.GlossaryListActivity;
-import np.com.naxa.iset.home.HomeActivity;
 import np.com.naxa.iset.quiz.QuizHomeActivity;
-import np.com.naxa.iset.quiz.QuizTestActivity;
 import np.com.naxa.iset.utils.DialogFactory;
-import np.com.naxa.iset.youtubeplayer.YoutubeVideoListActivity;
 
 /**
  * Created by samir on 01/12/18.
@@ -46,10 +44,12 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
 
     private Context context;
     private ArrayList<String> arrayList;
+    private ArrayList<Drawable> arrayListIcon;
 
-    public ItemRecyclerViewAdapter(Context context, ArrayList<String> arrayList) {
+    public ItemRecyclerViewAdapter(Context context, ArrayList<String> arrayList, ArrayList<Drawable> arrayListIcon) {
         this.context = context;
         this.arrayList = arrayList;
+        this.arrayListIcon = arrayListIcon;
     }
 
     @Override
@@ -61,6 +61,9 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         holder.itemLabel.setText(arrayList.get(position));
+        if(arrayListIcon.get(position) != null){
+            holder.itemImage.setBackground(arrayListIcon.get(position));
+        }
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,10 +101,10 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
                 break;
 
             case "NOTIFY OTHERS":
-                context.startActivity(new Intent(context, EmergencyActivity.class));
+                context.startActivity(new Intent(context, NotifyOthersActivity.class));
                 break;
 
-            case "My Circle":
+            case "YOUR CIRCLE":
                 context.startActivity(new Intent(context, MyCircleProfileActivity.class));
                 break;
 
