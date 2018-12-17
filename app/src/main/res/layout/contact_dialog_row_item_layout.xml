@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/ivContactPerson"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="@drawable/ic_nav_profile"
         android:layout_centerVertical="true"/>
 
@@ -23,12 +23,12 @@
         android:layout_toRightOf="@id/ivContactPerson"
         android:text="Contact person"
         android:textColor="@color/slate_black"
-        android:textSize="@dimen/material_text_title" />
+        android:textSize="@dimen/material_text_subhead" />
 
     <Button
         android:id="@+id/btnAddContactToCircle"
-        android:layout_width="@dimen/dp_40"
-        android:layout_height="@dimen/dp_40"
+        android:layout_width="@dimen/spacing_xlarge"
+        android:layout_height="@dimen/spacing_xlarge"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:background="@drawable/ic_add_black_24dp"

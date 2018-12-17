@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
@@ -29,7 +30,9 @@ import java.util.ArrayList;
 
 import np.com.naxa.iset.R;
 import np.com.naxa.iset.activity.MyCircleProfileActivity;
+import np.com.naxa.iset.disasterinfo.HazardListAdapter;
 import np.com.naxa.iset.mycircle.ContactModel;
+import np.com.naxa.iset.mycircle.MyCircleContactListAdapter;
 
 
 public final class DialogFactory {
@@ -258,7 +261,7 @@ public final class DialogFactory {
 
 
 
-    private void showContactListDialog(@NonNull Context context, ArrayList<ContactModel> contactModelArrayList){
+    public static Dialog createContactListDialog(@NonNull Context context, ArrayList<ContactModel> contactModelArrayList){
 
 
         final Dialog dialog = new Dialog(context);
@@ -283,6 +286,16 @@ public final class DialogFactory {
                 dialog.dismiss();
             }
         });
+
+        MyCircleContactListAdapter myCircleContactListAdapter = new MyCircleContactListAdapter(R.layout.contact_dialog_row_item_layout, contactModelArrayList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setAdapter(myCircleContactListAdapter);
+
+//        ((MyCircleContactListAdapter) recyclerView.getAdapter()).replaceData(contactModelArrayList);
+
+
+        dialog.getWindow().setAttributes(lp);
+        return dialog;
     }
 
 

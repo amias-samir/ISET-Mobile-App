@@ -28,7 +28,9 @@ public class MyCircleContactListAdapter extends BaseQuickAdapter<ContactModel, B
         Button addButton = helper.getView(R.id.btnAddContactToCircle);
         ImageView imageView = helper.getView(R.id.ivContactPerson);
 
-        helper.setText(R.id.tv_hazard_list_title,item.getName());
+        if(item.getName() != null) {
+            helper.setText(R.id.tvContactPerson, item.getName());
+        }
 
         if(item.photoURI != null) {
             Glide.with(mContext).load(item.photoURI)
@@ -38,7 +40,16 @@ public class MyCircleContactListAdapter extends BaseQuickAdapter<ContactModel, B
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .into(imageView);
 
+        }else {
+            Glide.with(mContext).load(getImage())
+                    .crossFade()
+                    .thumbnail(0.5f)
+                    .bitmapTransform(new CircleTransform(mContext))
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imageView);
         }
+
+
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,5 +59,12 @@ public class MyCircleContactListAdapter extends BaseQuickAdapter<ContactModel, B
             }
         });
 
+    }
+
+    public int getImage() {
+
+        int drawableResourceId = mContext.getResources().getIdentifier("ic_nav_profile", "drawable", mContext.getPackageName());
+
+        return drawableResourceId;
     }
 }
