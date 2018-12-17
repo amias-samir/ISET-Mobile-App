@@ -11,9 +11,13 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.event.EmergenctContactCallEvent;
+import np.com.naxa.iset.event.MyCircleContactAddEvent;
 import np.com.naxa.iset.utils.imageutils.CircleTransform;
 
 public class MyCircleContactListAdapter extends BaseQuickAdapter<ContactModel, BaseViewHolder> {
@@ -55,17 +59,9 @@ public class MyCircleContactListAdapter extends BaseQuickAdapter<ContactModel, B
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(mContext, "add to your circle button clicked", Toast.LENGTH_SHORT).show();
+                EventBus.getDefault().post(new MyCircleContactAddEvent.MyCircleContactAddClick(item));
             }
         });
 
-    }
-
-    public int getImage() {
-
-        int drawableResourceId = mContext.getResources().getIdentifier("ic_nav_profile", "drawable", mContext.getPackageName());
-
-        return drawableResourceId;
     }
 }

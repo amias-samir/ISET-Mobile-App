@@ -29,10 +29,15 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -42,7 +47,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.event.EmergenctContactCallEvent;
+import np.com.naxa.iset.event.MyCircleContactAddEvent;
 import np.com.naxa.iset.mycircle.ContactModel;
+import np.com.naxa.iset.mycircle.GetContactFromDevice;
 import np.com.naxa.iset.utils.DialogFactory;
 
 public class MyCircleProfileActivity extends AppCompatActivity {
@@ -114,60 +122,37 @@ public class MyCircleProfileActivity extends AppCompatActivity {
             case R.id.ib_setting:
                 break;
             case R.id.btn_add_people:
+                GetContactFromDevice getContactFromDevice = new GetContactFromDevice();
                 progressDialog = DialogFactory.createProgressDialog(MyCircleProfileActivity.this, "Please Wait!!!" );
                 progressDialog.show();
 
-                getContacts(MyCircleProfileActivity.this);
+                getContactFromDevice.getContacts(MyCircleProfileActivity.this, progressDialog);
 
                 break;
         }
     }
 
-    public List<ContactModel> getContacts(Context context) {
-        ArrayList<ContactModel> list = new ArrayList<>();
-        ContentResolver contentResolver = context.getContentResolver();
-        Cursor cursor = contentResolver.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-        if (cursor.getCount() > 0) {
-            while (cursor.moveToNext()) {
-                String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-                if (cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)) > 0) {
-                    Cursor cursorInfo = contentResolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?", new String[]{id}, null);
-                    InputStream inputStream = ContactsContract.Contacts.openContactPhotoInputStream(context.getContentResolver(),
-                            ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, new Long(id)));
 
-                    Uri person = ContentUris.withAppendedId(ContactsContract.Contacts.CONTENT_URI, new Long(id));
-                    Uri pURI = Uri.withAppendedPath(person, ContactsContract.Contacts.Photo.CONTENT_DIRECTORY);
 
-                    Bitmap photo = null;
-                    if (inputStream != null) {
-                        photo = BitmapFactory.decodeStream(inputStream);
-                    }
-                    while (cursorInfo.moveToNext()) {
-                        ContactModel info = new ContactModel();
-                        info.id = id;
-                        info.name = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-                        info.mobileNumber = cursorInfo.getString(cursorInfo.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-                        info.photo = photo;
-                        info.photoURI= pURI;
-                        list.add(info);
 
-                        Log.d(TAG, "getContacts: " + info.name);
-                    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
 
-                    cursorInfo.close();
-                }
-            }
-            cursor.close();
-        }
-
-        if(progressDialog.isShowing() && progressDialog != null){
-            progressDialog.dismiss();
-        }
-        DialogFactory.createContactListDialog(context, list).show();
-        return list;
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onRVItemClick(MyCircleContactAddEvent.MyCircleContactAddClick itemClick) {
+        String name = itemClick.getContactModel().getName();
+        Toast.makeText(this, "add to your circle button clicked "+name, Toast.LENGTH_SHORT).show();
+
+    }
 
 }
