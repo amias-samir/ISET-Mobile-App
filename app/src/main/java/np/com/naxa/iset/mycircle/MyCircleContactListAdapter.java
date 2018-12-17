@@ -32,8 +32,9 @@ public class MyCircleContactListAdapter extends BaseQuickAdapter<ContactModel, B
             helper.setText(R.id.tvContactPerson, item.getName());
         }
 
-        if(item.photoURI != null) {
+        if(item.getPhotoURI() != null && !item.getPhotoURI().equals("")) {
             Glide.with(mContext).load(item.photoURI)
+                    .placeholder(mContext.getResources().getDrawable(R.drawable.ic_nav_profile))
                     .crossFade()
                     .thumbnail(0.5f)
                     .bitmapTransform(new CircleTransform(mContext))
@@ -41,7 +42,7 @@ public class MyCircleContactListAdapter extends BaseQuickAdapter<ContactModel, B
                     .into(imageView);
 
         }else {
-            Glide.with(mContext).load(getImage())
+            Glide.with(mContext).load(mContext.getResources().getDrawable(R.drawable.ic_nav_profile))
                     .crossFade()
                     .thumbnail(0.5f)
                     .bitmapTransform(new CircleTransform(mContext))

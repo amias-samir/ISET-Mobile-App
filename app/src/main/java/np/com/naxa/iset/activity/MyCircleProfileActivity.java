@@ -107,7 +107,7 @@ public class MyCircleProfileActivity extends AppCompatActivity {
                     }
                 });
     }
-    ProgressDialog progressDialog;
+    Dialog progressDialog;
     @OnClick({R.id.ib_setting, R.id.btn_add_people})
     public void onViewClicked(View view) {
         switch (view.getId()) {
