@@ -24,8 +24,8 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitCenter"
-            android:background="@mipmap/ic_launcher"
             />
+
 
         <TextView
             android:id="@+id/item_label"

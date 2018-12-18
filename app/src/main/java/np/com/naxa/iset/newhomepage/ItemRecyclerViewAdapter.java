@@ -20,6 +20,7 @@ import np.com.naxa.iset.activity.MyCircleProfileActivity;
 import np.com.naxa.iset.activity.ReportActivity;
 import np.com.naxa.iset.disasterinfo.HazardInfoActivity;
 import np.com.naxa.iset.drr_dictionary.data_glossary.GlossaryListActivity;
+import np.com.naxa.iset.emergencynumbers.EmergencyNumbersActivity;
 import np.com.naxa.iset.quiz.QuizHomeActivity;
 import np.com.naxa.iset.utils.DialogFactory;
 
@@ -106,6 +107,10 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
 
             case "YOUR CIRCLE":
                 context.startActivity(new Intent(context, MyCircleProfileActivity.class));
+                break;
+
+            case "EMERGENCY NUMBERS":
+                context.startActivity(new Intent(context, EmergencyNumbersActivity.class));
                 break;
 
             case "HAZARD INFO":

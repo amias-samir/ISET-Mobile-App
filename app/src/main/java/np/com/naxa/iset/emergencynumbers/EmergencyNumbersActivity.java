@@ -107,12 +107,6 @@ public class EmergencyNumbersActivity extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
-    }
-
     @AfterPermissionGranted(RESULT_CALL)
     private void requestPermissionForPhone(String number) {
         String call = Manifest.permission.CALL_PHONE;
@@ -124,6 +118,15 @@ public class EmergencyNumbersActivity extends AppCompatActivity {
                     RESULT_CALL, call);
         }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
 
     public void startPhoneCall(String number){
         long contact_no = Long.parseLong(number);
