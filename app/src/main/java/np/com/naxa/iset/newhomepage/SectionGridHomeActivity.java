@@ -29,8 +29,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.activity.MyCircleProfileActivity;
 import np.com.naxa.iset.activity.NotifyOthersActivity;
+import np.com.naxa.iset.activity.ReportActivity;
+import np.com.naxa.iset.disasterinfo.HazardInfoActivity;
 import np.com.naxa.iset.profile.municipalityprofile.MunicipalityProfileActivity;
+import np.com.naxa.iset.quiz.QuizHomeActivity;
+import np.com.naxa.iset.settings.SettingsActivity;
+import np.com.naxa.iset.utils.DialogFactory;
 import np.com.naxa.iset.utils.imageutils.CircleTransform;
 import np.com.naxa.iset.utils.recycleviewutils.LinearLayoutManagerWithSmoothScroller;
 import np.com.naxa.iset.utils.recycleviewutils.RecyclerViewType;
@@ -116,7 +122,7 @@ public class SectionGridHomeActivity extends AppCompatActivity {
     private void populateRecyclerView() {
         String[] sectionHeader = {"REACT QUICKLY", "DISASTER INFORMATION"};
 //        String[] sectionChildTitle = {"FIND OPEN SPACE", "ASK FOR HELP", "Report", "NOTIFY OTHERS", "HAZARD INFO", "DRR QUIZ", "DRR Dictionary", "MAP"};
-        String[] sectionChildTitle = {"FIND OPEN SPACE", "ASK FOR HELP", "YOUR CIRCLE", "EMERGENCY NUMBERS", "HAZARD INFO", "DRR Dictionary", "DRR QUIZ", "Multimedia",  "DRR Knowledge", "Who Does What"};
+        String[] sectionChildTitle = {"FIND OPEN SPACE", "Report an incident", "YOUR CIRCLE", "EMERGENCY NUMBERS", "HAZARD INFO", "DRR Dictionary", "DRR QUIZ", "Multimedia",  "DRR Knowledge", "Who Does What"};
 
         ArrayList<Drawable> gridIcon = new ArrayList<Drawable>();
         gridIcon.add(getResources().getDrawable(R.drawable.ic_open_space_grid));
@@ -238,35 +244,72 @@ public class SectionGridHomeActivity extends AppCompatActivity {
                     //Replacing the main content with ContentFragment Which is our Inbox View;
                     case R.id.nav_home:
                         navItemIndex = 0;
+                        drawer.closeDrawers();
                         break;
                     case R.id.nav_profile:
                         navItemIndex = 1;
+                        startActivity(new Intent(SectionGridHomeActivity.this, MyCircleProfileActivity.class));
                         break;
                     case R.id.nav_ask_for_help:
                         navItemIndex = 2;
+                        startActivity(new Intent(SectionGridHomeActivity.this, ReportActivity.class));
+
                         break;
                     case R.id.nav_report:
                         navItemIndex = 3;
+                        startActivity(new Intent(SectionGridHomeActivity.this, ReportActivity.class));
+
                         break;
                     case R.id.nav_notify_oithers:
                         navItemIndex = 4;
+                        startActivity(new Intent(SectionGridHomeActivity.this, NotifyOthersActivity.class));
+
                         break;
                     case R.id.nav_hazard_info:
                         // launch new intent instead of loading fragment
+                        startActivity(new Intent(SectionGridHomeActivity.this, HazardInfoActivity.class));
                         drawer.closeDrawers();
                         return true;
                     case R.id.nav_play_quiz:
                         // launch new intent instead of loading fragment
+                        startActivity(new Intent(SectionGridHomeActivity.this, QuizHomeActivity.class));
                         drawer.closeDrawers();
                         return true;
 
                     case R.id.nav_settings:
                         // launch new intent instead of loading fragment
+                        startActivity(new Intent(SectionGridHomeActivity.this, SettingsActivity.class));
                         drawer.closeDrawers();
                         return true;
 
                     case R.id.nav_map:
                         // launch new intent instead of loading fragment
+                        DialogFactory.createBaseLayerDialog(SectionGridHomeActivity.this, new DialogFactory.CustomBaseLayerDialogListner() {
+                            @Override
+                            public void onStreetClick() {
+
+                            }
+
+                            @Override
+                            public void onSatelliteClick() {
+
+                            }
+
+                            @Override
+                            public void onOpenStreetClick() {
+
+                            }
+
+                            @Override
+                            public void onMetropolitanClick() {
+
+                            }
+
+                            @Override
+                            public void onWardClick() {
+
+                            }
+                        }).show();
                         drawer.closeDrawers();
                         return true;
                     default:

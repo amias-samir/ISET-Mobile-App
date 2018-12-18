@@ -87,7 +87,7 @@ public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerVi
             case "FIND OPEN SPACE":
                 break;
 
-            case "ASK FOR HELP":
+            case "Report an incident":
                 DialogFactory.createCustomDialog(context,
                         "If you want to submit a detailed report, fill the following form.",
                         new DialogFactory.CustomDialogListener() {
