@@ -32,6 +32,7 @@ import np.com.naxa.iset.R;
 import np.com.naxa.iset.activity.MyCircleProfileActivity;
 import np.com.naxa.iset.activity.NotifyOthersActivity;
 import np.com.naxa.iset.activity.ReportActivity;
+import np.com.naxa.iset.bloodrequest.BloodRequestActivity;
 import np.com.naxa.iset.disasterinfo.HazardInfoActivity;
 import np.com.naxa.iset.profile.municipalityprofile.MunicipalityProfileActivity;
 import np.com.naxa.iset.quiz.QuizHomeActivity;
@@ -194,7 +195,7 @@ public class SectionGridHomeActivity extends AppCompatActivity {
                 break;
 
             case R.id.btnAskForBlood:
-                Toast.makeText(this, "Ask for blood", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(SectionGridHomeActivity.this, BloodRequestActivity.class));
                 break;
 
             case R.id.btnNotifyOthers:
