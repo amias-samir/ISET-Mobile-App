@@ -252,6 +252,9 @@
     <string name="people_in_your_circle">People in your \'Circle\'</string>
     <string name="enter_name_or_phone_no">Enter name or Phone no</string>
     <string name="close">Close</string>
+    <string name="make_a_blood_request">Make a blood request</string>
+    <string name="choose_your_blood_type">Choose your blood type</string>
+    <string name="message_with_contact_information">Message with contact information</string>
 
     <string-array name="choose_language">
         <item>English</item>
