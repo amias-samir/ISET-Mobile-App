@@ -18,14 +18,14 @@ import np.com.naxa.iset.profile.wardprofile.fragments.WardProfileFragment;
 
 public class WardProfileActivity extends AppCompatActivity {
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.tabs)
     TabLayout tabs;
     @BindView(R.id.viewpager)
     ViewPager viewpager;
 
     String ward = "Profile";
+    @BindView(R.id.toolbar_general)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +37,20 @@ public class WardProfileActivity extends AppCompatActivity {
         try {
             Intent intent = getIntent();
             ward = intent.getStringExtra("ward");
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
 
         setupToolBar();
 
         setupViewPager(viewpager);
+
+        tabs.setupWithViewPager(viewpager);
     }
 
     private void setupToolBar() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Ward No "+ward);
+        getSupportActionBar().setTitle("Ward No " + ward);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
