@@ -4,6 +4,7 @@
     package="np.com.naxa.iset">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -182,9 +183,12 @@
         <activity
             android:name=".settings.SettingsActivity"
             android:exported="true" />
-        <activity android:name=".bloodrequest.BloodRequestActivity"
+        <activity
+            android:name=".bloodrequest.BloodRequestActivity"
             android:exported="true"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".mapboxmap.OpenSpaceMapActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>
