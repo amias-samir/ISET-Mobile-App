@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -98,6 +99,9 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     @BindView(R.id.recyclerViewMapCategory)
     RecyclerView recyclerViewMapCategory;
 
+    @BindView(R.id.iv_sliding_layout_indicator)
+    ImageView ivSlidingLayoutIndicator;
+
     private SlidingUpPanelLayout mLayout;
     private PermissionsManager permissionsManager;
     private MapView mapView;
@@ -160,6 +164,22 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
             @Override
             public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
                 Log.i(TAG, "onPanelStateChanged " + newState);
+
+                switch (newState.toString()){
+
+                    case "COLLAPSED":
+                        ivSlidingLayoutIndicator.setBackground(getResources().getDrawable(R.drawable.ic_keyboard_arrow_up_white_24dp));
+                        break;
+
+                    case "DRAGGING":
+                        ivSlidingLayoutIndicator.setBackground(getResources().getDrawable(R.drawable.ic_sliding_neutral_white_24dp));
+                        break;
+
+                    case "EXPANDED":
+                        ivSlidingLayoutIndicator.setBackground(getResources().getDrawable(R.drawable.ic_keyboard_arrow_down_white_24dp));
+                        break;
+                }
+
             }
         });
         mLayout.setFadeOnClickListener(new View.OnClickListener() {
@@ -179,7 +199,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
         loadDataToList();
     }
 
-    private void loadDataToList(){
+    private void loadDataToList() {
 
         ArrayList<MapCategoryModel> mapCategoryModelArrayList = new ArrayList<MapCategoryModel>();
 

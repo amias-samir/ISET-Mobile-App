@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff"
     android:orientation="vertical"
@@ -16,11 +16,12 @@
         android:background="@color/isetPurple"
         >
         <ImageView
+            android:id="@+id/iv_sliding_layout_indicator"
             android:layout_width="30dp"
             android:layout_height="match_parent"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/ic_keyboard_arrow_up_white_24dp"/>
+            android:background="@drawable/ic_keyboard_arrow_up_white_24dp" />
     </RelativeLayout>
 
 
