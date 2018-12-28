@@ -11,6 +11,12 @@
         android:id="@+id/action_anchor"
         android:orderInCategory="200"
         sothree:showAsAction="never"
-        android:title="@string/action_anchor_enable"/>
+        android:title="@string/action_anchor_enable" />
+
+    <item
+        android:id="@+id/action_map_option"
+        android:orderInCategory="200"
+        sothree:showAsAction="never"
+        android:title="@string/map_option" />
 
 </menu>

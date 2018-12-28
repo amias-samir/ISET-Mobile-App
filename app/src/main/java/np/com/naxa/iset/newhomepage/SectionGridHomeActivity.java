@@ -34,6 +34,7 @@ import np.com.naxa.iset.activity.NotifyOthersActivity;
 import np.com.naxa.iset.activity.ReportActivity;
 import np.com.naxa.iset.bloodrequest.BloodRequestActivity;
 import np.com.naxa.iset.disasterinfo.HazardInfoActivity;
+import np.com.naxa.iset.mapboxmap.OpenSpaceMapActivity;
 import np.com.naxa.iset.profile.municipalityprofile.MunicipalityProfileActivity;
 import np.com.naxa.iset.quiz.QuizHomeActivity;
 import np.com.naxa.iset.settings.SettingsActivity;
@@ -284,33 +285,7 @@ public class SectionGridHomeActivity extends AppCompatActivity {
                         return true;
 
                     case R.id.nav_map:
-                        // launch new intent instead of loading fragment
-                        DialogFactory.createBaseLayerDialog(SectionGridHomeActivity.this, new DialogFactory.CustomBaseLayerDialogListner() {
-                            @Override
-                            public void onStreetClick() {
-
-                            }
-
-                            @Override
-                            public void onSatelliteClick() {
-
-                            }
-
-                            @Override
-                            public void onOpenStreetClick() {
-
-                            }
-
-                            @Override
-                            public void onMetropolitanClick() {
-
-                            }
-
-                            @Override
-                            public void onWardClick() {
-
-                            }
-                        }).show();
+                      startActivity(new Intent(SectionGridHomeActivity.this, OpenSpaceMapActivity.class));
                         drawer.closeDrawers();
                         return true;
                     default:

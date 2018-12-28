@@ -27,32 +27,12 @@
             mapbox:mapbox_cameraZoom="11"
             />
 
-
-        <ToggleButton
-            android:id="@+id/toggleButton"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/button_rounded_purple"
-            android:textColor="@color/white"
-            mapbox:layout_constraintHorizontal_bias="1.0"
-            mapbox:layout_constraintStart_toStartOf="parent"
-            mapbox:layout_constraintTop_toBottomOf="@id/toolbar"
-            mapbox:layout_constraintVertical_bias="0.982"
-            android:text="Switch View"
-            android:textOn="Satellite View"
-            android:textOff="Street View"
-            />
-
         <Button
             android:id="@+id/point"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Point"
-            mapbox:layout_constraintTop_toBottomOf="@id/toolbar"
+            mapbox:layout_constraintTop_toBottomOf="@id/navigation"
             mapbox:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="16dp"
             android:background="@android:color/transparent"
@@ -83,14 +63,15 @@
 
         <Button
             android:id="@+id/navigation"
-            android:layout_width="180dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Start Navigation"
-            mapbox:layout_constraintTop_toBottomOf="@id/multiLineString"
+            mapbox:layout_constraintTop_toBottomOf="@id/toolbar"
             mapbox:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="16dp"
             android:background="@drawable/button_rounded_purple"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:visibility="gone"/>
 
 
     </android.support.constraint.ConstraintLayout>

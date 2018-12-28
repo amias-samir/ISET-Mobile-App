@@ -1,19 +1,26 @@
 package np.com.naxa.iset.disasterinfo;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import np.com.naxa.iset.R;
 import np.com.naxa.iset.quiz.QuizTestActivity;
+import np.com.naxa.iset.utils.sectionmultiitemUtils.DataServer;
 
 public class HazardInfoDetailsActivity extends AppCompatActivity {
 
@@ -46,6 +53,7 @@ public class HazardInfoDetailsActivity extends AppCompatActivity {
         hazardListModel = intent.getParcelableExtra("OBJ");
 
         setupToolBar();
+        initUI(hazardListModel);
     }
 
     private void setupToolBar() {
@@ -55,10 +63,43 @@ public class HazardInfoDetailsActivity extends AppCompatActivity {
         }else {
             getSupportActionBar().setTitle(hazardListModel.getTitle());
             btnBeforeHappens.setText("Before "+hazardListModel.getTitle());
+
+            tvTitle.setText(hazardListModel.getTitle());
         }
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+    }
+
+    DataServer dataServer = new DataServer();
+    HazardListModel hazardListModel1 = new HazardListModel();
+    private void initUI(HazardListModel hazardListModel){
+        if(hazardListModel.getTitle().equals("Earthquake") || hazardListModel.getTitle().equals("Landslide")){
+            if(hazardListModel.getTitle().equals("Earthquake")) {
+                hazardListModel1 = dataServer.getEarthquakeDetails();
+            }else {
+                hazardListModel1 = dataServer.getLandslideDetails();
+
+            }
+
+            WindowManager mWinMgr = (WindowManager)HazardInfoDetailsActivity.this.getSystemService(Context.WINDOW_SERVICE);
+            int displayWidth = mWinMgr.getDefaultDisplay().getWidth();
+            Glide.with(HazardInfoDetailsActivity.this)
+                    .load(hazardListModel1.getImage())
+                    .override(displayWidth, 200)
+                    .into(imageView);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                tvBody.setText(Html.fromHtml(hazardListModel1.getDesc(), Html.FROM_HTML_MODE_COMPACT));
+            } else {
+                tvBody.setText(Html.fromHtml(hazardListModel1.getDesc()));
+            }
+        }
+
+//        if(hazardListModel.getTitle().equals("Landslide")){
+//            this.hazardListModel = dataServer.getEarthquakeDetails();
+//        }
 
     }
 

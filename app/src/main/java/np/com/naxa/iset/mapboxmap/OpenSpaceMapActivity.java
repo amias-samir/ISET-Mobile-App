@@ -69,8 +69,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import np.com.naxa.iset.R;
 import np.com.naxa.iset.mapboxmap.mapboxutils.DrawGeoJsonOnMap;
+import np.com.naxa.iset.mapboxmap.mapboxutils.DrawRouteOnMap;
 import np.com.naxa.iset.mapboxmap.openspace.MapCategoryListAdapter;
 import np.com.naxa.iset.mapboxmap.openspace.MapCategoryModel;
+import np.com.naxa.iset.newhomepage.SectionGridHomeActivity;
+import np.com.naxa.iset.utils.DialogFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -84,8 +87,6 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     private static final String TAG = "DemoActivity";
     @BindView(R.id.toolbar_general)
     Toolbar toolbarGeneral;
-    @BindView(R.id.toggleButton)
-    ToggleButton toggleButton;
     @BindView(R.id.point)
     Button btnPoint;
     @BindView(R.id.multipolygon)
@@ -132,16 +133,12 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
         ButterKnife.bind(this);
 
         mapView = (MapView) findViewById(R.id.mapView);
-        toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
-        toggleButton.setChecked(true);
-
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
         setupToolBar();
         setupBottomSlidingPanel();
         setupListRecycler();
-
 
     }
 
@@ -151,7 +148,6 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
-
 
     private void setupBottomSlidingPanel() {
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
@@ -214,6 +210,44 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
     }
 
+    private void setupMapOptionsDialog(){
+        // launch new intent instead of loading fragment
+        DialogFactory.createBaseLayerDialog(OpenSpaceMapActivity.this, new DialogFactory.CustomBaseLayerDialogListner() {
+            @Override
+            public void onStreetClick() {
+                mapView.setStyleUrl(getResources().getString(R.string.mapbox_style_mapbox_streets));
+//                enableLocationComponent();
+                // Load and Draw the GeoJSON
+//                animateCameraPosition();
+
+            }
+
+            @Override
+            public void onSatelliteClick() {
+                mapView.setStyleUrl(getResources().getString(R.string.mapbox_style_satellite));
+//                enableLocationComponent();
+//                animateCameraPosition();
+
+            }
+
+            @Override
+            public void onOpenStreetClick() {
+
+            }
+
+            @Override
+            public void onMetropolitanClick() {
+
+            }
+
+            @Override
+            public void onWardClick() {
+
+            }
+        }).show();
+    }
+
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -263,6 +297,10 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
                 }
                 return true;
             }
+
+            case R.id.action_map_option :
+                setupMapOptionsDialog();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -277,11 +315,22 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
         }
     }
 
-
+    DrawGeoJsonOnMap drawGeoJsonOnMap;
+    DrawRouteOnMap drawRouteOnMap;
     @Override
     public void onMapReady(MapboxMap mapboxMap) {
 
         this.mapboxMap = mapboxMap;
+        setMapCameraPosition();
+
+        mapboxMap.addOnMapClickListener(this);
+
+     drawGeoJsonOnMap = new DrawGeoJsonOnMap(OpenSpaceMapActivity.this, mapboxMap, mapView);
+     drawRouteOnMap = new DrawRouteOnMap(OpenSpaceMapActivity.this, mapboxMap, mapView);
+        setupMapOptionsDialog();
+    }
+
+    public void setMapCameraPosition(){
 
         CameraPosition position = new CameraPosition.Builder()
                 .target(new LatLng(27.657531140175244, 85.46161651611328)) // Sets the new camera position
@@ -294,46 +343,6 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
                 .newCameraPosition(position), 7000);
 
         enableLocationComponent();
-
-//        originCoord = new LatLng(originLocation.getLatitude(), originLocation.getLongitude());
-        mapboxMap.addOnMapClickListener(this);
-
-
-        //show toast on click of show all button
-        toggleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Is the toggle on?
-                boolean on = ((ToggleButton) v).isChecked();
-
-                if (on) {
-                    // Enable
-                    mapView.setStyleUrl(getResources().getString(R.string.mapbox_style_mapbox_streets));
-
-                    enableLocationComponent();
-                    // Load and Draw the GeoJSON
-                    animateCameraPosition();
-
-
-                    btnPoint.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    btnMultiLineString.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    btnMultipolygon.setTextColor(getResources().getColor(R.color.colorPrimary));
-
-                } else {
-                    // Disable
-                    mapView.setStyleUrl(getResources().getString(R.string.mapbox_style_satellite));
-                    enableLocationComponent();
-
-                    animateCameraPosition();
-
-                    btnPoint.setTextColor(getResources().getColor(R.color.colorAccent));
-                    btnMultiLineString.setTextColor(getResources().getColor(R.color.colorAccent));
-                    btnMultipolygon.setTextColor(getResources().getColor(R.color.colorAccent));
-
-                    // Load and Draw the GeoJSON
-                }
-            }
-        });
     }
 
 
@@ -350,12 +359,6 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
 
@@ -364,47 +367,14 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
         destinationPosition = Point.fromLngLat(destinationCoord.getLongitude(), destinationCoord.getLatitude());
         originPosition = Point.fromLngLat(originCoord.getLongitude(), originCoord.getLatitude());
-        getRoute(originPosition, destinationPosition);
 
+        if(originPosition == null){
+            return;
+        }
 
-    }
+        drawRouteOnMap.getRoute(originPosition, destinationPosition);
+        navigation.setVisibility(View.VISIBLE);
 
-
-    private void getRoute(Point origin, Point destination) {
-        NavigationRoute.builder(this)
-                .accessToken(Mapbox.getAccessToken())
-                .origin(origin)
-                .destination(destination)
-                .build()
-                .getRoute(new Callback<DirectionsResponse>() {
-                    @Override
-                    public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
-                        // You can get the generic HTTP info about the response
-                        Log.d(TAG, "Response code: " + response.code());
-                        if (response.body() == null) {
-                            Log.e(TAG, "No routes found, make sure you set the right user and access token.");
-                            return;
-                        } else if (response.body().routes().size() < 1) {
-                            Log.e(TAG, "No routes found");
-                            return;
-                        }
-
-                        currentRoute = response.body().routes().get(0);
-
-                        // Draw the route on the map
-                        if (navigationMapRoute != null) {
-                            navigationMapRoute.removeRoute();
-                        } else {
-                            navigationMapRoute = new NavigationMapRoute(null, mapView, mapboxMap, R.style.NavigationMapRoute);
-                        }
-                        navigationMapRoute.addRoute(currentRoute);
-                    }
-
-                    @Override
-                    public void onFailure(Call<DirectionsResponse> call, Throwable throwable) {
-                        Log.e(TAG, "Error: " + throwable.getMessage());
-                    }
-                });
     }
 
 
@@ -510,12 +480,13 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     }
 
 
-    private void animateCameraPosition() {
+    private void animateCameraPosition(Location location) {
         CameraPosition position = new CameraPosition.Builder()
-                .target(new LatLng(27.7033, 85.4324)) // Sets the new camera position
-                .zoom(15) // Sets the zoom
-                .bearing(180) // Rotate the camera
-//                .tilt(30) // Set the camera tilt
+//                .target(new LatLng(27.7033, 85.4324)) // Sets the new camera position
+                .target(new LatLng(location)) // Sets the new camera position
+                .zoom(11.5) // Sets the zoom
+                .bearing(0) // Rotate the camera
+                .tilt(30) // Set the camera tilt
                 .build(); // Creates a CameraPosition from the builder
 
         Log.d("MapBox", "animateCameraPosition: ");
@@ -526,57 +497,38 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     }
 
 
-    ArrayList<LatLng> points = null;
 
+
+    ArrayList<LatLng> points = null;
     int count = 0;
     boolean point = false;
-
     @OnClick({R.id.point, R.id.multipolygon, R.id.multiLineString, R.id.navigation})
     public void onViewClicked(View view) {
+
         switch (view.getId()) {
             case R.id.point:
                 filename = "educational_Institution_geojson.geojson";
                 count++;
                 point = true;
-                DrawGeoJson drawGeoJson = new DrawGeoJson();
-                drawGeoJson.execute();
-
+                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap( filename, point, count);
                 break;
+
             case R.id.multipolygon:
                 filename = "wards.geojson";
                 count++;
                 point = false;
-
-                DrawGeoJsonOnMap drawGeoJsonOnMap = new DrawGeoJsonOnMap();
-                drawGeoJsonOnMap.readAndDrawOnMapFromGeoJsonFile(OpenSpaceMapActivity.this, mapboxMap, mapView, filename, point, count);
-
-                DrawGeoJson drawGeoJson1 = new DrawGeoJson();
-                drawGeoJson1.execute();
-
+                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap( filename, point, count);
                 break;
-            case R.id.multiLineString:
 
+            case R.id.multiLineString:
                 filename = "road_network.geojson";
                 count++;
                 point = false;
-                DrawGeoJson drawGeoJson2 = new DrawGeoJson();
-                drawGeoJson2.execute();
+                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap( filename, point, count);
                 break;
 
             case R.id.navigation:
-                boolean simulateRoute = true;
-                NavigationLauncherOptions options = NavigationLauncherOptions.builder()
-                        .directionsRoute(currentRoute)
-                        .shouldSimulateRoute(simulateRoute)
-                        .build();
-                // Call this method with Context from within an Activity
-                NavigationLauncher.startNavigation(OpenSpaceMapActivity.this, options);
-
-
-                navigation.setEnabled(true);
-                navigation.setBackgroundResource(R.color.mapbox_blue);
-
-
+               drawRouteOnMap.enableNavigationUiLauncher(OpenSpaceMapActivity.this);
                 break;
         }
     }
@@ -589,7 +541,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     @Override
     public void onLocationChanged(Location location) {
         originLocation = location;
-
+        animateCameraPosition(location);
     }
 
     @Override
@@ -607,109 +559,5 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
     }
 
-
-    private class DrawGeoJson extends AsyncTask<Void, Void, List<LatLng>> {
-        @Override
-        protected List<LatLng> doInBackground(Void... voids) {
-
-            try {
-                // Load GeoJSON file
-                InputStream inputStream = getAssets().open(filename);
-                BufferedReader rd = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-                StringBuilder sb = new StringBuilder();
-                int cp;
-                while ((cp = rd.read()) != -1) {
-                    sb.append((char) cp);
-                }
-
-                inputStream.close();
-
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        GeoJsonSource source = new GeoJsonSource("geojson", sb.toString());
-
-                        if (count == 1) {
-                            mapboxMap.addSource(source);
-                        }
-                        if (count > 1) {
-                            if (!point) {
-                                mapboxMap.clear();
-                            }
-                            mapboxMap.removeLayer("geojson");
-                            mapboxMap.removeSource("geojson");
-                            mapboxMap.addSource(source);
-
-                        }
-
-                        LineLayer lineLayer = new LineLayer("geojson", "geojson");
-                        lineLayer.setProperties(
-                                PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
-                                PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
-                                PropertyFactory.lineWidth(2f),
-                                PropertyFactory.lineColor(getResources().getColor(R.color.colorAccent))
-                        );
-                        mapboxMap.addLayer(lineLayer);
-                    }
-                });
-
-
-                // Parse JSON
-                JSONObject json = new JSONObject(sb.toString());
-                JSONArray features = json.getJSONArray("features");
-                points = new ArrayList<>();
-                for (int i = 0; i < features.length(); i++) {
-                    JSONObject feature = features.getJSONObject(i);
-
-                    JSONObject geometry = feature.getJSONObject("geometry");
-                    if (geometry != null) {
-                        String type = geometry.getString("type");
-
-                        // Our GeoJSON only has one feature: a line string
-                        if (!TextUtils.isEmpty(type) && type.equalsIgnoreCase("Point")) {
-
-                            // Get the Coordinates
-                            JSONArray coords = geometry.getJSONArray("coordinates");
-
-//                            for (int lc = 0; lc < coords.length(); lc++) {
-                            LatLng latLng = new LatLng(coords.getDouble(1), coords.getDouble(0));
-                            points.add(latLng);
-//                            }
-                        }
-                    }
-
-                }
-            } catch (Exception exception) {
-                Log.e("MAPBOX", "Exception Loading GeoJSON: " + exception.toString());
-            }
-
-            return points;
-        }
-
-        @Override
-        protected void onPostExecute(List<LatLng> points) {
-            super.onPostExecute(points);
-
-            if (points.size() > 0) {
-
-                // Draw polyline on map
-//                mapboxMap.addPolyline(new PolylineOptions()
-//                        .addAll(points)
-//                        .color(Color.parseColor("#3bb2d0"))
-//                        .width(2));
-
-                if (point) {
-                    for (int i = 0; i < points.size(); i++) {
-                        mapboxMap.addMarker(new MarkerOptions()
-                                .position(new LatLng(points.get(i)))
-                                .title("marker Title")
-                                .snippet("Marker Snippet"));
-                    }
-                }
-
-            }
-        }
-    }
 
 }
