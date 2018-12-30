@@ -18,6 +18,10 @@ public class SharedPreferenceUtils {
     public static final String TOKEN_ID = "token_id";
     public static final String IS_NOTIFY_ME = "notify_me";
     public static final String APP_LANGUAGE = "app_language";
+    public static final String MAP_BASE_LAYER = "base_layer";
+    public static final String MAP_OVERLAY_LAYER = "overlay_layer";
+    public static final int KEY_STREET = 0 , KEY_SATELLITE = 1, KEY_OPENSTREET = 2, KEY_MUNICIPAL_BOARDER = 3, KEY_WARD = 4;
+
 
 
     public SharedPreferenceUtils(Context context) {

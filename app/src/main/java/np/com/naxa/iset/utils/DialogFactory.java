@@ -34,6 +34,12 @@ import np.com.naxa.iset.disasterinfo.HazardListAdapter;
 import np.com.naxa.iset.mycircle.ContactModel;
 import np.com.naxa.iset.mycircle.MyCircleContactListAdapter;
 
+import static np.com.naxa.iset.utils.SharedPreferenceUtils.KEY_MUNICIPAL_BOARDER;
+import static np.com.naxa.iset.utils.SharedPreferenceUtils.KEY_OPENSTREET;
+import static np.com.naxa.iset.utils.SharedPreferenceUtils.KEY_SATELLITE;
+import static np.com.naxa.iset.utils.SharedPreferenceUtils.KEY_STREET;
+import static np.com.naxa.iset.utils.SharedPreferenceUtils.KEY_WARD;
+
 
 public final class DialogFactory {
 
@@ -160,6 +166,8 @@ public final class DialogFactory {
 
     public static Dialog createBaseLayerDialog(@NonNull Context context, @NonNull CustomBaseLayerDialogListner listner){
 
+        SharedPreferenceUtils sharedPreferenceUtils = new SharedPreferenceUtils(context);
+
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -180,6 +188,36 @@ public final class DialogFactory {
         Switch ward = (Switch) dialog.findViewById(R.id.switchWardBoundary);
 
 
+        if(sharedPreferenceUtils.getIntValue(SharedPreferenceUtils.MAP_BASE_LAYER , -1) == KEY_STREET){
+            street.setChecked(true);
+            satellite.setChecked(false);
+            openStreet.setChecked(false);
+            listner.onStreetClick();
+
+        }else if(sharedPreferenceUtils.getIntValue(SharedPreferenceUtils.MAP_BASE_LAYER, -1) == KEY_SATELLITE){
+            satellite.setChecked(true);
+            street.setChecked(false);
+            openStreet.setChecked(false);
+            listner.onSatelliteClick();
+        }else if(sharedPreferenceUtils.getIntValue(SharedPreferenceUtils.MAP_BASE_LAYER, -1) == KEY_OPENSTREET){
+            openStreet.setChecked(true);
+            openStreet.setChecked(true);
+            satellite.setChecked(false);
+            listner.onOpenStreetClick();
+        }
+
+
+        if(sharedPreferenceUtils.getIntValue(SharedPreferenceUtils.MAP_OVERLAY_LAYER, -1) == KEY_MUNICIPAL_BOARDER){
+            municipality.setChecked(true);
+            ward.setChecked(false);
+            listner.onMetropolitanClick();
+        }else if(sharedPreferenceUtils.getIntValue(SharedPreferenceUtils.MAP_OVERLAY_LAYER, -1) == KEY_WARD){
+            ward.setChecked(true);
+            municipality.setChecked(false);
+            listner.onWardClick();
+        }
+
+
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,6 +232,7 @@ public final class DialogFactory {
                     satellite.setChecked(false);
                     openStreet.setChecked(false);
                     listner.onStreetClick();
+                    sharedPreferenceUtils.setValue(SharedPreferenceUtils.MAP_BASE_LAYER, KEY_STREET);
                 }
             }
         });
@@ -205,7 +244,7 @@ public final class DialogFactory {
                     street.setChecked(false);
                     openStreet.setChecked(false);
                     listner.onSatelliteClick();
-
+                    sharedPreferenceUtils.setValue(SharedPreferenceUtils.MAP_BASE_LAYER, KEY_SATELLITE);
                 }
             }
         });
@@ -217,7 +256,7 @@ public final class DialogFactory {
                     street.setChecked(false);
                     satellite.setChecked(false);
                     listner.onOpenStreetClick();
-
+                    sharedPreferenceUtils.setValue(SharedPreferenceUtils.MAP_BASE_LAYER, KEY_OPENSTREET);
                 }
             }
         });
@@ -228,6 +267,7 @@ public final class DialogFactory {
                 if(isChecked == true){
                     ward.setChecked(false);
                     listner.onMetropolitanClick();
+                    sharedPreferenceUtils.setValue(SharedPreferenceUtils.MAP_OVERLAY_LAYER, KEY_MUNICIPAL_BOARDER);
 
                 }
             }
@@ -239,6 +279,7 @@ public final class DialogFactory {
                 if(isChecked == true){
                     municipality.setChecked(false);
                     listner.onWardClick();
+                    sharedPreferenceUtils.setValue(SharedPreferenceUtils.MAP_OVERLAY_LAYER, KEY_WARD);
                 }
             }
         });

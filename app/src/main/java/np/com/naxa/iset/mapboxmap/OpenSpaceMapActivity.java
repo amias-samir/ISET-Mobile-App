@@ -74,9 +74,14 @@ import np.com.naxa.iset.mapboxmap.openspace.MapCategoryListAdapter;
 import np.com.naxa.iset.mapboxmap.openspace.MapCategoryModel;
 import np.com.naxa.iset.newhomepage.SectionGridHomeActivity;
 import np.com.naxa.iset.utils.DialogFactory;
+import np.com.naxa.iset.utils.SharedPreferenceUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static np.com.naxa.iset.utils.SharedPreferenceUtils.KEY_MUNICIPAL_BOARDER;
+import static np.com.naxa.iset.utils.SharedPreferenceUtils.KEY_WARD;
+import static np.com.naxa.iset.utils.SharedPreferenceUtils.MAP_OVERLAY_LAYER;
 
 // classes needed to add a marker
 // classes to calculate a route
@@ -107,6 +112,8 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     private PermissionsManager permissionsManager;
     private MapView mapView;
     private MapboxMap mapboxMap;
+    int count = 0;
+
 
     String filename = "";
 
@@ -122,6 +129,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     private Point destinationPosition;
     private DirectionsRoute currentRoute;
     private NavigationMapRoute navigationMapRoute;
+    SharedPreferenceUtils sharedPreferenceUtils;
 
 
     @Override
@@ -136,9 +144,11 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
+        sharedPreferenceUtils = new SharedPreferenceUtils(OpenSpaceMapActivity.this);
         setupToolBar();
         setupBottomSlidingPanel();
         setupListRecycler();
+
 
     }
 
@@ -212,21 +222,39 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
     private void setupMapOptionsDialog(){
         // launch new intent instead of loading fragment
+
+        int MAP_OVERLAY_ID = sharedPreferenceUtils.getIntValue(MAP_OVERLAY_LAYER, -1);
+
         DialogFactory.createBaseLayerDialog(OpenSpaceMapActivity.this, new DialogFactory.CustomBaseLayerDialogListner() {
             @Override
             public void onStreetClick() {
                 mapView.setStyleUrl(getResources().getString(R.string.mapbox_style_mapbox_streets));
+                if(MAP_OVERLAY_ID == KEY_MUNICIPAL_BOARDER){
+                    onMetropolitanClick();
+                }else if(MAP_OVERLAY_ID == KEY_WARD){
+                    onWardClick();
+                }
 
             }
 
             @Override
             public void onSatelliteClick() {
                 mapView.setStyleUrl(getResources().getString(R.string.mapbox_style_satellite));
+                if(MAP_OVERLAY_ID == KEY_MUNICIPAL_BOARDER){
+                    onMetropolitanClick();
+                }else if(MAP_OVERLAY_ID == KEY_WARD){
+                    onWardClick();
+                }
 
             }
 
             @Override
             public void onOpenStreetClick() {
+                if(MAP_OVERLAY_ID == KEY_MUNICIPAL_BOARDER){
+                    onMetropolitanClick();
+                }else if(MAP_OVERLAY_ID == KEY_WARD){
+                    onWardClick();
+                }
 
             }
 
@@ -328,7 +356,11 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
         mapboxMap.addOnMapClickListener(this);
 
      drawGeoJsonOnMap = new DrawGeoJsonOnMap(OpenSpaceMapActivity.this, mapboxMap, mapView);
-     drawRouteOnMap = new DrawRouteOnMap(OpenSpaceMapActivity.this, mapboxMap, mapView);
+
+     if(sharedPreferenceUtils.getIntValue(MAP_OVERLAY_LAYER, -1) == -1) {
+         drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap("kathmandu_boundary.json", false, 1);
+     }
+
         setupMapOptionsDialog();
     }
 
@@ -502,7 +534,6 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
 
     ArrayList<LatLng> points = null;
-    int count = 0;
     boolean point = false;
     @OnClick({R.id.point, R.id.multipolygon, R.id.multiLineString, R.id.navigation})
     public void onViewClicked(View view) {
