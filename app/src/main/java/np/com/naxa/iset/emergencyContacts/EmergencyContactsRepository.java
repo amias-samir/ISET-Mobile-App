@@ -12,7 +12,7 @@ public class EmergencyContactsRepository extends RawAssetLoader {
 
 
     public EmergencyContactsRepository() {
-        context = ISET.getInstance().getApplicationContext();
+        this.context = ISET.getInstance().getApplicationContext();
     }
 
     public Observable<Pair> getContactJsonString(int pos) {

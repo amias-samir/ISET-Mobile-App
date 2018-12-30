@@ -135,7 +135,6 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Mapbox.getInstance(this, getResources().getString(R.string.access_token));
         Mapbox.getInstance(this, "pk.eyJ1Ijoic2FtaXJkYW5nYWwiLCJhIjoiY2pwZHNjaXNpMDJrNjNxbWFlaDZobnZ1MyJ9.ASQwLRwoQeTp3PkVqHh2hw");
         setContentView(R.layout.activity_open_space_map);
         ButterKnife.bind(this);
@@ -356,6 +355,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
         mapboxMap.addOnMapClickListener(this);
 
      drawGeoJsonOnMap = new DrawGeoJsonOnMap(OpenSpaceMapActivity.this, mapboxMap, mapView);
+     drawRouteOnMap = new DrawRouteOnMap(OpenSpaceMapActivity.this, mapboxMap, mapView);
 
      if(sharedPreferenceUtils.getIntValue(MAP_OVERLAY_LAYER, -1) == -1) {
          drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap("kathmandu_boundary.json", false, 1);
@@ -405,7 +405,9 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
         if(originPosition == null){
             return;
         }
-
+        if(destinationPosition == null){
+            return;
+        }
         drawRouteOnMap.getRoute(originPosition, destinationPosition);
         navigation.setVisibility(View.VISIBLE);
 
@@ -570,7 +572,6 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     protected LocationManager locationManager;
     protected LocationListener locationListener;
     protected boolean gps_enabled, network_enabled;
-
     @Override
     public void onLocationChanged(Location location) {
         originLocation = location;
