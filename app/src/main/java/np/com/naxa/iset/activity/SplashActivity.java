@@ -9,6 +9,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -44,8 +45,10 @@ import np.com.naxa.iset.network.model.GeoJsonCategoryDetails;
 import np.com.naxa.iset.network.retrofit.NetworkApiClient;
 import np.com.naxa.iset.network.retrofit.NetworkApiInterface;
 import np.com.naxa.iset.newhomepage.SectionGridHomeActivity;
+import np.com.naxa.iset.utils.CreateAppMainFolderUtils;
 import np.com.naxa.iset.utils.DialogFactory;
 import np.com.naxa.iset.utils.SharedPreferenceUtils;
+import np.com.naxa.iset.utils.imageutils.ImageSaveTask;
 import np.com.naxa.iset.viewmodel.CommonPlacesAttribViewModel;
 import np.com.naxa.iset.viewmodel.EducationalInstitutesViewModel;
 import np.com.naxa.iset.viewmodel.GeoJsonCategoryViewModel;
@@ -55,6 +58,8 @@ import np.com.naxa.iset.viewmodel.OpenSpaceViewModel;
 import okhttp3.ResponseBody;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
+
+import static np.com.naxa.iset.utils.CreateAppMainFolderUtils.appmainFolderName;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -111,6 +116,19 @@ public class SplashActivity extends AppCompatActivity {
     @AfterPermissionGranted(RESULT_STORAGE_PERMISSION)
     private void handleStoragePermission() {
         if (EasyPermissions.hasPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+//            create your own Directory
+            CreateAppMainFolderUtils createAppMainFolderUtils = new CreateAppMainFolderUtils(SplashActivity.this,
+                    appmainFolderName);
+            createAppMainFolderUtils.createMainFolder();
+
+//            if(createAppMainFolderUtils.isFolderExist("media")) {
+//                String[] image = {"https://tinyurl.com/ybu9syvj", Environment.getExternalStorageDirectory() + "/"+appmainFolderName+"/"+"media/"+"downloadTestImage.jpg"};
+//                ImageSaveTask imageSaveTask = new ImageSaveTask(SplashActivity.this);
+//                imageSaveTask.execute(image);
+//            }
+
+
             ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
             SharedPreferenceUtils sharedPreference = new SharedPreferenceUtils(this);
 

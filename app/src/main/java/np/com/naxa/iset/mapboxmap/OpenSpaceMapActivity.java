@@ -216,17 +216,12 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
             @Override
             public void onStreetClick() {
                 mapView.setStyleUrl(getResources().getString(R.string.mapbox_style_mapbox_streets));
-//                enableLocationComponent();
-                // Load and Draw the GeoJSON
-//                animateCameraPosition();
 
             }
 
             @Override
             public void onSatelliteClick() {
                 mapView.setStyleUrl(getResources().getString(R.string.mapbox_style_satellite));
-//                enableLocationComponent();
-//                animateCameraPosition();
 
             }
 
@@ -237,11 +232,18 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
             @Override
             public void onMetropolitanClick() {
-
+                filename = "kathmandu_boundary.json";
+                count++;
+                point = false;
+                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap( filename, point, count);
             }
 
             @Override
             public void onWardClick() {
+                filename = "kathmandu_wards.json";
+                count++;
+                point = false;
+                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap( filename, point, count);
 
             }
         }).show();
