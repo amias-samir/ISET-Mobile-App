@@ -23,6 +23,7 @@
     <!-- SLIDING LAYOUT -->
 <include layout="@layout/openspace_map_activity_sliding_containt_layout"
     android:id="@+id/openspace_sliding_content"
+    android:visibility="gone"
     >
 </include>
 </com.sothree.slidinguppanel.SlidingUpPanelLayout>

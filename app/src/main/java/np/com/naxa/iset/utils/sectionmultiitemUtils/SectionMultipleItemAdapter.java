@@ -96,11 +96,11 @@ public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter
                 Switch switchButton = helper.getView(R.id.switchMapCategoryData);
                 helper.setText(R.id.switchMapCategoryData, item.getMultiItemSectionModel().getData_key());
                 ImageView imageViewData = helper.getView(R.id.ivCategoryIndicator);
-//                Glide
-//                        .with(imageViewData.getContext())
-//                        .load(item.getMultiItemSectionModel().getImage_drawable())
-//                        .fitCenter()
-//                        .into(imageViewData);
+                Glide
+                        .with(imageViewData.getContext())
+                        .load(getImage(item.getMultiItemSectionModel().getImage()))
+                        .fitCenter()
+                        .into(imageViewData);
 
 
                 switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -114,8 +114,13 @@ public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter
                         }
                     }
                 });
-
-
         }
+    }
+
+    public int getImage(String imageName) {
+
+        int drawableResourceId = mContext.getResources().getIdentifier(imageName, "drawable", mContext.getPackageName());
+
+        return drawableResourceId;
     }
 }

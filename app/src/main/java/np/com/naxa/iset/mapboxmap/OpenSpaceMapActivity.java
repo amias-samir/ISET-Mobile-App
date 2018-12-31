@@ -1,6 +1,7 @@
 package np.com.naxa.iset.mapboxmap;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -132,8 +133,8 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
         sharedPreferenceUtils = new SharedPreferenceUtils(OpenSpaceMapActivity.this);
         setupToolBar();
-        setupBottomSlidingPanel();
-        setupListRecycler();
+//        setupBottomSlidingPanel();
+//        setupListRecycler();
         mData = DataServer.getMapDatacategoryList(OpenSpaceMapActivity.this);
 
 
@@ -207,12 +208,12 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
     }
 
-    private void setupMapOptionsDialog() {
+    private Dialog setupMapOptionsDialog() {
         // launch new intent instead of loading fragment
 
         int MAP_OVERLAY_ID = sharedPreferenceUtils.getIntValue(MAP_OVERLAY_LAYER, -1);
 
-        DialogFactory.createBaseLayerDialog(OpenSpaceMapActivity.this, new DialogFactory.CustomBaseLayerDialogListner() {
+        return DialogFactory.createBaseLayerDialog(OpenSpaceMapActivity.this, new DialogFactory.CustomBaseLayerDialogListner() {
             @Override
             public void onStreetClick() {
                 mapView.setStyleUrl(getResources().getString(R.string.mapbox_style_mapbox_streets));
@@ -261,7 +262,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
                 drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point, count);
 
             }
-        }).show();
+        });
     }
 
     @Override
@@ -292,6 +293,8 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
         if (sharedPreferenceUtils.getIntValue(MAP_OVERLAY_LAYER, -1) == -1) {
             drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap("kathmandu_boundary.json", false, 1);
         }
+//        mapView.setStyleUrl("mapbox://styles/samirdangal/cjqc6swc681go2rpjwnpdtm7y");
+        setupMapOptionsDialog();
     }
 
     public void setMapCameraPosition() {
@@ -506,7 +509,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
                 break;
 
             case R.id.btnMapLayerSwitch:
-                setupMapOptionsDialog();
+                setupMapOptionsDialog().show();
                 break;
         }
     }
