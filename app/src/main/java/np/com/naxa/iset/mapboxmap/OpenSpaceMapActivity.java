@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -15,7 +14,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,12 +21,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
-import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -44,23 +40,9 @@ import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.layers.LineLayer;
-import com.mapbox.mapboxsdk.style.layers.Property;
-import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
-import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
-import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher;
-import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions;
 import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute;
-import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,12 +54,8 @@ import np.com.naxa.iset.mapboxmap.mapboxutils.DrawGeoJsonOnMap;
 import np.com.naxa.iset.mapboxmap.mapboxutils.DrawRouteOnMap;
 import np.com.naxa.iset.mapboxmap.openspace.MapCategoryListAdapter;
 import np.com.naxa.iset.mapboxmap.openspace.MapCategoryModel;
-import np.com.naxa.iset.newhomepage.SectionGridHomeActivity;
 import np.com.naxa.iset.utils.DialogFactory;
 import np.com.naxa.iset.utils.SharedPreferenceUtils;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static np.com.naxa.iset.utils.SharedPreferenceUtils.KEY_MUNICIPAL_BOARDER;
 import static np.com.naxa.iset.utils.SharedPreferenceUtils.KEY_WARD;
@@ -107,6 +85,10 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
     @BindView(R.id.iv_sliding_layout_indicator)
     ImageView ivSlidingLayoutIndicator;
+    @BindView(R.id.btnMapLayerData)
+    Button btnMapLayerData;
+    @BindView(R.id.btnMapLayerSwitch)
+    Button btnMapLayerSwitch;
 
     private SlidingUpPanelLayout mLayout;
     private PermissionsManager permissionsManager;
@@ -170,7 +152,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
             public void onPanelStateChanged(View panel, SlidingUpPanelLayout.PanelState previousState, SlidingUpPanelLayout.PanelState newState) {
                 Log.i(TAG, "onPanelStateChanged " + newState);
 
-                switch (newState.toString()){
+                switch (newState.toString()) {
 
                     case "COLLAPSED":
                         ivSlidingLayoutIndicator.setBackground(getResources().getDrawable(R.drawable.ic_keyboard_arrow_up_white_24dp));
@@ -219,7 +201,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
     }
 
-    private void setupMapOptionsDialog(){
+    private void setupMapOptionsDialog() {
         // launch new intent instead of loading fragment
 
         int MAP_OVERLAY_ID = sharedPreferenceUtils.getIntValue(MAP_OVERLAY_LAYER, -1);
@@ -228,9 +210,9 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
             @Override
             public void onStreetClick() {
                 mapView.setStyleUrl(getResources().getString(R.string.mapbox_style_mapbox_streets));
-                if(MAP_OVERLAY_ID == KEY_MUNICIPAL_BOARDER){
+                if (MAP_OVERLAY_ID == KEY_MUNICIPAL_BOARDER) {
                     onMetropolitanClick();
-                }else if(MAP_OVERLAY_ID == KEY_WARD){
+                } else if (MAP_OVERLAY_ID == KEY_WARD) {
                     onWardClick();
                 }
 
@@ -239,9 +221,9 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
             @Override
             public void onSatelliteClick() {
                 mapView.setStyleUrl(getResources().getString(R.string.mapbox_style_satellite));
-                if(MAP_OVERLAY_ID == KEY_MUNICIPAL_BOARDER){
+                if (MAP_OVERLAY_ID == KEY_MUNICIPAL_BOARDER) {
                     onMetropolitanClick();
-                }else if(MAP_OVERLAY_ID == KEY_WARD){
+                } else if (MAP_OVERLAY_ID == KEY_WARD) {
                     onWardClick();
                 }
 
@@ -249,9 +231,9 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
             @Override
             public void onOpenStreetClick() {
-                if(MAP_OVERLAY_ID == KEY_MUNICIPAL_BOARDER){
+                if (MAP_OVERLAY_ID == KEY_MUNICIPAL_BOARDER) {
                     onMetropolitanClick();
-                }else if(MAP_OVERLAY_ID == KEY_WARD){
+                } else if (MAP_OVERLAY_ID == KEY_WARD) {
                     onWardClick();
                 }
 
@@ -262,7 +244,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
                 filename = "kathmandu_boundary.json";
                 count++;
                 point = false;
-                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap( filename, point, count);
+                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point, count);
             }
 
             @Override
@@ -270,68 +252,10 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
                 filename = "kathmandu_wards.json";
                 count++;
                 point = false;
-                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap( filename, point, count);
+                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point, count);
 
             }
         }).show();
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.demo, menu);
-        MenuItem item = menu.findItem(R.id.action_toggle);
-        if (mLayout != null) {
-            if (mLayout.getPanelState() == SlidingUpPanelLayout.PanelState.HIDDEN) {
-                item.setTitle(R.string.action_show);
-            } else {
-                item.setTitle(R.string.action_hide);
-            }
-        }
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_toggle: {
-                if (mLayout != null) {
-                    if (mLayout.getPanelState() != SlidingUpPanelLayout.PanelState.HIDDEN) {
-                        mLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
-                        item.setTitle(R.string.action_show);
-                    } else {
-                        mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-                        item.setTitle(R.string.action_hide);
-                    }
-                }
-                return true;
-            }
-            case R.id.action_anchor: {
-                if (mLayout != null) {
-                    if (mLayout.getAnchorPoint() == 1.0f) {
-                        mLayout.setAnchorPoint(0.7f);
-                        mLayout.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
-                        item.setTitle(R.string.action_anchor_disable);
-                    } else {
-                        mLayout.setAnchorPoint(1.0f);
-                        mLayout.setPanelState(SlidingUpPanelLayout.PanelState.COLLAPSED);
-                        item.setTitle(R.string.action_anchor_enable);
-                    }
-                }
-                return true;
-            }
-
-            case R.id.action_map_option :
-                setupMapOptionsDialog();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -346,6 +270,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
     DrawGeoJsonOnMap drawGeoJsonOnMap;
     DrawRouteOnMap drawRouteOnMap;
+
     @Override
     public void onMapReady(MapboxMap mapboxMap) {
 
@@ -354,17 +279,16 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
         mapboxMap.addOnMapClickListener(this);
 
-     drawGeoJsonOnMap = new DrawGeoJsonOnMap(OpenSpaceMapActivity.this, mapboxMap, mapView);
-     drawRouteOnMap = new DrawRouteOnMap(OpenSpaceMapActivity.this, mapboxMap, mapView);
 
-     if(sharedPreferenceUtils.getIntValue(MAP_OVERLAY_LAYER, -1) == -1) {
-         drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap("kathmandu_boundary.json", false, 1);
-     }
+        drawGeoJsonOnMap = new DrawGeoJsonOnMap(OpenSpaceMapActivity.this, mapboxMap, mapView);
+        drawRouteOnMap = new DrawRouteOnMap(OpenSpaceMapActivity.this, mapboxMap, mapView);
 
-        setupMapOptionsDialog();
+        if (sharedPreferenceUtils.getIntValue(MAP_OVERLAY_LAYER, -1) == -1) {
+            drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap("kathmandu_boundary.json", false, 1);
+        }
     }
 
-    public void setMapCameraPosition(){
+    public void setMapCameraPosition() {
 
         CameraPosition position = new CameraPosition.Builder()
                 .target(new LatLng(27.657531140175244, 85.46161651611328)) // Sets the new camera position
@@ -402,10 +326,10 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
         destinationPosition = Point.fromLngLat(destinationCoord.getLongitude(), destinationCoord.getLatitude());
         originPosition = Point.fromLngLat(originCoord.getLongitude(), originCoord.getLatitude());
 
-        if(originPosition == null){
+        if (originPosition == null) {
             return;
         }
-        if(destinationPosition == null){
+        if (destinationPosition == null) {
             return;
         }
         drawRouteOnMap.getRoute(originPosition, destinationPosition);
@@ -533,11 +457,10 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     }
 
 
-
-
     ArrayList<LatLng> points = null;
     boolean point = false;
-    @OnClick({R.id.point, R.id.multipolygon, R.id.multiLineString, R.id.navigation})
+
+    @OnClick({R.id.point, R.id.multipolygon, R.id.multiLineString, R.id.navigation, R.id.btnMapLayerData, R.id.btnMapLayerSwitch})
     public void onViewClicked(View view) {
 
         switch (view.getId()) {
@@ -545,25 +468,32 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
                 filename = "educational_Institution_geojson.geojson";
                 count++;
                 point = true;
-                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap( filename, point, count);
+                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point, count);
                 break;
 
             case R.id.multipolygon:
                 filename = "wards.geojson";
                 count++;
                 point = false;
-                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap( filename, point, count);
+                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point, count);
                 break;
 
             case R.id.multiLineString:
                 filename = "road_network.geojson";
                 count++;
                 point = false;
-                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap( filename, point, count);
+                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point, count);
                 break;
 
             case R.id.navigation:
-               drawRouteOnMap.enableNavigationUiLauncher(OpenSpaceMapActivity.this);
+                drawRouteOnMap.enableNavigationUiLauncher(OpenSpaceMapActivity.this);
+                break;
+
+            case R.id.btnMapLayerData:
+                break;
+
+            case R.id.btnMapLayerSwitch:
+                setupMapOptionsDialog();
                 break;
         }
     }
@@ -572,6 +502,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     protected LocationManager locationManager;
     protected LocationListener locationListener;
     protected boolean gps_enabled, network_enabled;
+
     @Override
     public void onLocationChanged(Location location) {
         originLocation = location;
@@ -592,6 +523,5 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     public void onProviderDisabled(String provider) {
 
     }
-
 
 }

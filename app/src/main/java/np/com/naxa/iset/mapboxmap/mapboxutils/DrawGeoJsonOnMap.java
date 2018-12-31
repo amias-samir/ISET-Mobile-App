@@ -1,10 +1,14 @@
 package np.com.naxa.iset.mapboxmap.mapboxutils;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.annotations.Polygon;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -119,6 +123,13 @@ public class DrawGeoJsonOnMap {
 
         if (point) {
             plotMarkerOnMap(geoJsonString);
+        }else {
+            mapboxMap.setOnPolygonClickListener(new MapboxMap.OnPolygonClickListener() {
+                @Override
+                public void onPolygonClick(@NonNull Polygon polygon) {
+                    Toast.makeText(context, (int) polygon.getId(), Toast.LENGTH_LONG).show();
+                }
+            });
         }
 
     }
@@ -176,6 +187,14 @@ public class DrawGeoJsonOnMap {
                                         .snippet("Marker Snippet"));
                             }
 
+
+                            mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+                                @Override
+                                public boolean onMarkerClick(@NonNull Marker marker) {
+                                    Toast.makeText(context, marker.getTitle(), Toast.LENGTH_LONG).show();
+                                    return true;
+                                }
+                            });
                         }
                     }
                 });
