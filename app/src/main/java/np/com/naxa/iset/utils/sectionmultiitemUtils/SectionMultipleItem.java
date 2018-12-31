@@ -9,6 +9,7 @@ public class SectionMultipleItem extends SectionMultiEntity<MultiItemSectionMode
     public static final int TEXT = 1;
     public static final int IMG = 2;
     public static final int IMG_TEXT = 3;
+    public static final int MAP_DATA_LIST = 4;
     private int itemType;
     private boolean isMore;
     private boolean isHeadListNo;

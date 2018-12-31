@@ -1,5 +1,6 @@
 package np.com.naxa.iset.utils.sectionmultiitemUtils;
 
+import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,12 +9,50 @@ public class MultiItemSectionModel implements Parcelable {
     String image;
     String data_key;
     String data_value;
+    Drawable image_drawable;
 
     public MultiItemSectionModel(String image, String data_key, String data_value) {
         this.image = image;
         this.data_key = data_key;
         this.data_value = data_value;
     }
+
+    public MultiItemSectionModel(String data_key, String data_value, Drawable image_drawable) {
+        this.data_key = data_key;
+        this.data_value = data_value;
+        this.image_drawable = image_drawable;
+    }
+
+
+    protected MultiItemSectionModel(Parcel in) {
+        image = in.readString();
+        data_key = in.readString();
+        data_value = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(image);
+        dest.writeString(data_key);
+        dest.writeString(data_value);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<MultiItemSectionModel> CREATOR = new Creator<MultiItemSectionModel>() {
+        @Override
+        public MultiItemSectionModel createFromParcel(Parcel in) {
+            return new MultiItemSectionModel(in);
+        }
+
+        @Override
+        public MultiItemSectionModel[] newArray(int size) {
+            return new MultiItemSectionModel[size];
+        }
+    };
 
     public String getImage() {
         return image;
@@ -39,33 +78,12 @@ public class MultiItemSectionModel implements Parcelable {
         this.data_value = data_value;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+
+    public Drawable getImage_drawable() {
+        return image_drawable;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.image);
-        dest.writeString(this.data_key);
-        dest.writeString(this.data_value);
+    public void setImage_drawable(Drawable image_drawable) {
+        this.image_drawable = image_drawable;
     }
-
-    protected MultiItemSectionModel(Parcel in) {
-        this.image = in.readString();
-        this.data_key = in.readString();
-        this.data_value = in.readString();
-    }
-
-    public static final Parcelable.Creator<MultiItemSectionModel> CREATOR = new Parcelable.Creator<MultiItemSectionModel>() {
-        @Override
-        public MultiItemSectionModel createFromParcel(Parcel source) {
-            return new MultiItemSectionModel(source);
-        }
-
-        @Override
-        public MultiItemSectionModel[] newArray(int size) {
-            return new MultiItemSectionModel[size];
-        }
-    };
 }

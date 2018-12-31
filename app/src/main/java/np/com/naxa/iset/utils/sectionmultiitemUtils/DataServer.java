@@ -1,8 +1,12 @@
 package np.com.naxa.iset.utils.sectionmultiitemUtils;
 
+import android.content.Context;
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import np.com.naxa.iset.R;
 import np.com.naxa.iset.disasterinfo.HazardListModel;
 
 public class DataServer {
@@ -343,5 +347,25 @@ public class DataServer {
                 "</ul>\n";
 
         return terminologies;
+    }
+
+
+    public static List<SectionMultipleItem> getMapDatacategoryList(@NonNull Context context){
+        List<SectionMultipleItem> list = new ArrayList<>();
+
+        list.add(new SectionMultipleItem(true, "Disaster prevention facility", false, false));
+        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel("Temporary Shelters", "", context.getResources().getDrawable(R.drawable.ic_industry))));
+        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel( "Evacuation Center", "", context.getResources().getDrawable(R.drawable.ic_marker_openspace))));
+        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel( "Evacuation Area", "", context.getResources().getDrawable(R.drawable.ic_marker_openspace))));
+        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel( "Water Supply location", "", context.getResources().getDrawable(R.drawable.ic_water_bodies))));
+        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel( "Medical institutions", "", context.getResources().getDrawable(R.drawable.ic_hospital))));
+
+        list.add(new SectionMultipleItem(true, "Support Station", false, false));
+        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel("Schools run by the Kathmandu Metropolitan Government", "", context.getResources().getDrawable(R.drawable.ic_college))));
+        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel( "Convenience Center", "", context.getResources().getDrawable(R.drawable.ic_airport))));
+        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel( "Hotel, Restaurants Area", "", context.getResources().getDrawable(R.drawable.ic_restaurant))));
+        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel( "Gas stations", "", context.getResources().getDrawable(R.drawable.ic_gas_station))));
+
+        return list;
     }
 }

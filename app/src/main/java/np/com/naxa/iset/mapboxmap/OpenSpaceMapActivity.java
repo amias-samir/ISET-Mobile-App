@@ -50,12 +50,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.home.model.MapDataCategory;
 import np.com.naxa.iset.mapboxmap.mapboxutils.DrawGeoJsonOnMap;
 import np.com.naxa.iset.mapboxmap.mapboxutils.DrawRouteOnMap;
 import np.com.naxa.iset.mapboxmap.openspace.MapCategoryListAdapter;
 import np.com.naxa.iset.mapboxmap.openspace.MapCategoryModel;
 import np.com.naxa.iset.utils.DialogFactory;
 import np.com.naxa.iset.utils.SharedPreferenceUtils;
+import np.com.naxa.iset.utils.sectionmultiitemUtils.DataServer;
+import np.com.naxa.iset.utils.sectionmultiitemUtils.SectionMultipleItem;
 
 import static np.com.naxa.iset.utils.SharedPreferenceUtils.KEY_MUNICIPAL_BOARDER;
 import static np.com.naxa.iset.utils.SharedPreferenceUtils.KEY_WARD;
@@ -113,6 +116,8 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     private NavigationMapRoute navigationMapRoute;
     SharedPreferenceUtils sharedPreferenceUtils;
 
+    // 1. create entityList which item data extend SectionMultiEntity
+    private List<SectionMultipleItem> mData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +134,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
         setupToolBar();
         setupBottomSlidingPanel();
         setupListRecycler();
+        mData = DataServer.getMapDatacategoryList(OpenSpaceMapActivity.this);
 
 
     }
@@ -320,20 +326,26 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
             return;
         }
 
-        originCoord = new LatLng(originLocation.getLatitude(), originLocation.getLongitude());
-        originLocation = mapboxMap.getLocationComponent().getLocationEngine().getLastLocation();
+        try {
 
-        destinationPosition = Point.fromLngLat(destinationCoord.getLongitude(), destinationCoord.getLatitude());
-        originPosition = Point.fromLngLat(originCoord.getLongitude(), originCoord.getLatitude());
+            originCoord = new LatLng(originLocation.getLatitude(), originLocation.getLongitude());
+            originLocation = mapboxMap.getLocationComponent().getLocationEngine().getLastLocation();
 
-        if (originPosition == null) {
-            return;
+            destinationPosition = Point.fromLngLat(destinationCoord.getLongitude(), destinationCoord.getLatitude());
+            originPosition = Point.fromLngLat(originCoord.getLongitude(), originCoord.getLatitude());
+
+            if (originPosition == null) {
+                return;
+            }
+            if (destinationPosition == null) {
+                return;
+            }
+            drawRouteOnMap.getRoute(originPosition, destinationPosition);
+            navigation.setVisibility(View.VISIBLE);
+        }catch (NullPointerException e){
+            Toast.makeText(this, "Searching current location", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
-        if (destinationPosition == null) {
-            return;
-        }
-        drawRouteOnMap.getRoute(originPosition, destinationPosition);
-        navigation.setVisibility(View.VISIBLE);
 
     }
 
@@ -490,6 +502,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
                 break;
 
             case R.id.btnMapLayerData:
+                DialogFactory.createMapDataLayerDialog(OpenSpaceMapActivity.this, mData).show();
                 break;
 
             case R.id.btnMapLayerSwitch:

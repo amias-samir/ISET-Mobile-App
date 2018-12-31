@@ -23,16 +23,19 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import np.com.naxa.iset.R;
-import np.com.naxa.iset.activity.MyCircleProfileActivity;
-import np.com.naxa.iset.disasterinfo.HazardListAdapter;
 import np.com.naxa.iset.mycircle.ContactModel;
 import np.com.naxa.iset.mycircle.MyCircleContactListAdapter;
+import np.com.naxa.iset.utils.sectionmultiitemUtils.SectionMultipleItem;
+import np.com.naxa.iset.utils.sectionmultiitemUtils.SectionMultipleItemAdapter;
 
 import static np.com.naxa.iset.utils.SharedPreferenceUtils.KEY_MUNICIPAL_BOARDER;
 import static np.com.naxa.iset.utils.SharedPreferenceUtils.KEY_OPENSTREET;
@@ -339,5 +342,55 @@ public final class DialogFactory {
         return dialog;
     }
 
+    public static Dialog createMapDataLayerDialog(@NonNull Context context, List<SectionMultipleItem> mapDataCategoryArrayList){
+
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.map_data_filter_custom_dialog_layout);
+
+//        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+//        lp.copyFrom(dialog.getWindow().getAttributes());
+//        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+//        lp.height = WindowManager.LayoutParams.MATCH_PARENT;
+
+        RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.recyclerViewDialogMapDataCategory);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.btn_close_dialog);
+
+
+
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        SectionMultipleItemAdapter sectionAdapter = new SectionMultipleItemAdapter(R.layout.map_data_layer_list_section_head_custom_layout, mapDataCategoryArrayList);
+        sectionAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                SectionMultipleItem item = (SectionMultipleItem) adapter.getData().get(position);
+                switch (view.getId()) {
+                    case R.id.card_view:
+                        if (item.getMultiItemSectionModel() != null) {
+                            Toast.makeText(context, item.getMultiItemSectionModel().getData_key(), Toast.LENGTH_LONG).show();
+                        }
+                        break;
+                    default:
+                        Toast.makeText(context, "OnItemChildClickListener " + position, Toast.LENGTH_LONG).show();
+                        break;
+
+                }
+            }
+        });
+        recyclerView.setAdapter(sectionAdapter);
+
+//        Toast.makeText(context, "createMapDataLayerDialog set adapter", Toast.LENGTH_SHORT).show();
+//        dialog.getWindow().setAttributes(lp);
+        return dialog;
+    }
 
 }

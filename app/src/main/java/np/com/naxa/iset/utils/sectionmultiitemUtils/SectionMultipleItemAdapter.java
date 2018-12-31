@@ -2,8 +2,11 @@ package np.com.naxa.iset.utils.sectionmultiitemUtils;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseSectionMultiItemQuickAdapter;
@@ -31,6 +34,7 @@ public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter
         addItemType(SectionMultipleItem.TEXT, R.layout.item_text_view);
         addItemType(SectionMultipleItem.IMG, R.layout.item_image_view);
         addItemType(SectionMultipleItem.IMG_TEXT, R.layout.item_img_text_view);
+        addItemType(SectionMultipleItem.MAP_DATA_LIST, R.layout.map_data_layer_list_row_custom_dialog_layout);
     }
 
     @Override
@@ -84,8 +88,34 @@ public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter
                         .load(item.getMultiItemSectionModel().getImage())
                         .fitCenter()
                         .into(imageView1);
-
                 break;
+
+            case SectionMultipleItem.MAP_DATA_LIST:
+                Log.d(TAG, "convertHead: setupRecyclerView "+item.getMultiItemSectionModel().getData_key());
+
+                Switch switchButton = helper.getView(R.id.switchMapCategoryData);
+                helper.setText(R.id.switchMapCategoryData, item.getMultiItemSectionModel().getData_key());
+                ImageView imageViewData = helper.getView(R.id.ivCategoryIndicator);
+//                Glide
+//                        .with(imageViewData.getContext())
+//                        .load(item.getMultiItemSectionModel().getImage_drawable())
+//                        .fitCenter()
+//                        .into(imageViewData);
+
+
+                switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if(isChecked){
+                            Toast.makeText(mContext, item.getMultiItemSectionModel().data_key +" Checked", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(mContext, item.getMultiItemSectionModel().data_key +" Unchecked", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
+
         }
     }
 }

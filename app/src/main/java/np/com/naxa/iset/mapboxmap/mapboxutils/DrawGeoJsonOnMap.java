@@ -106,20 +106,35 @@ public class DrawGeoJsonOnMap {
             if (!point) {
                 mapboxMap.clear();
             }
-            mapboxMap.removeLayer("geojson");
-            mapboxMap.removeSource("geojson");
-            mapboxMap.addSource(source);
+            GeoJsonSource source1 = new GeoJsonSource("geojson"+count, geoJsonString.toString());
+
+//            mapboxMap.removeLayer("geojson");
+//            mapboxMap.removeSource("geojson");
+            mapboxMap.addSource(source1);
 
         }
+        if(count == 0){
+            LineLayer lineLayer = new LineLayer("geojson", "geojson");
+            lineLayer.setProperties(
+                    PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
+                    PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
+                    PropertyFactory.lineWidth(2f),
+                    PropertyFactory.lineColor(context.getResources().getColor(R.color.colorAccent))
+            );
+            mapboxMap.addLayer(lineLayer);
+        }
+        if (count>1){
+            LineLayer lineLayer = new LineLayer("geojson"+count, "geojson"+count);
+            lineLayer.setProperties(
+                    PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
+                    PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
+                    PropertyFactory.lineWidth(2f),
+                    PropertyFactory.lineColor(context.getResources().getColor(R.color.colorAccent))
+            );
+            mapboxMap.addLayer(lineLayer);
+        }
 
-        LineLayer lineLayer = new LineLayer("geojson", "geojson");
-        lineLayer.setProperties(
-                PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
-                PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
-                PropertyFactory.lineWidth(2f),
-                PropertyFactory.lineColor(context.getResources().getColor(R.color.colorAccent))
-        );
-        mapboxMap.addLayer(lineLayer);
+
 
         if (point) {
             plotMarkerOnMap(geoJsonString);
