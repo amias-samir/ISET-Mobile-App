@@ -175,4 +175,5 @@
         <item name="navigationViewAccent">@color/mapboxPink</item>
     </style>
 
+
 </resources>

@@ -54,6 +54,7 @@ import np.com.naxa.iset.R;
 import np.com.naxa.iset.home.model.MapDataCategory;
 import np.com.naxa.iset.mapboxmap.mapboxutils.DrawGeoJsonOnMap;
 import np.com.naxa.iset.mapboxmap.mapboxutils.DrawRouteOnMap;
+import np.com.naxa.iset.mapboxmap.mapboxutils.MapboxBaseStyleUtils;
 import np.com.naxa.iset.mapboxmap.openspace.MapCategoryListAdapter;
 import np.com.naxa.iset.mapboxmap.openspace.MapCategoryModel;
 import np.com.naxa.iset.utils.DialogFactory;
@@ -277,6 +278,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
     DrawGeoJsonOnMap drawGeoJsonOnMap;
     DrawRouteOnMap drawRouteOnMap;
+    MapboxBaseStyleUtils mapboxBaseStyleUtils;
 
     @Override
     public void onMapReady(MapboxMap mapboxMap) {
@@ -284,18 +286,32 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
         this.mapboxMap = mapboxMap;
         setMapCameraPosition();
 
+//        mapboxMap.setStyleUrl("mapbox://styles/samirdangal/cjqc6swc681go2rpjwnpdtm7y");
+//        mapView.setStyleUrl("mapbox://styles/samirdangal/cjqc6swc681go2rpjwnpdtm7y");
+//        mapView.setStyleUrl("https://api.mapbox.com/styles/v1/samirdangal/cjqc6swc681go2rpjwnpdtm7y.html?fresh=true&title=true&access_token=pk.eyJ1Ijoic2FtaXJkYW5nYWwiLCJhIjoiY2pwZHNjaXNpMDJrNjNxbWFlaDZobnZ1MyJ9.ASQwLRwoQeTp3PkVqHh2hw#16.5/48.766736/2.329968/0");
+//        mapboxMap.setStyleUrl("https://api.mapbox.com/styles/v1/samirdangal/cjqc6swc681go2rpjwnpdtm7y.html?fresh=true&title=true&access_token=pk.eyJ1Ijoic2FtaXJkYW5nYWwiLCJhIjoiY2pwZHNjaXNpMDJrNjNxbWFlaDZobnZ1MyJ9.ASQwLRwoQeTp3PkVqHh2hw#16.5/48.766736/2.329968/0");
+
+
         mapboxMap.addOnMapClickListener(this);
 
 
         drawGeoJsonOnMap = new DrawGeoJsonOnMap(OpenSpaceMapActivity.this, mapboxMap, mapView);
         drawRouteOnMap = new DrawRouteOnMap(OpenSpaceMapActivity.this, mapboxMap, mapView);
+        mapboxBaseStyleUtils = new MapboxBaseStyleUtils(OpenSpaceMapActivity.this, mapboxMap, mapView);
+        mapboxBaseStyleUtils.changeBaseColor();
 
-        if (sharedPreferenceUtils.getIntValue(MAP_OVERLAY_LAYER, -1) == -1) {
-            drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap("kathmandu_boundary.json", false, 1);
+        if (sharedPreferenceUtils.getIntValue(MAP_OVERLAY_LAYER, -1) == -1 ||
+                sharedPreferenceUtils.getIntValue(MAP_OVERLAY_LAYER, -1) == KEY_MUNICIPAL_BOARDER) {
+            drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap("kathmandu_boundary.json", false, 2);
+            count = 2;
+        } else {
+            drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap("kathmandu_wards.json", false, 2);
+            count = 2;
         }
-//        mapView.setStyleUrl("mapbox://styles/samirdangal/cjqc6swc681go2rpjwnpdtm7y");
         setupMapOptionsDialog();
-    }
+
+        mapView.invalidate();
+        }
 
     public void setMapCameraPosition() {
 
@@ -345,8 +361,8 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
             }
             drawRouteOnMap.getRoute(originPosition, destinationPosition);
             navigation.setVisibility(View.VISIBLE);
-        }catch (NullPointerException e){
-            Toast.makeText(this, "Searching current location", Toast.LENGTH_SHORT).show();
+        } catch (NullPointerException e) {
+            Toast.makeText(this, "Searching current location \nMake sure your GPS provider is enabled.", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 
@@ -522,7 +538,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     @Override
     public void onLocationChanged(Location location) {
         originLocation = location;
-        animateCameraPosition(location);
+//        animateCameraPosition(location);
     }
 
     @Override
@@ -537,6 +553,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
     @Override
     public void onProviderDisabled(String provider) {
+        Toast.makeText(this, "Please enable your GPS Provider", Toast.LENGTH_LONG).show();
 
     }
 
