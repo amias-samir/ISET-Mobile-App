@@ -330,11 +330,16 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
 
     @Override
-    public void onMapClick(@NonNull LatLng point) {
+    public void onMapClick(@NonNull LatLng latLngPoint) {
+
+        if(point){
+            return;
+        }
+
         if (destinationMarker != null) {
             mapboxMap.removeMarker(destinationMarker);
         }
-        destinationCoord = point;
+        destinationCoord = latLngPoint;
         destinationMarker = mapboxMap.addMarker(new MarkerOptions()
                 .position(destinationCoord)
         );
