@@ -44,6 +44,10 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,6 +55,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.event.MapDataLayerListCheckEvent;
+import np.com.naxa.iset.event.MyCircleContactAddEvent;
 import np.com.naxa.iset.home.model.MapDataCategory;
 import np.com.naxa.iset.mapboxmap.mapboxutils.DrawGeoJsonOnMap;
 import np.com.naxa.iset.mapboxmap.mapboxutils.DrawRouteOnMap;
@@ -252,7 +258,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
                 filename = "kathmandu_boundary.json";
                 count++;
                 point = false;
-                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point, count);
+                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point , "");
             }
 
             @Override
@@ -260,7 +266,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
                 filename = "kathmandu_wards.json";
                 count++;
                 point = false;
-                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point, count);
+                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point, "");
 
             }
         });
@@ -302,10 +308,10 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
         if (sharedPreferenceUtils.getIntValue(MAP_OVERLAY_LAYER, -1) == -1 ||
                 sharedPreferenceUtils.getIntValue(MAP_OVERLAY_LAYER, -1) == KEY_MUNICIPAL_BOARDER) {
-            drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap("kathmandu_boundary.json", false, 2);
+            drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap("kathmandu_boundary.json", true, "");
             count = 2;
         } else {
-            drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap("kathmandu_wards.json", false, 2);
+            drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap("kathmandu_wards.json", true, "");
             count = 2;
         }
         setupMapOptionsDialog();
@@ -340,9 +346,9 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
             mapboxMap.removeMarker(destinationMarker);
         }
         destinationCoord = latLngPoint;
-        destinationMarker = mapboxMap.addMarker(new MarkerOptions()
-                .position(destinationCoord)
-        );
+//        destinationMarker = mapboxMap.addMarker(new MarkerOptions()
+//                .position(destinationCoord)
+//        );
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -364,8 +370,8 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
             if (destinationPosition == null) {
                 return;
             }
-            drawRouteOnMap.getRoute(originPosition, destinationPosition);
-            navigation.setVisibility(View.VISIBLE);
+//            drawRouteOnMap.getRoute(originPosition, destinationPosition);
+//            navigation.setVisibility(View.VISIBLE);
         } catch (NullPointerException e) {
             Toast.makeText(this, "Searching current location \nMake sure your GPS provider is enabled.", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
@@ -434,6 +440,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     @Override
     public void onStart() {
         super.onStart();
+        EventBus.getDefault().register(this);
         mapView.onStart();
 
 
@@ -454,6 +461,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     @Override
     public void onStop() {
         super.onStop();
+        EventBus.getDefault().unregister(this);
         mapView.onStop();
     }
 
@@ -501,24 +509,24 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
 
         switch (view.getId()) {
             case R.id.point:
-                filename = "educational_Institution_geojson.geojson";
+                filename = "financial_institution.geojson";
                 count++;
                 point = true;
-                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point, count);
+                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point, "ic_marker_openspace");
                 break;
 
             case R.id.multipolygon:
                 filename = "wards.geojson";
                 count++;
                 point = false;
-                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point, count);
+                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point, "");
                 break;
 
             case R.id.multiLineString:
                 filename = "road_network.geojson";
                 count++;
                 point = false;
-                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point, count);
+                drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(filename, point, "");
                 break;
 
             case R.id.navigation:
@@ -526,13 +534,27 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
                 break;
 
             case R.id.btnMapLayerData:
-                DialogFactory.createMapDataLayerDialog(OpenSpaceMapActivity.this, mData).show();
+                if(mapboxMap == null){
+                    return;
+                }
+                DialogFactory.createMapDataLayerDialog(OpenSpaceMapActivity.this, mData, drawGeoJsonOnMap).show();
                 break;
 
             case R.id.btnMapLayerSwitch:
                 setupMapOptionsDialog().show();
                 break;
         }
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onRVItemClick(MapDataLayerListCheckEvent.MapDataLayerListCheckedEvent itemClick) {
+        String name = itemClick.getMultiItemSectionModel().getData_value();
+        if(itemClick.getChecked()){
+            drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(itemClick.getMultiItemSectionModel().getData_value(), itemClick.getChecked(), itemClick.getMultiItemSectionModel().getImage());
+        }
+        Toast.makeText(this, "add to your circle button clicked "+name, Toast.LENGTH_SHORT).show();
+
     }
 
 

@@ -365,7 +365,7 @@ public class DataServer {
         list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel("ic_marker_openspace", "Evacuation Center", "")));
         list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel("ic_marker_openspace", "Evacuation Area", "")));
         list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel("ic_water_bodies", "Water Supply location", "")));
-        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel("ic_marker_hospital", "Medical institutions", "")));
+        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel("ic_marker_hospital", "Medical institutions", "health_facilities.geojson")));
 
 
         list.add(new SectionMultipleItem(true, "Support Station", false, false));
@@ -373,7 +373,7 @@ public class DataServer {
 //        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel( "Convenience Center", "", context.getResources().getDrawable(R.drawable.ic_airport))));
 //        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel( "Hotel, Restaurants Area", "", context.getResources().getDrawable(R.drawable.ic_restaurant))));
 //        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel( "Gas stations", "", context.getResources().getDrawable(R.drawable.ic_gas_station))));
-        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel("ic_marker_education", "Schools run by the Kathmandu Metropolitan Government", "")));
+        list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel("ic_marker_education", "Schools run by the Kathmandu Metropolitan Government", "educational_Institution_geojson.geojson")));
         list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel("ic_airport", "Convenience Center", "")));
         list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel("ic_restaurant", "Hotel, Restaurants Area", "")));
         list.add(new SectionMultipleItem(SectionMultipleItem.MAP_DATA_LIST, new MultiItemSectionModel("ic_gas_station", "Gas stations", "")));

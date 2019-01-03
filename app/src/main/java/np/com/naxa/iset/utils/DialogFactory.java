@@ -16,6 +16,7 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -32,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.mapboxmap.mapboxutils.DrawGeoJsonOnMap;
 import np.com.naxa.iset.mycircle.ContactModel;
 import np.com.naxa.iset.mycircle.MyCircleContactListAdapter;
 import np.com.naxa.iset.utils.sectionmultiitemUtils.SectionMultipleItem;
@@ -45,6 +47,8 @@ import static np.com.naxa.iset.utils.SharedPreferenceUtils.KEY_WARD;
 
 
 public final class DialogFactory {
+
+    private static final String TAG = "DialogFactory";
 
     private ProgressDialog progressDialog;
 
@@ -167,7 +171,7 @@ public final class DialogFactory {
     }
 
 
-    public static Dialog createBaseLayerDialog(@NonNull Context context, @NonNull CustomBaseLayerDialogListner listner){
+    public static Dialog createBaseLayerDialog(@NonNull Context context, @NonNull CustomBaseLayerDialogListner listner) {
 
         SharedPreferenceUtils sharedPreferenceUtils = new SharedPreferenceUtils(context);
 
@@ -191,18 +195,18 @@ public final class DialogFactory {
         Switch ward = (Switch) dialog.findViewById(R.id.switchWardBoundary);
 
 
-        if(sharedPreferenceUtils.getIntValue(SharedPreferenceUtils.MAP_BASE_LAYER , -1) == KEY_STREET){
+        if (sharedPreferenceUtils.getIntValue(SharedPreferenceUtils.MAP_BASE_LAYER, -1) == KEY_STREET) {
             street.setChecked(true);
             satellite.setChecked(false);
             openStreet.setChecked(false);
             listner.onStreetClick();
 
-        }else if(sharedPreferenceUtils.getIntValue(SharedPreferenceUtils.MAP_BASE_LAYER, -1) == KEY_SATELLITE){
+        } else if (sharedPreferenceUtils.getIntValue(SharedPreferenceUtils.MAP_BASE_LAYER, -1) == KEY_SATELLITE) {
             satellite.setChecked(true);
             street.setChecked(false);
             openStreet.setChecked(false);
             listner.onSatelliteClick();
-        }else if(sharedPreferenceUtils.getIntValue(SharedPreferenceUtils.MAP_BASE_LAYER, -1) == KEY_OPENSTREET){
+        } else if (sharedPreferenceUtils.getIntValue(SharedPreferenceUtils.MAP_BASE_LAYER, -1) == KEY_OPENSTREET) {
             openStreet.setChecked(true);
             openStreet.setChecked(true);
             satellite.setChecked(false);
@@ -210,11 +214,11 @@ public final class DialogFactory {
         }
 
 
-        if(sharedPreferenceUtils.getIntValue(SharedPreferenceUtils.MAP_OVERLAY_LAYER, -1) == KEY_MUNICIPAL_BOARDER){
+        if (sharedPreferenceUtils.getIntValue(SharedPreferenceUtils.MAP_OVERLAY_LAYER, -1) == KEY_MUNICIPAL_BOARDER) {
             municipality.setChecked(true);
             ward.setChecked(false);
             listner.onMetropolitanClick();
-        }else if(sharedPreferenceUtils.getIntValue(SharedPreferenceUtils.MAP_OVERLAY_LAYER, -1) == KEY_WARD){
+        } else if (sharedPreferenceUtils.getIntValue(SharedPreferenceUtils.MAP_OVERLAY_LAYER, -1) == KEY_WARD) {
             ward.setChecked(true);
             municipality.setChecked(false);
             listner.onWardClick();
@@ -231,7 +235,7 @@ public final class DialogFactory {
         street.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
-                if(isChecked == true){
+                if (isChecked == true) {
                     satellite.setChecked(false);
                     openStreet.setChecked(false);
                     listner.onStreetClick();
@@ -243,7 +247,7 @@ public final class DialogFactory {
         satellite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
-                if(isChecked == true){
+                if (isChecked == true) {
                     street.setChecked(false);
                     openStreet.setChecked(false);
                     listner.onSatelliteClick();
@@ -255,7 +259,7 @@ public final class DialogFactory {
         openStreet.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
-                if(isChecked == true){
+                if (isChecked == true) {
                     street.setChecked(false);
                     satellite.setChecked(false);
                     listner.onOpenStreetClick();
@@ -267,7 +271,7 @@ public final class DialogFactory {
         municipality.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
-                if(isChecked == true){
+                if (isChecked == true) {
                     ward.setChecked(false);
                     listner.onMetropolitanClick();
                     sharedPreferenceUtils.setValue(SharedPreferenceUtils.MAP_OVERLAY_LAYER, KEY_MUNICIPAL_BOARDER);
@@ -279,15 +283,13 @@ public final class DialogFactory {
         ward.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
-                if(isChecked == true){
+                if (isChecked == true) {
                     municipality.setChecked(false);
                     listner.onWardClick();
                     sharedPreferenceUtils.setValue(SharedPreferenceUtils.MAP_OVERLAY_LAYER, KEY_WARD);
                 }
             }
         });
-
-
 
 
         dialog.getWindow().setAttributes(lp);
@@ -297,15 +299,18 @@ public final class DialogFactory {
 
     public interface CustomBaseLayerDialogListner {
         void onStreetClick();
+
         void onSatelliteClick();
+
         void onOpenStreetClick();
+
         void onMetropolitanClick();
+
         void onWardClick();
     }
 
 
-
-    public static Dialog createContactListDialog(@NonNull Context context, ArrayList<ContactModel> contactModelArrayList){
+    public static Dialog createContactListDialog(@NonNull Context context, ArrayList<ContactModel> contactModelArrayList) {
 
 
         final Dialog dialog = new Dialog(context);
@@ -321,7 +326,6 @@ public final class DialogFactory {
         FloatingSearchView floatingSearchView = (FloatingSearchView) dialog.findViewById(R.id.floating_search_contacts_dialog);
         RecyclerView recyclerView = (RecyclerView) dialog.findViewById(R.id.recyclerViewContactsDialog);
         Button dialogButton = (Button) dialog.findViewById(R.id.btnClose);
-
 
 
         dialogButton.setOnClickListener(new View.OnClickListener() {
@@ -342,7 +346,7 @@ public final class DialogFactory {
         return dialog;
     }
 
-    public static Dialog createMapDataLayerDialog(@NonNull Context context, List<SectionMultipleItem> mapDataCategoryArrayList){
+    public static Dialog createMapDataLayerDialog(@NonNull Context context, List<SectionMultipleItem> mapDataCategoryArrayList, DrawGeoJsonOnMap drawGeoJsonOnMap) {
 
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -360,7 +364,6 @@ public final class DialogFactory {
         Button dialogButton = (Button) dialog.findViewById(R.id.btn_close_dialog);
 
 
-
         dialogButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -376,7 +379,13 @@ public final class DialogFactory {
                 switch (view.getId()) {
                     case R.id.card_view:
                         if (item.getMultiItemSectionModel() != null) {
+                            if (item.getMultiItemSectionModel().getData_value().equals("") || item.getMultiItemSectionModel().getData_value() == null)
+                            {
+                                Log.d(TAG, "onItemChildClick: null value ");
+                                return;
+                            }
                             Toast.makeText(context, item.getMultiItemSectionModel().getData_key(), Toast.LENGTH_LONG).show();
+
                         }
                         break;
                     default:
@@ -392,5 +401,7 @@ public final class DialogFactory {
 //        dialog.getWindow().setAttributes(lp);
         return dialog;
     }
+
+
 
 }

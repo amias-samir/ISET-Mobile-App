@@ -12,9 +12,14 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseSectionMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import np.com.naxa.iset.R;
+import np.com.naxa.iset.event.MapDataLayerListCheckEvent;
+import np.com.naxa.iset.event.MyCircleContactAddEvent;
+import np.com.naxa.iset.utils.imageutils.LoadImageUtils;
 
 public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter<SectionMultipleItem, BaseViewHolder> {
     /**
@@ -98,7 +103,7 @@ public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter
                 ImageView imageViewData = helper.getView(R.id.ivCategoryIndicator);
                 Glide
                         .with(imageViewData.getContext())
-                        .load(getImage(item.getMultiItemSectionModel().getImage()))
+                        .load(LoadImageUtils.getImageFromDrawable(mContext,item.getMultiItemSectionModel().getImage()))
                         .fitCenter()
                         .into(imageViewData);
 
@@ -107,8 +112,11 @@ public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if(isChecked){
+                            EventBus.getDefault().post(new MapDataLayerListCheckEvent.MapDataLayerListCheckedEvent(item.getMultiItemSectionModel(), true));
+
                             Toast.makeText(mContext, item.getMultiItemSectionModel().data_key +" Checked", Toast.LENGTH_SHORT).show();
                         }else {
+                            EventBus.getDefault().post(new MapDataLayerListCheckEvent.MapDataLayerListCheckedEvent(item.getMultiItemSectionModel(), false));
                             Toast.makeText(mContext, item.getMultiItemSectionModel().data_key +" Unchecked", Toast.LENGTH_SHORT).show();
 
                         }

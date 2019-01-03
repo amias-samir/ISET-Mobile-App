@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonParseException;
+import com.google.maps.android.data.geojson.GeoJsonLayer;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.mapboxsdk.annotations.BubbleLayout;
@@ -37,6 +38,7 @@ import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonOptions;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.mapbox.mapboxsdk.style.sources.Source;
 import com.mapbox.mapboxsdk.utils.BitmapUtils;
 
 import org.json.JSONArray;
@@ -68,6 +70,7 @@ import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
 import np.com.naxa.iset.R;
 import np.com.naxa.iset.mapboxmap.OpenSpaceMapActivity;
+import np.com.naxa.iset.utils.imageutils.LoadImageUtils;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.all;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.division;
@@ -105,21 +108,34 @@ public class DrawGeoJsonOnMap implements MapboxMap.OnMapClickListener {
     OpenSpaceMapActivity context;
     MapboxMap mapboxMap;
     MapView mapView;
+
+
     ArrayList<LatLng> points = null;
     StringBuilder geoJsonString;
 
+    String imageName;
+
+
+    String markerImageId = "MARKER_IMAGE_ID_";
+    String markerLayerId = "MARKER_LAYER_ID_";
+    String markerCalloutLayerId = "CALLOUT_LAYER_ID_";
 
     private String MARKER_IMAGE_ID = "MARKER_IMAGE_ID";
     private String MARKER_LAYER_ID = "MARKER_LAYER_ID";
     private String CALLOUT_LAYER_ID = "CALLOUT_LAYER_ID";
 
+
+
     private String PROPERTY_SELECTED = "selected";
     private String PROPERTY_NAME = "name";
     private String PROPERTY_CAPITAL = "Address";
     private String geojsonSourceId = "geojsonSourceId";
+    private String geojsonLayerId = "geojsonLayerId";
     private GeoJsonSource source;
     private FeatureCollection featureCollection;
     private HashMap<String, View> viewMap;
+
+    GeoJsonLayer geoJsonLayer ;
 
     public DrawGeoJsonOnMap(OpenSpaceMapActivity context, MapboxMap mapboxMap, MapView mapView) {
         this.context = context;
@@ -128,10 +144,29 @@ public class DrawGeoJsonOnMap implements MapboxMap.OnMapClickListener {
     }
 
 
-    public void readAndDrawGeoSonFileOnMap(String geoJsonFileName, Boolean point, int count) {
-
+    public void readAndDrawGeoSonFileOnMap(String geoJsonFileName, Boolean isChecked, String imageName) {
+        this.imageName = imageName;
 
         try {
+            geojsonSourceId = geoJsonFileName;
+            geojsonLayerId = geoJsonFileName;
+            MARKER_IMAGE_ID = markerImageId+geoJsonFileName;
+            MARKER_LAYER_ID = markerLayerId+geoJsonFileName;
+            CALLOUT_LAYER_ID = markerCalloutLayerId+geoJsonFileName;
+
+
+//            if(mapboxMap.getSource(geojsonSourceId)!= null) {
+                mapboxMap.removeLayer(geojsonLayerId);
+                mapboxMap.removeLayer(MARKER_LAYER_ID);
+            mapboxMap.removeLayer(CALLOUT_LAYER_ID);
+
+//            }
+//            if(mapboxMap.getLayer(geojsonLayerId) != null){
+
+//                mapboxMap.removeSource(geojsonSourceId);
+//            }
+
+
 
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -170,19 +205,17 @@ public class DrawGeoJsonOnMap implements MapboxMap.OnMapClickListener {
                     @Override
                     public void onComplete() {
 
-                        drawGeoJsonOnMap(geoJsonString, point, count);
+                        drawGeoJsonOnMap(geoJsonString, isChecked);
                     }
                 });
     }
 
-    private void drawGeoJsonOnMap(StringBuilder geoJsonString, Boolean point, int count) {
-        GeoJsonSource source = new GeoJsonSource("geojson", geoJsonString.toString());
+    private void drawGeoJsonOnMap(StringBuilder geoJsonString, Boolean isChecked) {
+        GeoJsonSource source = new GeoJsonSource(geojsonSourceId, geoJsonString.toString());
         String type = "";
-        if (count == 1) {
-            mapboxMap.addSource(source);
-        }
-        if (count > 1) {
-            geojsonSourceId = "geojsonSourceId" + count;
+//        if (count == 1) {
+//        }
+//        if (count > 1) {
 
             try {
 
@@ -196,35 +229,43 @@ public class DrawGeoJsonOnMap implements MapboxMap.OnMapClickListener {
                 e.printStackTrace();
             }
             if (type.equals("Point") || type.equals("point") || type.equals("POINT")) {
-                mapboxMap.clear();
+//                mapboxMap.clear();
+            }else {
+                if(mapboxMap.getSource(geojsonSourceId) == null) {
+                    mapboxMap.addSource(source);
+                }
+
+                LineLayer lineLayer = new LineLayer(geojsonLayerId, geojsonSourceId);
+                lineLayer.setProperties(
+                        PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
+                        PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
+                        PropertyFactory.lineWidth(2f),
+                        PropertyFactory.lineColor(context.getResources().getColor(R.color.colorAccent))
+                );
+                                mapboxMap.addLayer(lineLayer);
+
+
             }
-            GeoJsonSource source1 = new GeoJsonSource("geojson" + count, geoJsonString.toString());
+//            GeoJsonSource source1 = new GeoJsonSource(geojsonSourceId, geoJsonString.toString());
 
 //            mapboxMap.removeLayer("geojson");
 //            mapboxMap.removeSource("geojson");
-            mapboxMap.addSource(source1);
+//            mapboxMap.addSource(source1);
 
-        }
-        if (count == 0) {
-            LineLayer lineLayer = new LineLayer("geojson", "geojson");
-            lineLayer.setProperties(
-                    PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
-                    PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
-                    PropertyFactory.lineWidth(2f),
-                    PropertyFactory.lineColor(context.getResources().getColor(R.color.colorAccent))
-            );
-            mapboxMap.addLayer(lineLayer);
-        }
-        if (count > 1) {
-            LineLayer lineLayer = new LineLayer("geojson" + count, "geojson" + count);
-            lineLayer.setProperties(
-                    PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
-                    PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
-                    PropertyFactory.lineWidth(2f),
-                    PropertyFactory.lineColor(context.getResources().getColor(R.color.colorAccent))
-            );
-            mapboxMap.addLayer(lineLayer);
-        }
+//        }
+//        if (count == 0) {
+
+//        }
+//        if (count > 1) {
+//            LineLayer lineLayer = new LineLayer(geojsonLayerId, geojsonSourceId);
+//            lineLayer.setProperties(
+//                    PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
+//                    PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
+//                    PropertyFactory.lineWidth(2f),
+//                    PropertyFactory.lineColor(context.getResources().getColor(R.color.colorAccent))
+//            );
+//            mapboxMap.addLayer(lineLayer);
+//        }
 
 
         if (type.equals("Point") || type.equals("point") || type.equals("POINT")) {
@@ -467,9 +508,9 @@ public class DrawGeoJsonOnMap implements MapboxMap.OnMapClickListener {
                     TextView titleTextView = bubbleLayout.findViewById(R.id.map_popup_header);
                     titleTextView.setText(name);
 
-                    String address = feature.getStringProperty(PROPERTY_CAPITAL);
-                    TextView descriptionTextView = bubbleLayout.findViewById(R.id.map_popup_body);
-                    descriptionTextView.setText(address);
+//                    String address = feature.getStringProperty(PROPERTY_CAPITAL) == null? "":feature.getStringProperty(PROPERTY_CAPITAL);
+//                    TextView descriptionTextView = bubbleLayout.findViewById(R.id.map_popup_body);
+//                    descriptionTextView.setText(address);
 
                     int measureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
                     bubbleLayout.measure(measureSpec, measureSpec);
@@ -585,16 +626,26 @@ public class DrawGeoJsonOnMap implements MapboxMap.OnMapClickListener {
      * Adds the GeoJSON source to the map
      */
     private void setupSource() {
-        source = new GeoJsonSource(geojsonSourceId, featureCollection);
-        mapboxMap.addSource(source);
+
+        try {
+
+            mapboxMap.removeLayer(geojsonLayerId);
+            mapboxMap.removeSource(geojsonSourceId);
+
+            source = new GeoJsonSource(geojsonSourceId, featureCollection);
+            mapboxMap.addSource(source);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     /**
      * Adds the marker image to the map for use as a SymbolLayer icon
      */
     private void setUpImage() {
+
         Bitmap icon = BitmapFactory.decodeResource(
-                context.getResources(), R.drawable.mapbox_marker_icon_default);
+                context.getResources(), LoadImageUtils.getImageFromDrawable(context, imageName));
         mapboxMap.addImage(MARKER_IMAGE_ID, icon);
     }
 
@@ -602,6 +653,7 @@ public class DrawGeoJsonOnMap implements MapboxMap.OnMapClickListener {
      * Setup a layer with maki icons, eg. west coast city.
      */
     private void setUpMarkerLayer() {
+//        mapboxMap.removeLayer(MARKER_LAYER_ID);
         mapboxMap.addLayer(new SymbolLayer(MARKER_LAYER_ID, geojsonSourceId)
                 .withProperties(
                         iconImage(MARKER_IMAGE_ID),
@@ -616,6 +668,7 @@ public class DrawGeoJsonOnMap implements MapboxMap.OnMapClickListener {
      * </p>
      */
     private void setUpInfoWindowLayer() {
+//        mapboxMap.removeLayer(CALLOUT_LAYER_ID);
         mapboxMap.addLayer(new SymbolLayer(CALLOUT_LAYER_ID, geojsonSourceId)
                 .withProperties(
                         /* show image with id title based on the value of the name feature property */
