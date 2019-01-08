@@ -19,6 +19,7 @@ import java.util.List;
 import np.com.naxa.iset.R;
 import np.com.naxa.iset.event.MapDataLayerListCheckEvent;
 import np.com.naxa.iset.event.MyCircleContactAddEvent;
+import np.com.naxa.iset.utils.SharedPreferenceUtils;
 import np.com.naxa.iset.utils.imageutils.LoadImageUtils;
 
 public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter<SectionMultipleItem, BaseViewHolder> {
@@ -32,6 +33,8 @@ public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter
      */
 
     int sectionItemCount = 0;
+
+    SharedPreferenceUtils sharedPreferenceUtils;
 
     public SectionMultipleItemAdapter(int sectionHeadResId, List data) {
         super(sectionHeadResId, data);
@@ -99,6 +102,9 @@ public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter
                 Log.d(TAG, "convertHead: setupRecyclerView "+item.getMultiItemSectionModel().getData_key());
 
                 Switch switchButton = helper.getView(R.id.switchMapCategoryData);
+                sharedPreferenceUtils = new SharedPreferenceUtils(switchButton.getContext());
+
+
                 helper.setText(R.id.switchMapCategoryData, item.getMultiItemSectionModel().getData_key());
                 ImageView imageViewData = helper.getView(R.id.ivCategoryIndicator);
                 Glide
@@ -107,28 +113,33 @@ public class SectionMultipleItemAdapter extends BaseSectionMultiItemQuickAdapter
                         .fitCenter()
                         .into(imageViewData);
 
+                if(sharedPreferenceUtils.getBoolanValue(item.getMultiItemSectionModel().getData_key(), false)){
+                    switchButton.setChecked(true);
+                    Log.d(TAG, "convert: Checked");
+                    EventBus.getDefault().post(new MapDataLayerListCheckEvent.MapDataLayerListCheckedEvent(item.getMultiItemSectionModel(), true));
+                }else {
+                    switchButton.setChecked(false);
+                    Log.d(TAG, "convert: Unchecked");
+                    EventBus.getDefault().post(new MapDataLayerListCheckEvent.MapDataLayerListCheckedEvent(item.getMultiItemSectionModel(), false));
+                }
 
                 switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        Log.d(TAG, "onCheckedChanged: "+item.getMultiItemSectionModel().getData_key() + " is checked "+isChecked);
                         if(isChecked){
                             EventBus.getDefault().post(new MapDataLayerListCheckEvent.MapDataLayerListCheckedEvent(item.getMultiItemSectionModel(), true));
-
+                            sharedPreferenceUtils.setValue(item.getMultiItemSectionModel().data_key, true);
                             Toast.makeText(mContext, item.getMultiItemSectionModel().data_key +" Checked", Toast.LENGTH_SHORT).show();
                         }else {
                             EventBus.getDefault().post(new MapDataLayerListCheckEvent.MapDataLayerListCheckedEvent(item.getMultiItemSectionModel(), false));
+                            sharedPreferenceUtils.setValue(item.getMultiItemSectionModel().data_key, false);
                             Toast.makeText(mContext, item.getMultiItemSectionModel().data_key +" Unchecked", Toast.LENGTH_SHORT).show();
 
                         }
                     }
                 });
+
         }
-    }
-
-    public int getImage(String imageName) {
-
-        int drawableResourceId = mContext.getResources().getIdentifier(imageName, "drawable", mContext.getPackageName());
-
-        return drawableResourceId;
     }
 }

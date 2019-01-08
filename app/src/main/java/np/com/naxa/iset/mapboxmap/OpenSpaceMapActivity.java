@@ -315,6 +315,7 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
             count = 2;
         }
         setupMapOptionsDialog();
+        DialogFactory.createMapDataLayerDialog(OpenSpaceMapActivity.this, mData, drawGeoJsonOnMap);
 
         mapView.invalidate();
         }
@@ -550,9 +551,9 @@ public class OpenSpaceMapActivity extends AppCompatActivity implements OnMapRead
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onRVItemClick(MapDataLayerListCheckEvent.MapDataLayerListCheckedEvent itemClick) {
         String name = itemClick.getMultiItemSectionModel().getData_value();
-        if(itemClick.getChecked()){
+//        if(itemClick.getChecked()){
             drawGeoJsonOnMap.readAndDrawGeoSonFileOnMap(itemClick.getMultiItemSectionModel().getData_value(), itemClick.getChecked(), itemClick.getMultiItemSectionModel().getImage());
-        }
+//        }
         Toast.makeText(this, "add to your circle button clicked "+name, Toast.LENGTH_SHORT).show();
 
     }

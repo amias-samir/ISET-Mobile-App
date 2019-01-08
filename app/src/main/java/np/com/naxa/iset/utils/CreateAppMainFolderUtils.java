@@ -35,6 +35,17 @@ public class CreateAppMainFolderUtils {
             }
     }
 
+    public String getAppmainFolderName(){
+     return Environment.getExternalStorageDirectory()+"/"+mainFolderName;
+    }
+    public String getAppDataFolderName(){
+        return Environment.getExternalStorageDirectory()+"/"+mainFolderName+"/"+databaseFolderName;
+    }
+
+    public String getAppMediaFolderName(){
+        return Environment.getExternalStorageDirectory()+"/"+mainFolderName+"/"+mediaFolderName;
+    }
+
     public void createDatabaseFolder(){
         String myfolderLoc=Environment.getExternalStorageDirectory()+"/"+mainFolderName+"/"+databaseFolderName;
 
